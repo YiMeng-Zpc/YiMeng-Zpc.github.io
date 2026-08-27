@@ -1,6 +1,0 @@
-name = "keystatic-oauth-proxy"
-main = "src/index.ts"
-compatibility_date = "2024-01-01"
-
-[vars]
-GITHUB_CLIENT_ID = "Ov23liRKe9S4RSOwMTPR"

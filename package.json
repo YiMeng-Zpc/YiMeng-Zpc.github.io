@@ -1,25 +1,26 @@
 {
-  "name": "yimeng-blog",
+  "name": "keystatic-admin",
   "version": "1.0.0",
   "private": true,
-  "description": "忆梦的博客 - Hugo + Keystatic CMS",
   "scripts": {
-    "dev": "hugo server --bind=0.0.0.0",
-    "dev:keystatic": "next dev -p 3000",
-    "dev:all": "concurrently \"npm run dev\" \"npm run dev:keystatic\"",
-    "build": "hugo --minify",
-    "preview": "hugo server --bind=0.0.0.0 -D"
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "pages:build": "npx opennextjs-cloudflare build",
+    "pages:preview": "npx wrangler dev",
+    "pages:deploy": "npx opennextjs-cloudflare deploy"
   },
   "dependencies": {
-    "@keystatic/core": "^0.5.0",
-    "@keystatic/hugo": "^0.1.0",
-    "next": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@keystatic/core": "^0.6.9",
+    "@keystatic/next": "^5.0.5",
+    "next": "15.5.24",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.0",
-    "concurrently": "^8.2.0",
-    "typescript": "^5.3.0"
+    "@opennextjs/cloudflare": "^1.20.4",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^4.125.0"
   }
 }

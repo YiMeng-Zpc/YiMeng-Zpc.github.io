@@ -1,32 +1,22 @@
-# Hugo build output
-public/
-resources/_gen/
-
-# Hugo temporary files
-.hugo_build.lock
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# Node.js
+# Dependencies
 node_modules/
-.next/
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
 
-# Environment variables (secrets!)
+# Next.js
+.next/
+out/
+
+# Cloudflare Pages / OpenNext build output
+.open-next/
+.vercel/
+
+# Environment variables (包含 GitHub OAuth 密钥，不能提交!)
 .env
 .env.local
 .env.*.local
 
-# Keystatic local storage
+# Keystatic
 .keystatic/
+
+# OS
+.DS_Store
+Thumbs.db
