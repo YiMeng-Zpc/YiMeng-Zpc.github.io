@@ -1,4 +1,4 @@
-baseURL = 'https://YiMeng-Zpc.github.io/'
+baseURL = 'https://www.zhangpengchao.com/'
 locale = 'zh-cn'
 title = '忆梦的博客'
 theme = 'hugo-theme-reimu'
