@@ -52,9 +52,9 @@ https://keystatic-admin.pages.dev
 3. 点击 "Update application"
 4. **Authorization callback URL** 改为：
    ```
-   https://你的-pages域名.keystatic/admin/api/keystatic/github/oauth/callback
+   https://你的pages域名/api/keystatic/github/oauth/callback
    ```
-   例如：`https://keystatic-admin.pages.dev/keystatic/api/keystatic/github/oauth/callback`
+   例如：`https://keystatic-admin.pages.dev/api/keystatic/github/oauth/callback`
 
 > ⚠️ **注意**：URL 必须精确匹配，包括路径！否则 OAuth 登录会失败。
 
