@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>忆梦博客 - 管理后台登录</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+           background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+           min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .login-card { background: white; border-radius: 16px; padding: 40px;
+                  box-shadow: 0 20px 60px rgba(0,0,0,0.15); text-align: center; max-width: 400px; width: 90%; }
+    .login-card h1 { font-size: 24px; color: #333; margin-bottom: 8px; }
+    .login-card p { color: #666; margin-bottom: 24px; font-size: 14px; }
+    .login-btn { display: inline-block; background: #24292e; color: white; padding: 12px 32px;
+                 border-radius: 8px; text-decoration: none; font-size: 16px; font-weight: 600;
+                 transition: background 0.2s; }
+    .login-btn:hover { background: #444d56; }
+    .icon { font-size: 48px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="icon">🌸</div>
+    <h1>忆梦的博客</h1>
+    <p>使用 GitHub 账号登录管理后台</p>
+    <a class="login-btn" id="login-btn">使用 GitHub 登录</a>
+  </div>
+  <script>
+    // GitHub OAuth Configuration
+    // Step 1: 创建 GitHub OAuth App 后填入以下信息
+    const CLIENT_ID = 'YOUR_GITHUB_CLIENT_ID';
+    const REDIRECT_URI = window.location.origin + '/admin/auth-callback.html';
+    
+    document.getElementById('login-btn').addEventListener('click', function() {
+      window.location.href = 
+        'https://github.com/login/oauth/authorize' +
+        '?client_id=' + CLIENT_ID +
+        '&redirect_uri=' + encodeURIComponent(REDIRECT_URI) +
+        '&scope=repo,user';
+    });
+
+    // 如果已登录，自动跳转到 CMS
+    if (window.location.search.includes('access_token')) {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('access_token');
+      if (token) {
+        localStorage.setItem('gh_token', token);
+        window.location.href = '/admin/#/';
+      }
+    }
+  </script>
+</body>
+</html>
