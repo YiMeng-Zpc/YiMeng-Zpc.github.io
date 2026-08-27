@@ -1,0 +1,97 @@
+baseURL = 'https://YiMeng-Zpc.github.io/'
+locale = 'zh-cn'
+title = '忆梦的博客'
+theme = 'hugo-theme-reimu'
+defaultContentLanguage = 'zh'
+
+# 中文为默认语言
+[languages.zh]
+  title = '忆梦的博客'
+  locale = 'zh-cn'
+  weight = 1
+
+# 英文语言
+[languages.en]
+  title = "YiMeng's Blog"
+  locale = 'en'
+  weight = 2
+
+[params]
+  author = '忆梦'
+  keyword = ['博客', '技术', '生活', 'Hugo', 'blog']
+  description = '忆梦的个人博客，记录技术学习与生活感悟'
+  since = 2026
+
+  # 社交链接
+  [params.social]
+    github = 'https://github.com/YiMeng-Zpc'
+    email = 'Yi.Meng-@outlook.com'
+
+  # 顶部导航栏
+  [[params.nav]]
+    title = '首页'
+    path = '/'
+  [[params.nav]]
+    title = '归档'
+    path = '/archives'
+  [[params.nav]]
+    title = '标签'
+    path = '/tags'
+  [[params.nav]]
+    title = '分类'
+    path = '/categories'
+  [[params.nav]]
+    title = '关于'
+    path = '/about'
+
+  # 侧边栏菜单
+  [[params.menu]]
+    title = '首页'
+    path = '/'
+    icon = 'fa fa-home'
+  [[params.menu]]
+    title = '归档'
+    path = '/archives'
+    icon = 'fa fa-archive'
+  [[params.menu]]
+    title = '标签'
+    path = '/tags'
+    icon = 'fa fa-tags'
+  [[params.menu]]
+    title = '分类'
+    path = '/categories'
+    icon = 'fa fa-folder'
+  [[params.menu]]
+    title = '关于'
+    path = '/about'
+    icon = 'fa fa-user'
+
+  # 封面图配置（使用主题默认）
+  [params.cover]
+    image = '/images/cover.webp'
+    blur = true
+    opacity = 0.6
+
+  # 页脚
+  [params.footer]
+    since = 2026
+    author = '忆梦'
+    custom = 'Powered by Hugo & Reimu Theme'
+
+  # 搜索功能
+  [params.search]
+    enable = true
+
+  # 侧边栏小组件
+  [params.widget]
+    enable = true
+    description = '一个热爱技术的开发者，记录学习与成长的点滴。'
+
+  # 自定义颜色（樱花粉主题色）
+  [params.color]
+    primary = '#ff7eb3'
+    secondary = '#ff758c'
+    background = '#fff5f5'
+
+  # 版权声明
+  # copyright = "© 2026 忆梦"

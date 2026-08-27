@@ -1,0 +1,21 @@
+# Hugo build output
+public/
+resources/_gen/
+
+# Hugo temporary files
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (if using npm)
+node_modules/
+package-lock.json

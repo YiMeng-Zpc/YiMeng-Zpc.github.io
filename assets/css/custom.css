@@ -1,0 +1,78 @@
+/* 自定义样式 - 忆梦的博客 */
+
+/* 首页欢迎区域美化 */
+.post-card {
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 126, 179, 0.2);
+}
+
+/* 标签样式 */
+.tag {
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+  transform: scale(1.05);
+}
+
+/* 代码块样式 */
+pre {
+  border-radius: 8px;
+  background: #1e1e2e !important;
+}
+
+code {
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff7eb3 0%, #ff758c 100%);
+}
+
+/* 卡片圆角 */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* 链接动画 */
+a {
+  transition: color 0.3s ease;
+}
+
+/* 页面过渡动画 */
+.content {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
