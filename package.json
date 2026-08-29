@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "cf:build": "npx opennextjs-cloudflare build && mv .open-next/worker.js .open-next/_worker.js",
+    "cf:build": "npx opennextjs-cloudflare build && mv .open-next/worker.js .open-next/_worker.js && cp -r .open-next/assets/* .open-next/",
     "cf:preview": "npx wrangler dev",
     "cf:deploy": "npx opennextjs-cloudflare deploy"
   },
