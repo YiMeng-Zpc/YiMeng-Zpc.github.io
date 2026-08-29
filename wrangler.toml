@@ -1,2 +1,7 @@
 name = "keystatic-admin"
 pages_build_output_dir = ".open-next"
+
+[vars]
+KEYSTATIC_GITHUB_CLIENT_ID = "Ov23liRKe9S4RSOwMTPR"
+KEYSTATIC_GITHUB_CLIENT_SECRET = "73b1dc3e2c3fe11bd18a2212484465e275f246cc"
+KEYSTATIC_SECRET = "my-super-secret-key-2026"
