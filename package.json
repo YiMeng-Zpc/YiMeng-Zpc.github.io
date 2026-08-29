@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev --port 3000",
     "build": "next build",
-    "pages:build": "npx opennextjs-cloudflare build",
-    "pages:preview": "npx wrangler dev",
-    "pages:deploy": "npx opennextjs-cloudflare deploy"
+    "cf:build": "npx opennextjs-cloudflare build && mv .open-next/worker.js .open-next/_worker.js",
+    "cf:preview": "npx wrangler dev",
+    "cf:deploy": "npx opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@keystatic/core": "^0.6.9",
