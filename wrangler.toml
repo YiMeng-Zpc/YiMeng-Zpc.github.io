@@ -1,4 +1,4 @@
-name = "keystatic-admin"
+name = "yi-meng-keystatic-admin"
 main = ".open-next/worker.js"
 compatibility_date = "2025-06-02"
 compatibility_flags = ["nodejs_compat"]
@@ -9,6 +9,10 @@ binding = "ASSETS"
 
 [vars]
 NODE_ENV = "production"
-KEYSTATIC_GITHUB_CLIENT_ID = "Ov23liRKe9S4RSOwMTPR"
-KEYSTATIC_GITHUB_CLIENT_SECRET = "c0a5a61089e78d6b9c1af997bc0d562557a16a39"
-KEYSTATIC_SECRET = "ks_yimeng_zpc_2026_xK9mP2vQ7wR4x"
+# GitHub OAuth App callback must be set to:
+#   https://<your-worker-domain>/api/keystatic/github/oauth/callback
+# Set the actual values in Cloudflare dashboard or via:
+#   wrangler secret put KEYSTATIC_GITHUB_CLIENT_ID
+#   wrangler secret put KEYSTATIC_GITHUB_CLIENT_SECRET
+#   wrangler secret put KEYSTATIC_SECRET
+# (Do NOT commit real secrets in this file.)

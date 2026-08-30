@@ -1,0 +1,177 @@
+{{- $params := .Site.Params -}}
+{{- $customCSS := $params.custom_css -}}
+
+<!-- FontAwesome 6 Free CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- 自定义炫酷主题样式 -->
+{{- with $customCSS -}}
+<link rel="stylesheet" href="{{ . | relURL }}" />
+{{- end -}}
+
+<!-- 鼠标跟随光晕 + 粒子 -->
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  // 鼠标光晕
+  var halo = document.createElement('div');
+  halo.id = 'mouse-halo';
+  document.body.appendChild(halo);
+  var style = document.createElement('style');
+  style.textContent = '#mouse-halo{position:fixed;top:0;left:0;width:600px;height:600px;background:radial-gradient(circle,rgba(255,43,214,0.15),transparent 60%);border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:transform .15s ease-out;mix-blend-mode:screen;will-change:transform}';
+  document.head.appendChild(style);
+  document.addEventListener('mousemove', function(e){
+    halo.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px) translate(-50%,-50%)';
+  });
+
+  // 樱花/萤火粒子
+  var palette = ['#ff2bd6', '#00f0ff', '#9d4edd', '#ff6b9d'];
+  var layer = document.createElement('div');
+  layer.id = 'particle-layer';
+  layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden;';
+  document.body.appendChild(layer);
+  function spawn(){
+    var p = document.createElement('div');
+    p.className = 'particle';
+    var size = 4 + Math.random() * 8;
+    var dur = 8 + Math.random() * 10;
+    var left = Math.random() * 100;
+    var delay = Math.random() * 8;
+    var color = palette[Math.floor(Math.random() * palette.length)];
+    p.style.cssText = 'left:' + left + 'vw;width:' + size + 'px;height:' + size + 'px;background:' + color + ';box-shadow:0 0 12px ' + color + ',0 0 20px ' + color + ';animation-duration:' + dur + 's;animation-delay:' + delay + 's;';
+    layer.appendChild(p);
+    setTimeout(function(){ if (p.parentNode) p.remove(); }, (dur + delay) * 1000);
+  }
+  for (var i = 0; i < 24; i++) spawn();
+  setInterval(spawn, 800);
+})();
+</script>
+
+<div id="header-nav">
+  <nav id="main-nav" aria-label="Primary navigation">
+    {{- range .Site.Params.menu -}}
+      <a class="main-nav-link-wrap" href="{{ .url | relLangURL }}">
+        {{- if ne .icon false -}}
+          {{- $cls := .icon | default "fa-solid fa-circle-dot" -}}
+          {{- /* 如果是图片路径（含 . 和 /），按图片渲染 */ -}}
+          {{- if and (strings.Contains $cls ".") (strings.Contains $cls "/") -}}
+            <div class='main-nav-icon icon'>
+              <img src="{{ $cls | relURL }}" alt="{{ .name }} icon" style="height: 1em;" />
+            </div>
+          {{- else -}}
+            <div class='main-nav-icon icon'>
+              <i class="{{ $cls }}"></i>
+            </div>
+          {{- end -}}
+        {{- end -}}
+        <span class="main-nav-link">{{ i18n .name }}</span>
+      </a>
+    {{- end -}}
+    <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
+  </nav>
+  <nav id="sub-nav" aria-label="Secondary navigation">
+    {{- with .OutputFormats.Get "rss" -}}
+      <a id="nav-rss-link" class="nav-icon" href="{{ .Permalink | relURL }}" title="{{ i18n "rss_feed" }}" aria-label="{{ i18n "rss_feed" }}" target="_blank"></a>
+    {{- end -}}
+    {{- if .Site.Params.algolia_search.enable -}}
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="{{ i18n "search" }}" aria-label="{{ i18n "search" }}"></a>
+    {{- end -}}
+  </nav>
+  {{- if and hugo.IsMultilingual (ne "404" .Type) -}}
+    {{- $i18nMap := dict -}}
+    {{- with .Rotate "language" -}}
+      {{- range . -}}
+        {{- $i18nMap = merge $i18nMap (dict .Lang .Site.Language.Label) -}}
+      {{- end -}}
+    {{- end -}}
+    <nav id="i18n-nav" aria-label="Language selection">
+      <div class="custom-dropdown">
+        <div class="select-selected" id="select-selected" role="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Language menu">
+          <span id="nav-language-btn" class="nav-icon" style="padding: 0 20px 0 0"></span>
+          <span id="selected-lang">{{ index $i18nMap $.Language.Lang }}</span>
+        </div>
+        <ul class="select-items" id="select-items" role="listbox" aria-label="Languages">
+          {{- with .Rotate "language" -}}
+            {{- range . -}}
+              <li data-value="{{ .Lang }}" role="option" {{ if eq $.Language .Site.Language }}class="selected" aria-selected="true"{{ else }}aria-selected="false"{{ end }} >{{ .Site.Language.Label }}</li>
+            {{- end -}}
+          {{- end -}}
+        </ul>
+      </div>
+      <script>
+        var selectSelected = document.getElementById("select-selected");
+        var selectedLang = document.getElementById("selected-lang");
+        var selectItems = document.getElementById("select-items");
+        var selectOptions = selectItems.querySelectorAll("li");
+
+        selectSelected.addEventListener("click", () => {
+          selectItems.classList.toggle("show");
+          var expanded = selectSelected.getAttribute("aria-expanded") === "true";
+          selectSelected.setAttribute("aria-expanded", (!expanded).toString());
+        });
+
+        selectOptions.forEach((item) => {
+          item.addEventListener("click", () => {
+            const langMap = {};
+            {{- with .Translations -}}
+              {{- range . -}}
+              langMap['{{ .Language.Lang }}'] = '{{ .RelPermalink }}';
+              {{- end -}}
+            {{- end -}}
+            selectedLang.textContent = item.textContent;
+            selectItems.classList.remove("show");
+            selectOptions.forEach((option) => {
+              option.classList.remove("selected");
+              option.setAttribute("aria-selected", "false");
+            });
+            item.classList.add("selected");
+            item.setAttribute("aria-selected", "true");
+            if (item.dataset.value === "{{ .Language.Lang }}") return;
+            if (!langMap[item.dataset.value]) {
+              _$("#lang-tooltip").style.opacity = "1";
+              setTimeout(() => { _$("#lang-tooltip").style.opacity = "0"; }, 1000);
+              return;
+            }
+            window.location = langMap[item.dataset.value];
+          });
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest(".custom-dropdown")) {
+            selectItems.classList.remove("show");
+            selectSelected.setAttribute("aria-expanded", "false");
+          }
+        });
+      </script>
+    </nav>
+  {{- end -}}
+</div>
+
+<header id="header" aria-label="Site header">
+  {{- $coverImage := "" -}}
+  {{- $ks := .Scratch.Get "ks" | default dict -}}
+  {{- with $ks.coverImage -}}
+    {{- $coverImage = . -}}
+  {{- end -}}
+  {{- if not $coverImage -}}
+    {{- with .Site.Params.cover.image -}}
+      {{- $coverImage = . -}}
+    {{- end -}}
+  {{- end -}}
+  <picture></picture>
+  <img fetchpriority="high" src="{{ $coverImage | relURL }}" alt="{{ .Site.Title }}" />
+  <div id="header-outer">
+    <div id="header-title">
+      <span id="logo">
+        <h1 data-aos="slide-up">{{ .Site.Title }}</h1>
+      </span>
+      <h2 id="subtitle-wrap" data-aos="slide-down">
+        {{- if .IsHome -}}
+          <span id="subtitle">少女祈祷中...</span>
+        {{- else -}}
+          <span id="subtitle">{{ .Title }}</span>
+        {{- end -}}
+      </h2>
+    </div>
+  </div>
+</header>

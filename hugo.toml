@@ -4,6 +4,8 @@ title = '忆梦的博客'
 theme = 'hugo-theme-reimu'
 defaultContentLanguage = 'zh-CN'
 
+# mainSections - Hugo defaults to ["posts"] when unset; we just confirm
+
 # 中文为默认语言
 [languages.zh-CN]
   title = '忆梦的博客'
@@ -24,6 +26,10 @@ defaultContentLanguage = 'zh-CN'
   keyword = ['博客', '技术', '生活', 'Hugo', 'blog']
   description = '忆梦的个人博客，记录技术学习与生活感悟'
   since = 2026
+  mainSections = ['posts', 'blog']
+
+  # 自定义 CSS 注入：注入我们自己的炫酷样式
+  custom_css = '/css/cyber.css'
 
   # 社交链接
   [params.social]
@@ -34,44 +40,50 @@ defaultContentLanguage = 'zh-CN'
   [[params.nav]]
     name = 'home'
     path = '/'
+    icon = 'fa-solid fa-house'
   [[params.nav]]
     name = 'archives'
     path = '/archives'
+    icon = 'fa-solid fa-box-archive'
   [[params.nav]]
     name = 'tags'
     path = '/tags'
+    icon = 'fa-solid fa-tags'
   [[params.nav]]
     name = 'categories'
     path = '/categories'
+    icon = 'fa-solid fa-folder-open'
   [[params.nav]]
     name = 'about'
     path = '/about'
+    icon = 'fa-solid fa-user-astronaut'
 
   # 侧边栏菜单（name 用于 i18n，url 用于链接）
+  # icon 写法：FA6 class 直接渲染，比如 'fa-solid fa-house'
   [[params.menu]]
     name = 'home'
     url = '/'
-    icon = 'fa fa-home'
+    icon = 'fa-solid fa-house'
   [[params.menu]]
     name = 'archives'
     url = '/archives'
-    icon = 'fa fa-archive'
+    icon = 'fa-solid fa-box-archive'
   [[params.menu]]
     name = 'tags'
     url = '/tags'
-    icon = 'fa fa-tags'
+    icon = 'fa-solid fa-tags'
   [[params.menu]]
     name = 'categories'
     url = '/categories'
-    icon = 'fa fa-folder'
+    icon = 'fa-solid fa-folder-open'
   [[params.menu]]
     name = 'about'
     url = '/about'
-    icon = 'fa fa-user'
+    icon = 'fa-solid fa-user-astronaut'
 
-  # 封面图配置（使用主题默认）
+  # 封面图配置
   [params.cover]
-    image = '/images/cover.webp'
+    image = '/images/banner.webp'
     blur = true
     opacity = 0.6
 
@@ -79,7 +91,7 @@ defaultContentLanguage = 'zh-CN'
   [params.footer]
     since = 2026
     author = '忆梦'
-    custom = 'Powered by Hugo & Reimu Theme'
+    custom = 'Powered by Hugo & Reimu Theme ✦ Built with ♥ by YiMeng'
 
   # 搜索功能
   [params.search]
@@ -90,11 +102,21 @@ defaultContentLanguage = 'zh-CN'
     enable = true
     description = '一个热爱技术的开发者，记录学习与成长的点滴。'
 
-  # 自定义颜色（樱花粉主题色）
+  # 主题配色：霓虹紫粉青（cyberpunk 系）
   [params.color]
-    primary = '#ff7eb3'
-    secondary = '#ff758c'
-    background = '#fff5f5'
+    primary = '#ff2bd6'
+    secondary = '#00f0ff'
+    background = '#0b0418'
+    accent = '#9d4edd'
+  # 暗色模式
+  [params.dark_mode]
+    button = true
+    mode = 'auto'
+
+  # 启用 AOS 动效
+  [params.animation]
+    enable = true
+    options = { archive = { section = 'fade-up' } }
 
   # 版权声明
   # copyright = "© 2026 忆梦"

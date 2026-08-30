@@ -1,4 +1,5 @@
-// Keystatic admin page - UI is rendered by layout.tsx
+"use client";
+import KeystaticApp from "./keystatic";
 export default function KeystaticPage() {
-  return null;
+  return <KeystaticApp />;
 }

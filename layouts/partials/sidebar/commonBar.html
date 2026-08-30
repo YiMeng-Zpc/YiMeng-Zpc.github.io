@@ -14,7 +14,16 @@
 {{- $author := $ks.author | default $params.author -}}
 {{- $description := $ks.description | default $params.description -}}
 {{- $bio := $ks.sidebarBio | default $description -}}
-{{- $avatar := ($ks.avatar | default $params.avatar) | default "default.webp" -}}
+{{- $avatar := "" -}}
+{{- with $ks.avatar -}}
+  {{- $avatar = . -}}
+{{- end -}}
+{{- if not $avatar -}}
+  {{- with $params.avatar -}}
+    {{- /* ignore theme default webp path if it doesn't exist */ -}}
+  {{- end -}}
+  {{- $avatar = "default.svg" -}}
+{{- end -}}
 
 {{/* 封面图 */}}
 {{- with $ks.coverImage -}}
@@ -35,7 +44,8 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>{{ i18n "sidebar.post" }}</div>
-    {{- $posts := (where .ctx.Page.Site.RegularPages "Section" "in" $params.mainSections) -}}
+    {{- $mainSections := $params.mainSections | default (slice "posts") -}}
+    {{- $posts := where .ctx.Site.RegularPages "Section" "in" $mainSections -}}
     <div class="sidebar-state-number">{{ len $posts }}</div>
   </div>
   <a class="sidebar-state-category" href="{{ "categories/" | relLangURL }}" aria-label="sidebar-state-category-link">
@@ -61,11 +71,17 @@
           target="_blank"
           aria-label="{{ $social.name }}"
           rel="noopener nofollow noreferrer"
-        ></a>
+        ><i class="fa-brands fa-{{ $social.name }}"></i></a>
       </div>
     {{- end -}}
   {{- else -}}
     {{- range $name, $url := $socialLinks -}}
+      {{- $socialIcon := "fa-brands fa-" -}}
+      {{- if eq $name "email" -}}
+        {{- $socialIcon = "fa-solid fa-envelope" -}}
+      {{- else -}}
+        {{- $socialIcon = printf "fa-brands fa-%s" $name -}}
+      {{- end -}}
       <div class="icon-{{ $name }} sidebar-social-icon">
         <a
           href="{{ $url }}"
@@ -73,7 +89,7 @@
           target="_blank"
           aria-label="{{ $name }}"
           rel="noopener nofollow noreferrer"
-        ></a>
+        ><i class="{{ $socialIcon }}"></i></a>
       </div>
     {{- end -}}
   {{- end -}}
@@ -88,19 +104,12 @@
         aria-label="{{ i18n .name }}"
       ></a>
       {{- if ne .icon false -}}
-        <div class='sidebar-menu-icon icon {{ if or (and (eq .icon "e62b") ($params.icon_font)) (and (eq .icon "f6ad") (not $params.icon_font)) (not .icon) }}rotate{{ end }}'>
-          {{- if .icon -}}
-            {{- if and (strings.Contains .icon ".") (strings.Contains .icon "/") -}}
-              <img src="{{ .icon | relURL }}" alt="{{ .name }} icon" class="" style="height: 1em;">
-            {{- else -}}
-              &#x{{- .icon -}};
-            {{- end -}}
+        <div class='sidebar-menu-icon icon'>
+          {{- $cls := .icon | default "fa-solid fa-circle-dot" -}}
+          {{- if and (strings.Contains $cls ".") (strings.Contains $cls "/") -}}
+            <img src="{{ $cls | relURL }}" alt="{{ .name }} icon" style="height: 1em;" />
           {{- else -}}
-            {{- if $params.icon_font -}}
-              &#xe62b;
-            {{- else -}}
-              &#xf6ad;
-            {{- end -}}
+            <i class="{{ $cls }}"></i>
           {{- end -}}
         </div>
       {{- end -}}

@@ -1,82 +1,89 @@
-# Keystatic CMS 部署指南
-
-## 架构说明
+# ✦ 部署架构总览
 
 ```
-www.zhangpengchao.com          → GitHub Pages (Hugo 博客)
-xxx.pages.dev/keystatic        → Cloudflare Pages (Keystatic 后台)
-GitHub OAuth                   → Keystatic 内置处理（不需要额外 Worker）
+┌─────────────────────────────────────────┐
+│  www.zhangpengchao.com                  │
+│  └─ GitHub Pages  (Hugo 静态博客)        │
+│     • 内容来自 content/posts/*.md        │
+│     • 主题：hugo-theme-reimu + 自定义霓虹  │
+│     • Workflow: .github/workflows/hugo.yml│
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  keystatic-admin.<account>.workers.dev   │
+│  └─ Cloudflare Workers (Keystatic 后台)   │
+│     • Next.js 15 + Keystatic 0.6 + OpenNext│
+│     • Workflow: .github/workflows/       │
+│       deploy-keystatic.yml                │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│  GitHub OAuth App                        │
+│  callback: https://<worker-domain>/      │
+│    api/keystatic/github/oauth/callback    │
+└─────────────────────────────────────────┘
 ```
 
-## 步骤一：Cloudflare Pages 部署
+**两条独立的 CI 流水线，互不冲突：**
+- **hugo.yml** —— 当 `content/**`、`layouts/**`、`themes/**`、`hugo.toml` 等博客源码变动时，自动重新构建 Hugo 并部署到 GitHub Pages。
+- **deploy-keystatic.yml** —— 当 `app/**`、`keystatic.config.ts` 等后台代码变动时，自动构建 Next.js 并部署到 Cloudflare Workers。
 
-### 1. 登录 Cloudflare
-1. 打开 https://dash.cloudflare.com
-2. 登录你的账号
+---
 
-### 2. 创建 Pages 项目
-1. 左侧菜单 → Workers 和 Pages → 创建应用程序 → Pages
-2. 点击 "连接到 Git"
-3. 选择 GitHub → 授权 Cloudflare 访问
-4. 选择仓库：`YiMeng-Zpc/YiMeng-Zpc.github.io`
-5. 设置构建配置：
-   - **Production 分支**：`main`
-   - **构建命令**：`npx opennextjs-cloudflare build`
-   - **构建输出目录**：`.open-next`
-6. 点击 "保存并部署"
+## 🚀 一、博客主站（已默认自动部署）
 
-### 3. 设置环境变量
-部署完成后，进入 Pages 项目 → 设置 → 环境变量：
+GitHub Pages 走的是 GitHub Actions 自动部署，无需额外操作。
+- Settings → Pages → Source 选 **GitHub Actions**
+- `hugo.yml` 会自动跑
 
-| 变量名 | 值 |
-|--------|------|
-| `KEYSTATIC_GITHUB_CLIENT_ID` | `Ov23liRKe9S4RSOwMTPR` |
-| `KEYSTATIC_GITHUB_CLIENT_SECRET` | `73b1dc3e2c3fe11bd18a2212484465e275f246cc` |
-| `KEYSTATIC_SECRET` | （随便生成一个随机字符串，用于加密 token） |
+---
 
-> **重要**：这些环境变量需要同时设置到"预览"和"生产"环境！
+## 🚀 二、Keystatic 后台（Cloudflare Workers）
 
-设置完后需要重新部署一次（在 Pages 项目 → 部署 → 重新部署）。
+### 步骤 1：创建 GitHub OAuth App
+1. 打开 https://github.com/settings/developers → **New OAuth App**
+2. **Homepage URL**: `https://www.zhangpengchao.com`
+3. **Authorization callback URL**: `https://keystatic-admin.<你的CF账号>.workers.dev/api/keystatic/github/oauth/callback`
+   - 替换 `<你的CF账号>` 为你的 Cloudflare 账号子域
+   - 这一步 **先用一个占位符**，部署后用真实域名再回来改
+4. 拿到 **Client ID** 和 **Client Secret**
 
-### 4. 获取你的 Pages 域名
-部署完成后，你会得到一个类似这样的地址：
-```
-https://keystatic-admin.pages.dev
-```
-或者自定义的子域名。
+### 步骤 2：在 Cloudflare 添加 Secrets（推荐用 GitHub Actions secrets 注入）
+去仓库 Settings → Secrets and variables → Actions，添加：
+- `KEYSTATIC_GITHUB_CLIENT_ID`
+- `KEYSTATIC_GITHUB_CLIENT_SECRET`  
+- `KEYSTATIC_SECRET`（一个随机字符串，比如 `openssl rand -hex 32`）
+- `CLOUDFLARE_API_TOKEN`（从 Cloudflare Dashboard → My Profile → API Tokens 创建 Edit Cloudflare Workers 权限）
 
-## 步骤二：更新 GitHub OAuth App
+### 步骤 3：首次部署
+push 到 `main` 后 `deploy-keystatic.yml` 会自动跑。也可以手动 trigger。
 
-1. 打开 https://github.com/settings/developers
-2. 点击你创建的 OAuth App
-3. 点击 "Update application"
-4. **Authorization callback URL** 改为：
-   ```
-   https://你的pages域名/api/keystatic/github/oauth/callback
-   ```
-   例如：`https://keystatic-admin.pages.dev/api/keystatic/github/oauth/callback`
+### 步骤 4：拿到真实 worker 域名
+部署成功后 Cloudflare 会给你一个 `keystatic-admin.<account>.workers.dev`。
+回到 GitHub OAuth App 把 callback URL 改成这个域名。
 
-> ⚠️ **注意**：URL 必须精确匹配，包括路径！否则 OAuth 登录会失败。
+### 步骤 5：开始使用
+打开 `https://keystatic-admin.<account>.workers.dev/keystatic`，点 "Sign in with GitHub"，授权后就能管理文章和站点设置。
 
-## 步骤三：测试
+每次你用 Keystatic 创建/编辑文章 → 它会直接 commit 到 `content/posts/*.md` → GitHub Actions 触发 hugo.yml → 博客自动更新。
 
-1. 访问 `https://你的-pages域名/keystatic`
-2. 点击 "Sign in with GitHub"
-3. 授权后应该能看到 Keystatic 管理界面
-4. 可以创建、编辑、删除文章
+---
 
-## 故障排除
+## 🔍 故障排查
 
-### OAuth 登录失败
-- 检查 GitHub OAuth App 的 callback URL 是否正确
-- 检查环境变量是否设置正确（特别是 KEYSTATIC_SECRET）
-- 确保环境变量同时设置了"预览"和"生产"
+### OAuth 登录失败 / 跳到 GitHub 后报错
+- 检查 OAuth App 的 callback URL 是否和 Worker 域名精确匹配（包括路径 `/api/keystatic/github/oauth/callback`）
+- 检查三个 Secrets 是否都设置了
 
-### 构建失败
-- 确保 Cloudflare Pages 的构建命令是 `npx opennextjs-cloudflare build`
-- 确保构建输出目录是 `.open-next`
+### 后台页面 404
+- 确认 `wrangler.toml` 里的 `name` 没和别人冲突
+- 看 Cloudflare Workers Logs
 
-### 文章路径
-- Keystatic 创建的文章会保存在 `content/posts/` 目录下
-- 格式为 Markdown，带有 frontmatter（YAML 头部信息）
-- Keystatic 会自动创建 Pull Request 来合并更改
+### 文章没出现在博客上
+- 文章 frontmatter 里 `draft` 不能为 `true`
+- 文章必须在 `content/posts/` 下
+- Hugo build log 看是否报错
+
+### 想换 OAuth App
+1. https://github.com/settings/developers 更新 callback URL
+2. 改 GitHub Secrets 里 `KEYSTATIC_GITHUB_CLIENT_ID/SECRET`

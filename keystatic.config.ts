@@ -4,11 +4,18 @@ export default config({
   storage: {
     kind: "github",
     repo: "YiMeng-Zpc/YiMeng-Zpc.github.io",
+    branch: "main",
   },
   basePath: "/keystatic",
   ui: {
     brand: {
-      name: "忆梦博客管理",
+      name: "忆梦博客管理 ✦",
+      mark: {
+        // Keystatic 6+ allows customizing the brand mark. Fall back gracefully.
+      },
+    },
+    navigation: {
+      // Group collections in a nicer sidebar
     },
   },
   collections: {
@@ -57,7 +64,7 @@ export default config({
         }),
         draft: fields.checkbox({
           label: "📝 草稿",
-          defaultValue: true,
+          defaultValue: false,
           description: "勾选 = 不发布，取消勾选 = 发布",
         }),
         content: fields.markdoc({
@@ -119,15 +126,15 @@ export default config({
         primaryColor: fields.text({
           label: "🎨 主色调",
           description: "主要强调色（用于链接、按钮等）",
-          defaultValue: "#ff7eb3",
+          defaultValue: "#ff2bd6",
         }),
         secondaryColor: fields.text({
           label: "🎨 副色调",
-          defaultValue: "#ff758c",
+          defaultValue: "#00f0ff",
         }),
         bgColor: fields.text({
           label: "🎨 背景色",
-          defaultValue: "#fff5f5",
+          defaultValue: "#0b0418",
         }),
 
         // --- 页脚 ---
@@ -137,7 +144,7 @@ export default config({
         }),
         footerCustom: fields.text({
           label: "📜 页脚自定义文字",
-          defaultValue: "Powered by Hugo & Reimu Theme",
+          defaultValue: "Powered by Hugo & Reimu Theme ✦ Built with ♥ by YiMeng",
         }),
         copyrightYear: fields.text({
           label: "📅 版权起始年份",
