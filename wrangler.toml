@@ -9,10 +9,12 @@ binding = "ASSETS"
 
 [vars]
 NODE_ENV = "production"
-# GitHub OAuth App callback must be set to:
-#   https://<your-worker-domain>/api/keystatic/github/oauth/callback
-# Set the actual values in Cloudflare dashboard or via:
-#   wrangler secret put KEYSTATIC_GITHUB_CLIENT_ID
-#   wrangler secret put KEYSTATIC_GITHUB_CLIENT_SECRET
-#   wrangler secret put KEYSTATIC_SECRET
-# (Do NOT commit real secrets in this file.)
+# Keystatic GitHub OAuth — public client ID is safe to commit.
+# Client ID is referenced at build time by the Keystatic handler.
+KEYSTATIC_GITHUB_CLIENT_ID = "Ov23liRke9S4RSOwMTPR"
+
+# Secrets (set via Cloudflare dashboard or `wrangler secret put`):
+# - KEYSTATIC_GITHUB_CLIENT_SECRET
+# - KEYSTATIC_SECRET
+# The OAuth App callback must be:
+# https://keystatic-admin.yi-meng.workers.dev/api/keystatic/github/oauth/callback
