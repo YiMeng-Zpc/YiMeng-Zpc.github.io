@@ -1,0 +1,17 @@
+{
+  "siteTitle": "忆梦的博客",
+  "siteTitleEn": "YiMeng's Blog",
+  "author": "忆梦",
+  "description": "一个热爱技术的开发者，记录学习与成长的点滴。",
+  "coverOpacity": "0.6",
+  "primaryColor": "#ff7eb3",
+  "secondaryColor": "#ff758c",
+  "bgColor": "#fff5f5",
+  "footerAuthor": "忆梦",
+  "footerCustom": "Powered by Hugo & Reimu Theme",
+  "copyrightYear": "2026",
+  "sidebarBio": "一个热爱技术的开发者，记录学习与成长的点滴。",
+  "githubUrl": "https://github.com/YiMeng-Zpc",
+  "emailUrl": "mailto:Yi.Meng-@outlook.com",
+  "searchEnabled": true
+}

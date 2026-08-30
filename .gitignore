@@ -5,9 +5,16 @@ node_modules/
 .next/
 out/
 
-# Cloudflare Pages / OpenNext build output
+# Hugo build output
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Cloudflare Workers / OpenNext build output
+.open-next/
 .open-next/
 .vercel/
+.wrangler/
 
 # Environment variables (包含 GitHub OAuth 密钥，不能提交!)
 .env

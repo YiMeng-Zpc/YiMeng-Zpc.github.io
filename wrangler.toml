@@ -1,9 +1,14 @@
 name = "keystatic-admin"
-pages_build_output_dir = ".open-next"
-compatibility_date = "2024-12-30"
+main = ".open-next/worker.js"
+compatibility_date = "2025-06-02"
 compatibility_flags = ["nodejs_compat"]
 
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
 [vars]
+NODE_ENV = "production"
 KEYSTATIC_GITHUB_CLIENT_ID = "Ov23liRKe9S4RSOwMTPR"
-KEYSTATIC_GITHUB_CLIENT_SECRET = "73b1dc3e2c3fe11bd18a2212484465e275f246cc"
-KEYSTATIC_SECRET = "my-super-secret-key-2026"
+KEYSTATIC_GITHUB_CLIENT_SECRET = "c0a5a61089e78d6b9c1af997bc0d562557a16a39"
+KEYSTATIC_SECRET = "ks_yimeng_zpc_2026_xK9mP2vQ7wR4x"

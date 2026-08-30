@@ -1,0 +1,53 @@
+{{/* 从 data/site.json 加载 Keystatic 管理的设置 */}}
+{{- $sd := hugo.Data.site -}}
+{{- $p := .Site.Params -}}
+
+{{/* 如果 site.json 不存在，直接使用 hugo.toml 的值 */}}
+{{- if not $sd -}}
+  {{- $sd = dict -}}
+{{- end -}}
+
+{{/* 用 site.json 的值覆盖，没设置的用 hugo.toml 的 */}}
+{{- $merged := dict -}}
+
+{{/* 站点标题 */}}
+{{- $merged = merge $merged (dict "siteTitle" ($sd.siteTitle | default .Site.Title)) -}}
+
+{{/* 作者 */}}
+{{- $merged = merge $merged (dict "author" ($sd.author | default $p.author)) -}}
+
+{{/* 描述 */}}
+{{- $merged = merge $merged (dict "description" ($sd.description | default $p.description)) -}}
+
+{{/* 侧边栏简介 */}}
+{{- $merged = merge $merged (dict "sidebarBio" ($sd.sidebarBio | default ($p.widget | default dict).description | default "")) -}}
+
+{{/* 封面透明度 */}}
+{{- $merged = merge $merged (dict "coverOpacity" ($sd.coverOpacity | default "0.6")) -}}
+
+{{/* 封面图 */}}
+{{- with $sd.coverImage }}{{- $merged = merge $merged (dict "coverImage" .) -}}{{- end -}}
+
+{{/* 颜色 */}}
+{{- $merged = merge $merged (dict "primaryColor" ($sd.primaryColor | default ($p.color | default dict).primary | default "#ff7eb3")) -}}
+{{- $merged = merge $merged (dict "secondaryColor" ($sd.secondaryColor | default ($p.color | default dict).secondary | default "#ff758c")) -}}
+{{- $merged = merge $merged (dict "bgColor" ($sd.bgColor | default ($p.color | default dict).background | default "#fff5f5")) -}}
+
+{{/* 社交链接 */}}
+{{- $social := dict -}}
+{{- with $sd.githubUrl }}{{- $social = merge $social (dict "github" .) -}}{{- end -}}
+{{- with $sd.emailUrl }}{{- $social = merge $social (dict "email" .) -}}{{- end -}}
+{{- with $sd.bilibiliUrl }}{{- $social = merge $social (dict "bilibili" .) -}}{{- end -}}
+{{- with $sd.twitterUrl }}{{- $social = merge $social (dict "twitter" .) -}}{{- end -}}
+{{- if gt (len $social) 0 }}{{- $merged = merge $merged (dict "social" $social) -}}{{- end -}}
+
+{{/* 头像 */}}
+{{- with $sd.avatar }}{{- $merged = merge $merged (dict "avatar" .) -}}{{- end -}}
+
+{{/* 页脚 */}}
+{{- $footer := $p.footer | default dict -}}
+{{- $merged = merge $merged (dict "footerAuthor" ($sd.footerAuthor | default $footer.author | default "")) -}}
+{{- $merged = merge $merged (dict "footerCustom" ($sd.footerCustom | default $footer.custom | default "")) -}}
+
+{{/* 将合并后的配置存入 page scratch */}}
+{{- .Scratch.Set "ks" $merged -}}
