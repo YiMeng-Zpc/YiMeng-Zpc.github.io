@@ -1,4 +1,4 @@
-import { config, collection, fields, singletons } from "@keystatic/core";
+import { config, collection, fields, singleton } from "@keystatic/core";
 
 export default config({
   storage: {
@@ -76,7 +76,7 @@ export default config({
     }),
 
     // ========== 博客配置（单例页面） ==========
-    siteConfig: singletons({
+    siteConfig: singleton({
       label: "⚙️ 站点设置",
       path: "data/site",
       format: { dataFile: "site" },
