@@ -1,51 +1,16 @@
-{{- $params := .Site.Params -}}
+﻿{{- $params := .Site.Params -}}
 {{- $customCSS := $params.custom_css -}}
 
 <!-- FontAwesome 6 Free CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- 自定义炫酷主题样式 -->
+<!-- 鑷畾涔夌偒閰蜂富棰樻牱寮?-->
 {{- with $customCSS -}}
 <link rel="stylesheet" href="{{ . | relURL }}" />
 {{- end -}}
 
-<!-- 鼠标跟随光晕 + 粒子 -->
-<script>
-(function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  // 鼠标光晕
-  var halo = document.createElement('div');
-  halo.id = 'mouse-halo';
-  document.body.appendChild(halo);
-  var style = document.createElement('style');
-  style.textContent = '#mouse-halo{position:fixed;top:0;left:0;width:600px;height:600px;background:radial-gradient(circle,rgba(255,43,214,0.15),transparent 60%);border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);transition:transform .15s ease-out;mix-blend-mode:screen;will-change:transform}';
-  document.head.appendChild(style);
-  document.addEventListener('mousemove', function(e){
-    halo.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px) translate(-50%,-50%)';
-  });
-
-  // 樱花/萤火粒子
-  var palette = ['#ff2bd6', '#00f0ff', '#9d4edd', '#ff6b9d'];
-  var layer = document.createElement('div');
-  layer.id = 'particle-layer';
-  layer.style.cssText = 'position:fixed;inset:0;pointer-events:none;z-index:2;overflow:hidden;';
-  document.body.appendChild(layer);
-  function spawn(){
-    var p = document.createElement('div');
-    p.className = 'particle';
-    var size = 4 + Math.random() * 8;
-    var dur = 8 + Math.random() * 10;
-    var left = Math.random() * 100;
-    var delay = Math.random() * 8;
-    var color = palette[Math.floor(Math.random() * palette.length)];
-    p.style.cssText = 'left:' + left + 'vw;width:' + size + 'px;height:' + size + 'px;background:' + color + ';box-shadow:0 0 12px ' + color + ',0 0 20px ' + color + ';animation-duration:' + dur + 's;animation-delay:' + delay + 's;';
-    layer.appendChild(p);
-    setTimeout(function(){ if (p.parentNode) p.remove(); }, (dur + delay) * 1000);
-  }
-  for (var i = 0; i < 24; i++) spawn();
-  setInterval(spawn, 800);
-})();
-</script>
+<!-- 鍔ㄦ€?4K 椋庢櫙鍥捐儗鏅?+ 鏄熻景绮掑瓙锛堢敺鎬у寲绉戞妧椋庯級 -->
+<script src="/js/fengjing-bg.js" defer></script>
 
 <div id="header-nav">
   <nav id="main-nav" aria-label="Primary navigation">
@@ -53,7 +18,7 @@
       <a class="main-nav-link-wrap" href="{{ .url | relLangURL }}">
         {{- if ne .icon false -}}
           {{- $cls := .icon | default "fa-solid fa-circle-dot" -}}
-          {{- /* 如果是图片路径（含 . 和 /），按图片渲染 */ -}}
+          {{- /* 濡傛灉鏄浘鐗囪矾寰勶紙鍚?. 鍜?/锛夛紝鎸夊浘鐗囨覆鏌?*/ -}}
           {{- if and (strings.Contains $cls ".") (strings.Contains $cls "/") -}}
             <div class='main-nav-icon icon'>
               <img src="{{ $cls | relURL }}" alt="{{ .name }} icon" style="height: 1em;" />
@@ -148,18 +113,10 @@
 </div>
 
 <header id="header" aria-label="Site header">
+  {{- /* 鍏抽棴 Reimu 涓婚鐨?banner image锛堝コ鎬у寲浜屾鍏冨皝闈級鈥斺€?璁╄儗鏅浘 div 鎺ョ */ -}}
   {{- $coverImage := "" -}}
-  {{- $ks := .Scratch.Get "ks" | default dict -}}
-  {{- with $ks.coverImage -}}
-    {{- $coverImage = . -}}
-  {{- end -}}
-  {{- if not $coverImage -}}
-    {{- with .Site.Params.cover.image -}}
-      {{- $coverImage = . -}}
-    {{- end -}}
-  {{- end -}}
   <picture></picture>
-  <img fetchpriority="high" src="{{ $coverImage | relURL }}" alt="{{ .Site.Title }}" />
+  <img style="visibility:hidden" alt="" />
   <div id="header-outer">
     <div id="header-title">
       <span id="logo">
@@ -167,7 +124,15 @@
       </span>
       <h2 id="subtitle-wrap" data-aos="slide-down">
         {{- if .IsHome -}}
-          <span id="subtitle">少女祈祷中...</span>
+          {{- $sub := "" -}}
+          {{- if and (reflect.IsMap $params.subtitle) $params.subtitle.text -}}
+            {{- $sub = $params.subtitle.text -}}
+          {{- else if and (reflect.IsMap $params.subtitle) $params.subtitle.typing.strings -}}
+            {{- $sub = index $params.subtitle.typing.strings 0 -}}
+          {{- else -}}
+            {{- $sub = $params.subtitle -}}
+          {{- end -}}
+          <span id="subtitle">{{ $sub }}</span>
         {{- else -}}
           <span id="subtitle">{{ .Title }}</span>
         {{- end -}}
@@ -175,3 +140,5 @@
     </div>
   </div>
 </header>
+
+
