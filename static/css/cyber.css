@@ -8,6 +8,23 @@
 
 /* ---------- 配色变量 ---------- */
 :root {
+/* override Reimu default red variables with masculine palette */
+:root {
+  --red-0: #0ea5e9;
+  --red-1: #0284c7;
+  --red-2: #38bdf8;
+  --red-3: rgba(14, 165, 233, 0.35);
+  --red-4: rgba(14, 165, 233, 0.18);
+  --red-5: rgba(14, 165, 233, 0.10);
+  --red-5-5: rgba(14, 165, 233, 0.06);
+  --red-6: rgba(14, 165, 233, 0.20);
+  --color-link: #38bdf8;
+  --color-h2-after: #f59e0b;
+  --color-red-3-shadow: rgba(245, 158, 11, 0.45);
+  --color-red-6-shadow: rgba(245, 158, 11, 0.55);
+  --color-default: #cbd5e1;
+}
+
   --sky-deep:    #0a0e1a;   /* 深夜蓝黑 — 主背景 */
   --sky-mid:     #111827;   /* 深灰蓝 — 卡片底色 */
   --sky-light:   #1e293b;   /* 钢蓝灰 — 分割线/hover底 */
@@ -28,6 +45,20 @@
 }
 
 /* 暗色模式（默认就是暗色） */
+
+/* full-mode override: transparent body so fengjing-bg shows through */
+html[data-theme-mode='auto'] body,
+html[data-theme-mode='dark'] body,
+html[data-theme-mode='light'] body {
+  background: transparent !important;
+  color: var(--snow) !important;
+}
+html[data-theme-mode='auto'] #wrap,
+html[data-theme-mode='dark'] #wrap,
+html[data-theme-mode='light'] #wrap {
+  background: transparent !important;
+}
+
 [data-theme-mode='dark'] {
   --color-background: var(--sky-deep) !important;
   --color-text: var(--snow) !important;
