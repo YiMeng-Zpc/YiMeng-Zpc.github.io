@@ -1,4 +1,4 @@
-# ✦ 忆梦的博客 · 霓虹科技主题
+# ✦ Zhang Pengchao's blog
 
 > Hugo + Reimu 主题 + 定制霓虹 CSS + FontAwesome 6 + 樱花粒子 + 鼠标光晕  
 > 主站部署在 **GitHub Pages**，Keystatic CMS 后台部署在 **Cloudflare Workers**
