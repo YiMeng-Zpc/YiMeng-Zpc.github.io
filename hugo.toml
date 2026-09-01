@@ -32,7 +32,7 @@ defaultContentLanguage = 'zh-CN'
 
   # footer 个性化署名（覆盖 Reimu 主题的'Hugo / Theme.Reimu' 署名）
   # copyright 是 Hugo Params.copyright，会被 Reimu footer.html 渲染到 footer 第一行
-  copyright = '<span style="opacity:.75">走过的路、写过的码、拍过的照片 — 都不会骗人 ✦</span>'
+  copyright = '<span style="opacity:.75">走过的路、写过的码、拍过的照片 — 都是回忆留下的足迹</span>'
 
   # 鑷畾涔?CSS 娉ㄥ叆锛氭敞鍏ユ垜浠嚜宸辩殑鐐叿鏍峰紡
   custom_css = '/css/cyber.css'

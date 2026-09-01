@@ -512,6 +512,14 @@ a:hover {
   filter: drop-shadow(0 0 5px var(--ocean-bright));
 }
 
+/* Footer 区域居中布局 */
+#footer-info {
+  text-align: center;
+}
+#footer-info > div {
+  margin: 0 auto;
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
   .home-posts-grid { grid-template-columns: 1fr; }
