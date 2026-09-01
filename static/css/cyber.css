@@ -233,7 +233,7 @@ body::before {
 .icon-copyright,
 .icon-brush,
 .icon-coffee {
-  background-image: linear-gradient(90deg, #38bdf8 0%, #67e8f9 25%, #a5f3fc 50%, #67e8f9 75%, #38bdf8 100%) !important;
+  background-image: linear-gradient(90deg, #38bdf8 0%, #06b6d4 17%, #10b981 33%, #34d399 50%, #10b981 67%, #06b6d4 83%, #38bdf8 100%) !important;
   background-size: 200% 100% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
