@@ -1,4 +1,128 @@
-<!-- 覆盖主题的 favicon 链接, 同时提供 apple touch icon -->
+{{/* 保留主题原 head.html 全部内容 (compile main.scss + loader.css + 字体等), 
+    然后追加我们自己的 favicon + apple-touch-icon override */}}
+
+<!-- icon -->
+{{- $js := hugo.Data.vendor.js -}}
+{{- $css := hugo.Data.vendor.css -}}
+{{- if .Site.Params.icon_font -}}
+  {{- range $js.fontawesome.high_priority -}}
+    {{- partial "helpers/cdnJs.html" (dict "item" . "ctx" $) -}}
+  {{- end -}}
+  {{- range $js.fontawesome.low_priority -}}
+    {{- partial "helpers/cdnJs.html" (dict "item" . "ctx" $ "async" true) -}}
+  {{- end -}}
+{{- else -}}
+  {{- range $css.fontawesome.high_priority -}}
+    {{- partial "helpers/cdnCss.html" (dict "item" . "ctx" $) -}}
+  {{- end -}}
+  {{- range $css.fontawesome.low_priority -}}
+    {{- partial "helpers/cdnCss.html" (dict "item" . "ctx" $ "async" true) -}}
+  {{- end -}}
+{{- end -}}
+<!-- loader -->
+{{- if .Site.Params.preloader.enable -}}
+  {{- partial "helpers/scss.html" (dict "source" "css/loader.scss" "temp" "loader.scss" "target" "css/loader.css" "ctx" .) -}}
+{{- end -}}
+<!-- open-graph -->
+
+{{- template "_internal/opengraph.html" . -}}
+
+{{- template "_internal/twitter_cards.html" . -}}
+
+{{- template "_internal/schema.html" . -}}
+
+{{- if .Site.Params.open_graph_image.enable -}}
+  {{- $img := "" -}}
+  {{- $path := "" -}}
+  {{- if .IsHome -}}
+    {{- $path = .Site.Params.open_graph_image.home_page -}}
+  {{- else -}}
+    {{- $path = .Site.Params.open_graph_image.other_page -}}
+  {{- end -}}
+  {{- if not $path -}}
+    {{- $path = .Site.Params.open_graph_image.default -}}
+  {{- end -}}
+  {{- if $path -}}
+    {{- $img = resources.Get (printf "%s" $path) -}}
+  {{- end -}}
+  {{- if $img -}}
+    {{- if not (eq $img.MediaType.SubType "svg") -}}
+      {{- $img = $img.Resize (printf "%dx%d webp q75" $img.Width $img.Height) -}}
+    {{- end -}}
+    <meta property="og:image" content="{{ $img.Permalink | safeURL }}" />
+  {{- end -}}
+{{- end -}}
+
+<!-- theme color -->
+<meta name="theme-color" content="{{ .Site.Params.theme_color | default "#222831" }}">
+
+<!-- favicon use default -->
 <link rel="shortcut icon" href="{{ "favicon.ico" | relURL }}">
 <link rel="icon" type="image/png" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+
+<!-- photo-swipe -->
+{{- partial "helpers/cdnCss.html" (dict "name" "photoswipe" "ctx" . "async" true) -}}
+<!-- katex -->
+{{- partial "helpers/cdnCss.html" (dict "name" "katex" "ctx" . "async" true) -}}
+<!-- waline -->
+{{- if and .Site.Params.waline.enable .Site.Params.waline.serverURL -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "waline" "ctx" .) -}}
+{{- end -}}
+<!-- gitalk -->
+{{- if and .Site.Params.gitalk.enable .Site.Params.gitalk.clientID .Site.Params.gitalk.clientSecret -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "gitalk" "ctx" .) -}}
+{{- end -}}
+<!-- pace -->
+{{- partial "helpers/cdnJs.html" (dict "name" "pace-js" "ctx" . "async" true) -}}
+<!-- aos -->
+{{- if .Site.Params.animation.enable -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "aos" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.player.aplayer.enable -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "aplayer" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.player.meting.enable -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "meting" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.math.enable -}}
+  {{- if eq .Site.Params.math.mathjax_enable true -}}
+    {{- partial "helpers/cdnJs.html" (dict "name" "mathjax" "ctx" .) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .Site.Params.code.copy -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "clipboard" "ctx" .) -}}
+{{- end -}}
+
+{{- if and .Site.Params.firework.enable (not .Site.Params.firework.muse) -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "mouse-firework" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.mermaid.enable -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "mermaid" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.algolia_search.enable -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "algolia" "ctx" .) -}}
+{{- end -}}
+
+{{- if .Site.Params.pangu.enable -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "pangu" "ctx" .) -}}
+{{- end -}}
+
+<!-- main.scss (主题主样式) -->
+{{- partial "helpers/scss.html" (dict "source" "css/main.scss" "temp" "main.scss" "target" "css/main.css" "ctx" .) -}}
+
+<!-- 自定义: 我们的 cyber.css + hero.css -->
+<link rel="stylesheet" href="{{ "css/cyber.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/hero.css" | relURL }}">
+
+{{- partial "helpers/cdnJs.html" (dict "name" "instantsearch" "ctx" .) -}}
+
+{{- if .Site.Params.dark_mode.enable -}}
+  {{- partial "helpers/scss.html" (dict "source" "css/dark.scss" "temp" "dark.scss" "target" "css/dark.css" "ctx" .) -}}
+{{- end -}}
