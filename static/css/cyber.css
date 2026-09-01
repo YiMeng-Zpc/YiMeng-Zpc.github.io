@@ -238,7 +238,7 @@ body::before {
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
-  animation: oceanAmberGradient 7s ease infinite !important;
+  animation: oceanAmberGradient 4s ease infinite !important;
   font-weight: 800 !important;
   letter-spacing: 1px;
 }
@@ -246,7 +246,7 @@ body::before {
 /* 标题保持闪烁发光，链接不要闪烁 */
 #header-title h1,
 #subtitle-wrap #subtitle {
-  animation: oceanAmberGradient 7s ease infinite, neonFlicker 5s infinite;
+  animation: oceanAmberGradient 4s ease infinite, neonFlicker 5s infinite;
   text-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
 }
 
