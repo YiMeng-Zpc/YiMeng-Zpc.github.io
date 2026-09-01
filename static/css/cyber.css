@@ -197,20 +197,23 @@ body::before {
 #header-title h1,
 #subtitle-wrap #subtitle,
 .main-nav-link,
+.main-nav-icon,
 .sidebar-menu-link,
-.sidebar-author .sidebar-author-name,
-.sidebar-name,
+.sidebar-menu-link-dummy,
+.sidebar-menu-icon,
+.sidebar-author-name,
 .sidebar-description,
-.sidebar-state-name,
 .sidebar-state-number,
+.sidebar-state-name,
+.sidebar-social-icon,
 .hero-cell h3,
 .hero-cell .uptime-counter b,
 .hero-cell .hero-sub,
 .hero-sub,
-.footer-content,
-.footer-info,
-#footer-copyright,
+#footer,
 #footer a,
+#footer span,
+.toc-title,
 .tag-cloud-title,
 .category-cloud-title,
 .archive-header h1,
@@ -225,7 +228,11 @@ body::before {
 .button,
 .btn,
 .search-result-title,
-.sidebar-title {
+.sidebar-title,
+.footer-info-sep,
+.icon-copyright,
+.icon-brush,
+.icon-coffee {
   background: linear-gradient(90deg, #38bdf8, #fbbf24, #38bdf8) !important;
   background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
@@ -244,7 +251,8 @@ body::before {
 }
 
 /* 计时器小数字保留白色，避免太小看不清渐变 */
-.uptime-counter b {
+.uptime-counter b,
+.hero-cell .uptime-counter b {
   background: none !important;
   -webkit-text-fill-color: #fff !important;
   animation: none !important;
