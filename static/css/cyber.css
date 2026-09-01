@@ -183,18 +183,107 @@ body::before {
    Hero 标题 — 蓝→金渐变
    ============================================ */
 
+/* ============================================
+   炫彩蓝→金渐变文字（除文章正文外）
+   - 首页 hero 标题 + 副标题
+   - 顶部导航链接 / 侧栏菜单
+   - 侧栏作者名 / 标题 / 段落描述
+   - 主页 hero cell 标题 / 数字
+   - footer 版权
+   - 标签/分类/归档页面标题
+   - 搜索/筛选/页码按钮
+   注：文章正文 .post-content / .article-entry / p / li 不在此列
+   ============================================ */
 #header-title h1,
-#subtitle-wrap #subtitle {
-  background: linear-gradient(90deg, #38bdf8, #fbbf24, #38bdf8);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: oceanAmberGradient 7s ease infinite, neonFlicker 5s infinite;
-  text-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
+#subtitle-wrap #subtitle,
+.main-nav-link,
+.sidebar-menu-link,
+.sidebar-author .sidebar-author-name,
+.sidebar-name,
+.sidebar-description,
+.sidebar-state-name,
+.sidebar-state-number,
+.hero-cell h3,
+.hero-cell .uptime-counter b,
+.hero-cell .hero-sub,
+.hero-sub,
+.footer-content,
+.footer-info,
+#footer-copyright,
+#footer a,
+.tag-cloud-title,
+.category-cloud-title,
+.archive-header h1,
+.archive-header h2,
+.page-header h1,
+.section-title,
+.list-title,
+.taxonomy-term,
+.taxonomy-count,
+.pagination a,
+.pagination .page-number,
+.button,
+.btn,
+.search-result-title,
+.sidebar-title {
+  background: linear-gradient(90deg, #38bdf8, #fbbf24, #38bdf8) !important;
+  background-size: 300% 100% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: oceanAmberGradient 7s ease infinite !important;
   font-weight: 800 !important;
   letter-spacing: 1px;
 }
+
+/* 标题保持闪烁发光，链接不要闪烁 */
+#header-title h1,
+#subtitle-wrap #subtitle {
+  animation: oceanAmberGradient 7s ease infinite, neonFlicker 5s infinite;
+  text-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
+}
+
+/* 计时器小数字保留白色，避免太小看不清渐变 */
+.uptime-counter b {
+  background: none !important;
+  -webkit-text-fill-color: #fff !important;
+  animation: none !important;
+}
+
+/* 文章正文里的文字不受炫彩字体影响（保持可读） */
+.post-content,
+.post-content p,
+.post-content li,
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.article-entry p,
+.article-entry li,
+.article-entry h1,
+.article-entry h2,
+.article-entry h3,
+.article-entry h4,
+.post-card h3 a,
+.archive-article-title {
+  background: none !important;
+  -webkit-text-fill-color: revert !important;
+  animation: none !important;
+}
+
+/* 文章卡片标题、文章归档标题回退到普通渐变文字（不是炫彩动画） */
+.post-card h3 a,
+.archive-article-title {
+  background: linear-gradient(90deg, #38bdf8, #fbbf24) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: none !important;
+}
+
+/* ============================================
+   Hero 标题 — 蓝→金渐变
+   ============================================ */
 
 @keyframes oceanAmberGradient {
   0%, 100% { background-position: 0% 50%; }
