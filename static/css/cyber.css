@@ -233,7 +233,7 @@ body::before {
 .icon-copyright,
 .icon-brush,
 .icon-coffee {
-  background: linear-gradient(90deg, #38bdf8, #a5f3fc, #38bdf8) !important;
+  background-image: linear-gradient(90deg, #38bdf8, #a5f3fc, #38bdf8) !important;
   background-size: 300% 100% !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -282,7 +282,7 @@ body::before {
 /* 文章卡片标题、文章归档标题回退到普通渐变文字（不是炫彩动画） */
 .post-card h3 a,
 .archive-article-title {
-  background: linear-gradient(90deg, #38bdf8, #fbbf24) !important;
+  background-image: linear-gradient(90deg, #38bdf8, #fbbf24) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
@@ -404,7 +404,7 @@ a:hover {
 
 /* 文章标题 — 蓝金渐变 */
 .archive-article-title {
-  background: linear-gradient(90deg, #38bdf8, #fbbf24);
+  background-image: linear-gradient(90deg, #38bdf8, #fbbf24);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
