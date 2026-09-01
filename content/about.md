@@ -42,4 +42,4 @@ date: 2026-08-31
 - GitHub：[YiMeng-Zpc](https://github.com/YiMeng-Zpc)
 - Email：Yi.Meng-@outlook.com
 
-> 走过的路、写过的码、拍过的照片——都不会骗人。
+> 走过的路、写过的码、拍过的照片——都是回忆留下的足迹。
