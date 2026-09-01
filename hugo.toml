@@ -40,7 +40,7 @@ defaultContentLanguage = 'zh-CN'
   # 绀句氦閾炬帴
   [params.social]
     github = 'https://github.com/YiMeng-Zpc'
-    email = 'Yi.Meng-@outlook.com'
+    email = 'mailto:Yi.Meng-@outlook.com'
 
   # 椤堕儴瀵艰埅鏍忥紙name 鐢ㄤ簬 i18n 缈昏瘧锛?
   [[params.nav]]

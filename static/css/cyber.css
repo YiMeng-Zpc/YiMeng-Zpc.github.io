@@ -383,17 +383,12 @@ a:hover {
   color: var(--amber);
 }
 
-/* 头像光圈 — 蓝橙 */
+/* 头像光圈 — 蓝橙渐变描边 (使用 box-shadow inset 描边，避开 mask-composite 兼容问题) */
 .sidebar-author img.lazyload,
 .sidebar-author img {
-  border: 3px solid transparent !important;
-  background: linear-gradient(135deg, var(--ocean-bright), var(--amber)) border-box;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 2px;
+  border: 3px solid #38bdf8 !important;
   border-radius: 50% !important;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 0 3px #f59e0b inset, 0 0 20px rgba(56, 189, 248, 0.4);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
