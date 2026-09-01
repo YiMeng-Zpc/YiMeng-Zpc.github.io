@@ -8,8 +8,6 @@
 
 /* ---------- 配色变量 ---------- */
 :root {
-/* override Reimu default red variables with masculine palette */
-:root {
   --red-0: #0ea5e9;
   --red-1: #0284c7;
   --red-2: #38bdf8;
@@ -23,7 +21,7 @@
   --color-red-3-shadow: rgba(245, 158, 11, 0.45);
   --color-red-6-shadow: rgba(245, 158, 11, 0.55);
   --color-default: #cbd5e1;
-}
+
 
   --sky-deep:    #0a0e1a;   /* 深夜蓝黑 — 主背景 */
   --sky-mid:     #111827;   /* 深灰蓝 — 卡片底色 */
