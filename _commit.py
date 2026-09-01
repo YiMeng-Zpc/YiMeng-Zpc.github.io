@@ -23,7 +23,7 @@ content = """seo: 站点标题改为'张鹏超' (提高搜索命中率)
 with open('_msg.txt', 'wb') as f:
     f.write(content.encode('utf-8'))
 
-import subprocess
+import subprocess, sys
 r = subprocess.run(['git', 'add', '-A'], capture_output=True)
 r2 = subprocess.run(['git', 'commit', '-F', '_msg.txt'], capture_output=True)
 
