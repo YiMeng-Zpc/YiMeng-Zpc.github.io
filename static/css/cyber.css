@@ -528,6 +528,41 @@ blockquote, .sidebar-state-tag, article.h-entry.article {
 @media (max-width: 768px) {
   .home-posts-grid { grid-template-columns: 1fr; }
   body::before { width: 300px; height: 300px; }
+
+  /* Mobile sidebar: 取消 justify-content: center
+     原因: 内容总高 (664px) > max-height (567px) 时,
+     center 会让首项被推到 wrap 顶部之外 (实测 y=-117),
+     导致头像上半被 #mobile-nav 上边界裁掉 */
+  #mobile-nav .sidebar-wrap {
+    justify-content: flex-start !important;
+  }
+  /* 头像在 mobile 上下边距收敛, 让它完整显示在 wrap 顶部 */
+  #mobile-nav .sidebar-author img {
+    margin: 12px auto 8px !important;
+  }
+  #mobile-nav .sidebar-author-name {
+    margin: 8px 0 4px !important;
+  }
+}
+
+/* 关于页顶部头像 */
+img[alt="about-avatar"] {
+  display: block !important;
+  margin: 32px auto 8px !important;
+  width: 140px !important;
+  height: 140px !important;
+  border-radius: 50% !important;
+  object-fit: cover;
+  border: 3px solid #38bdf8 !important;
+  box-shadow: 0 0 0 3px #f59e0b inset, 0 0 28px rgba(56, 189, 248, 0.45);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+img[alt="about-avatar"]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 3px #fbbf24 inset, 0 0 40px rgba(245, 158, 11, 0.55);
+}
+@media (max-width: 768px) {
+  img[alt="about-avatar"] { margin: 16px auto 4px !important; width: 100px !important; height: 100px !important; }
 }
 
 /* 减少动效偏好 */

@@ -4,6 +4,8 @@ slug: "about"
 date: 2026-08-31
 ---
 
+![about-avatar](/avatar/default.jpg)
+
 ## 我是张鹏超
 
 > 一个把生活装进背包、把代码写进云端的人。
