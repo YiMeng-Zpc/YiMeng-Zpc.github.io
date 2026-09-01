@@ -1,6 +1,6 @@
 baseURL = 'https://www.zhangpengchao.com/'
 locale = 'zh-CN'
-title = '张鹏超的博客'
+title = '张鹏超'
 
 theme = 'hugo-theme-reimu'
 defaultContentLanguage = 'zh-CN'
@@ -9,7 +9,7 @@ defaultContentLanguage = 'zh-CN'
 
 # 涓枃涓洪粯璁よ瑷€
 [languages.zh-CN]
-  title = '张鹏超的博客'
+  title = '张鹏超'
 
   label = '简体中文'
   locale = 'zh-CN'
