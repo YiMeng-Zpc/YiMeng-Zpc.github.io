@@ -30,6 +30,10 @@ defaultContentLanguage = 'zh-CN'
   since = 2026
   mainSections = ['posts', 'blog']
 
+  # footer 个性化署名（覆盖 Reimu 主题的'Hugo / Theme.Reimu' 署名）
+  # copyright 是 Hugo Params.copyright，会被 Reimu footer.html 渲染到 footer 第一行
+  copyright = '<span style="opacity:.75">走过的路、写过的码、拍过的照片 — 都不会骗人 ✦</span>'
+
   # 鑷畾涔?CSS 娉ㄥ叆锛氭敞鍏ユ垜浠嚜宸辩殑鐐叿鏍峰紡
   custom_css = '/css/cyber.css'
 
@@ -98,6 +102,7 @@ defaultContentLanguage = 'zh-CN'
     since = 2026
     author = '张鹏超'
     custom = 'Powered by Hugo · 走过的路都不会骗人 ✦ by ZhangPengchao'
+    powered = false   # 关闭 Reimu 主题 '基于 Hugo Theme.Reimu' 署名
     busuanzi = false  # 关闭不蒜子访问量/访客量统计（默认 true）
     count = false     # 关闭 footer 内部计数
 
