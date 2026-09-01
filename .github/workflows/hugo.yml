@@ -10,6 +10,7 @@ on:
       - "static/**"
       - "themes/**"
       - "hugo.toml"
+      - "data/**"
       - ".github/workflows/hugo.yml"
   workflow_dispatch:
 
