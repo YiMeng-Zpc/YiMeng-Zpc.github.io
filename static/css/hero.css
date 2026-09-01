@@ -1,0 +1,267 @@
+/* ============================================
+   主页炫酷核心区：运行计时器 + 旋转地球
+   配色：深海蓝 + 琥珀金（与 cyber.css 一致）
+   ============================================ */
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin: 60px auto;
+  max-width: 980px;
+  padding: 0 20px;
+}
+
+.hero-cell {
+  position: relative;
+  padding: 32px 24px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.10) 0%,
+    rgba(2, 132, 199, 0.06) 50%,
+    rgba(245, 158, 11, 0.08) 100%);
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  box-shadow:
+    0 8px 30px rgba(14, 165, 233, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.hero-cell:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 16px 50px rgba(14, 165, 233, 0.28),
+    0 0 30px rgba(245, 158, 11, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.hero-cell::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(245, 158, 11, 0.08) 90deg,
+    transparent 180deg,
+    rgba(14, 165, 233, 0.08) 270deg,
+    transparent 360deg);
+  animation: hero-rotate-bg 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-rotate-bg {
+  to { transform: rotate(360deg); }
+}
+
+.hero-cell-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--snow, #f1f5f9);
+}
+
+.hero-cell h3 {
+  font-size: 1.1rem;
+  margin: 8px 0 16px;
+  color: #e0f2fe;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.hero-cell .fa-clock-rotate-left {
+  font-size: 28px;
+  color: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
+}
+
+.hero-sub {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  letter-spacing: 1px;
+}
+
+/* ---------- 1. 运行时间计数器 ---------- */
+.uptime-counter {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.uptime-counter span {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+  padding: 12px 8px;
+  border-radius: 10px;
+  background: linear-gradient(135deg,
+    rgba(14, 165, 233, 0.18),
+    rgba(2, 132, 199, 0.10));
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow:
+    0 4px 15px rgba(14, 165, 233, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+}
+
+.uptime-counter b {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Courier New', 'Source Code Pro', monospace;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  letter-spacing: 1px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.uptime-counter em {
+  margin-top: 4px;
+  font-style: normal;
+  font-size: 0.72rem;
+  color: #cbd5e1;
+  letter-spacing: 2px;
+}
+
+/* ---------- 2. 旋转地球 ---------- */
+.earth-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 12px auto 8px;
+  perspective: 800px;
+}
+
+.earth-orbit {
+  position: absolute;
+  inset: -20px;
+  border: 1px dashed rgba(56, 189, 248, 0.35);
+  border-radius: 50%;
+  animation: orbit-spin 30s linear infinite;
+}
+
+.earth-shadow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220px;
+  height: 30px;
+  margin: -15px 0 0 -110px;
+  background: radial-gradient(ellipse at center,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.20) 50%,
+    transparent 80%);
+  filter: blur(6px);
+  animation: orbit-spin 30s linear infinite reverse;
+}
+
+@keyframes orbit-spin {
+  to { transform: rotate(360deg); }
+}
+
+.earth {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 30% 30%, #38bdf8 0%, #0284c7 30%, #075985 60%, #0c4a6e 100%);
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.6),
+    inset -20px -10px 60px rgba(0, 0, 0, 0.55),
+    0 0 50px rgba(56, 189, 248, 0.55),
+    0 0 90px rgba(14, 165, 233, 0.30);
+  animation: earth-rotate 12s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes earth-rotate {
+  to { background-position: 200px 0; }
+}
+
+/* 大陆层（用径向渐变模拟） */
+.earth-face {
+  position: absolute;
+  inset: 0;
+  background:
+    /* 模拟大陆块的形状（不规则色块） */
+    radial-gradient(ellipse 35% 25% at 25% 40%, #15803d 0%, #166534 50%, transparent 75%),
+    radial-gradient(ellipse 25% 30% at 65% 30%, #15803d 0%, #166534 50%, transparent 75%),
+    radial-gradient(ellipse 40% 20% at 45% 70%, #16a34a 0%, #14532d 55%, transparent 80%),
+    radial-gradient(ellipse 20% 18% at 80% 65%, #15803d 0%, #166534 50%, transparent 75%),
+    radial-gradient(ellipse 18% 15% at 10% 80%, #166534 0%, transparent 70%),
+    radial-gradient(ellipse 22% 20% at 55% 15%, #15803d 0%, transparent 70%);
+  animation: earth-rotate 12s linear infinite;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+}
+
+/* 云层（半透明白色） */
+.earth-clouds {
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(ellipse 30% 8% at 20% 30%, rgba(255, 255, 255, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 6% at 70% 50%, rgba(255, 255, 255, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 7% at 40% 70%, rgba(255, 255, 255, 0.30) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 5% at 85% 25%, rgba(255, 255, 255, 0.40) 0%, transparent 70%);
+  animation: earth-rotate 20s linear infinite reverse;
+  mix-blend-mode: screen;
+}
+
+/* 大气辉光 */
+.earth-glow {
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%,
+    transparent 55%,
+    rgba(125, 211, 252, 0.25) 62%,
+    rgba(56, 189, 248, 0.10) 72%,
+    transparent 85%);
+  pointer-events: none;
+  animation: glow-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+  from { opacity: 0.7; transform: scale(1); }
+  to   { opacity: 1.0; transform: scale(1.04); }
+}
+
+/* 响应式：小屏单列 */
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin: 36px auto;
+  }
+  .earth-wrap, .earth, .earth-shadow {
+    width: 160px;
+    height: 160px;
+  }
+  .earth-shadow {
+    width: 180px;
+    margin-left: -90px;
+  }
+  .uptime-counter b { font-size: 1.6rem; }
+  .uptime-counter span { min-width: 54px; padding: 10px 6px; }
+}
+
+/* 减少动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  .earth,
+  .earth-face,
+  .earth-clouds,
+  .earth-orbit,
+  .earth-shadow,
+  .earth-glow,
+  .hero-cell::before {
+    animation: none !important;
+  }
+}

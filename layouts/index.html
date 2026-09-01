@@ -42,10 +42,36 @@
   </section>
   {{- partial "pagination.html" . -}}
   {{- else -}}
-    <section style="text-align:center;padding:60px 20px;color:var(--neon-muted);" data-aos="fade-up">
-      <i class="fa-solid fa-feather" style="font-size:48px;color:var(--neon-cyan);filter:drop-shadow(0 0 10px var(--neon-cyan));"></i>
-      <h3 style="margin-top:20px;">还没有文章</h3>
-      <p>更多内容在路上 ✦ 走过的路都不会骗人</p>
+    {{- /* 主页炫酷核心区：运行计时器 + 旋转地球 */ -}}
+    {{- $since := (.Site.Params.footer.since | default 2026) -}}
+    <section class="hero-grid" data-aos="fade-up">
+      <div class="hero-cell hero-uptime">
+        <div class="hero-cell-inner">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <h3>博客已运行</h3>
+          <div class="uptime-counter" id="uptime-counter" data-since="{{ $since }}">
+            <span class="uptime-d"><b>--</b><em>天</em></span>
+            <span class="uptime-h"><b>--</b><em>时</em></span>
+            <span class="uptime-m"><b>--</b><em>分</em></span>
+            <span class="uptime-s"><b>--</b><em>秒</em></span>
+          </div>
+          <p class="hero-sub">since {{ $since }} ✦ 走过的路都不会骗人</p>
+        </div>
+      </div>
+      <div class="hero-cell hero-globe">
+        <div class="hero-cell-inner">
+          <div class="earth-wrap" aria-hidden="true">
+            <div class="earth-orbit"></div>
+            <div class="earth-shadow"></div>
+            <div class="earth">
+              <div class="earth-face"></div>
+              <div class="earth-clouds"></div>
+              <div class="earth-glow"></div>
+            </div>
+          </div>
+          <p class="hero-sub">代码 · 旅行 · 摄影 · 在路上</p>
+        </div>
+      </div>
     </section>
   {{- end -}}
 {{- end -}}
