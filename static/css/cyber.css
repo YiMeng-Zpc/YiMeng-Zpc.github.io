@@ -520,6 +520,12 @@ a:hover {
   margin: 0 auto;
 }
 
+/* 去掉块引用、侧栏标签、文章主体的装饰竖线 */
+blockquote, .sidebar-state-tag, article.h-entry.article {
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
   .home-posts-grid { grid-template-columns: 1fr; }
