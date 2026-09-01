@@ -526,6 +526,9 @@ blockquote, .sidebar-state-tag, article.h-entry.article {
   padding-left: 0 !important;
 }
 
+/* 去掉副标题尾部的打字机闪烁光标 | */
+#subtitle::after { content: none !important; }
+
 /* 响应式 */
 @media (max-width: 768px) {
   .home-posts-grid { grid-template-columns: 1fr; }
