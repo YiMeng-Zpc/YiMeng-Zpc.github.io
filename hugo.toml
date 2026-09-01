@@ -93,11 +93,13 @@ defaultContentLanguage = 'zh-CN'
   [params.subtitle]
     text = '代码 · 旅行 · 摄影 · 在路上'
 
-  # 椤佃剼
+  # 页脚
   [params.footer]
     since = 2026
     author = '张鹏超'
     custom = 'Powered by Hugo · 走过的路都不会骗人 ✦ by ZhangPengchao'
+    busuanzi = false  # 关闭不蒜子访问量/访客量统计（默认 true）
+    count = false     # 关闭 footer 内部计数
 
   # 鎼滅储鍔熻兘
   [params.search]
