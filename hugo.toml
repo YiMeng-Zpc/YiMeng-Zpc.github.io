@@ -23,6 +23,28 @@ defaultContentLanguage = 'zh-CN'
   locale = 'en-US'
   weight = 2
 
+  # 英文站的站级文案覆盖（中文默认值见下方 [params]）
+  [languages.en.params]
+    author = 'Zhang Pengchao'
+    keyword = ['blog', 'code', 'travel', 'photography', 'skiing', 'Zhang Pengchao']
+    description = "Zhang Pengchao — documenting code, travel, photography, and everything on the road"
+    copyright = '<span style="opacity:.75">The roads walked, the code written, the photos taken — footprints left by memories</span>'
+
+    [languages.en.params.subtitle]
+      text = 'Code · Travel · Photography · On the Road'
+
+    [languages.en.params.widget]
+      enable = true
+      description = 'A developer who loves technology and documenting life ✦ thoughts on blog, code, and daily life.'
+
+    [languages.en.params.footer]
+      since = 2026
+      author = 'Zhang Pengchao'
+      custom = 'Powered by Hugo · Every step counts ✦ by ZhangPengchao'
+      powered = false
+      busuanzi = false
+      count = false
+
 [params]
   author = '张鹏超'
   keyword = ['博客', '代码', '旅行', '摄影', '滑雪', '张鹏超']
@@ -36,6 +58,14 @@ defaultContentLanguage = 'zh-CN'
 
   # 自定义 CSS 注入：注入我们自己的炫酷样式
   custom_css = '/css/cyber.css'
+
+  # 自定义霓虹光标（替换 Reimu 主题默认的卡通小女孩光标）
+  [params.reimu_cursor]
+    enable = true
+    [params.reimu_cursor.cursor]
+      default = '/images/cursor/cyber-cursor-default.png'
+      pointer = '/images/cursor/cyber-cursor-pointer.png'
+      text = '/images/cursor/cyber-cursor-text.png'
 
   # 社交链接
   [params.social]

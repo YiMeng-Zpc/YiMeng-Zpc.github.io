@@ -48,14 +48,14 @@
       <div class="hero-cell hero-uptime">
         <div class="hero-cell-inner">
           <i class="fa-solid fa-clock-rotate-left"></i>
-          <h3>博客已运行</h3>
+          <h3>{{ i18n "hero.uptime_title" }}</h3>
           <div class="uptime-counter" id="uptime-counter" data-since="{{ $since }}">
-            <span class="uptime-d"><b>--</b><em>天</em></span>
-            <span class="uptime-h"><b>--</b><em>时</em></span>
-            <span class="uptime-m"><b>--</b><em>分</em></span>
-            <span class="uptime-s"><b>--</b><em>秒</em></span>
+            <span class="uptime-d"><b>--</b><em>{{ i18n "uptime.day" }}</em></span>
+            <span class="uptime-h"><b>--</b><em>{{ i18n "uptime.hour" }}</em></span>
+            <span class="uptime-m"><b>--</b><em>{{ i18n "uptime.minute" }}</em></span>
+            <span class="uptime-s"><b>--</b><em>{{ i18n "uptime.second" }}</em></span>
           </div>
-          <p class="hero-sub">since {{ $since }} ✦ 都是回忆留下的足迹</p>
+          <p class="hero-sub">{{ i18n "hero.since_prefix" }} {{ $since }} ✦ {{ i18n "hero.moto" }}</p>
         </div>
       </div>
       <div class="hero-cell hero-globe">
@@ -69,7 +69,7 @@
               <div class="earth-glow"></div>
             </div>
           </div>
-          <p class="hero-sub">代码 · 旅行 · 摄影 · 在路上</p>
+          <p class="hero-sub">{{ i18n "hero.tagline" }}</p>
         </div>
       </div>
     </section>
