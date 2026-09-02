@@ -4,7 +4,7 @@
 <!-- FontAwesome 6 Free CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- 鑷畾涔夌偒閰蜂富棰樻牱寮?-->
+<!-- 自定义炫酷主题样式 -->
 {{- with $customCSS -}}
 <link rel="stylesheet" href="{{ . | relURL }}" />
 {{- end -}}
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="/css/hero.css" />
 <script src="/js/hero.js" defer></script>
 
-<!-- 鍔ㄦ€?4K 椋庢櫙鍥捐儗鏅?+ 鏄熻景绮掑瓙锛堢敺鎬у寲绉戞妧椋庯級 -->
+<!-- 动态 4K 风景图背景 + 星辰粒子（男性化科技风） -->
 <script src="/js/fengjing-bg.js" defer></script>
 
 <div id="header-nav">
@@ -22,7 +22,7 @@
       <a class="main-nav-link-wrap" href="{{ .url | relLangURL }}">
         {{- if ne .icon false -}}
           {{- $cls := .icon | default "fa-solid fa-circle-dot" -}}
-          {{- /* 濡傛灉鏄浘鐗囪矾寰勶紙鍚?. 鍜?/锛夛紝鎸夊浘鐗囨覆鏌?*/ -}}
+          {{- /* 如果是图片路径（含 . 和 /），按图片渲染 */ -}}
           {{- if and (strings.Contains $cls ".") (strings.Contains $cls "/") -}}
             <div class='main-nav-icon icon'>
               <img src="{{ $cls | relURL }}" alt="{{ .name }} icon" style="height: 1em;" />
@@ -117,7 +117,7 @@
 </div>
 
 <header id="header" aria-label="Site header">
-  {{- /* 鍏抽棴 Reimu 涓婚鐨?banner image锛堝コ鎬у寲浜屾鍏冨皝闈級鈥斺€?璁╄儗鏅浘 div 鎺ョ */ -}}
+  {{- /* 关闭 Reimu 主题的 banner image（女性化二次元封面）——让背景图 div 接管 */ -}}
   {{- $coverImage := "" -}}
   <picture></picture>
   <img style="visibility:hidden" alt="" />
