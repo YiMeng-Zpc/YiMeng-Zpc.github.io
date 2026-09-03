@@ -54,7 +54,7 @@
 
     // ---------- texture ----------
     var img = new Image();
-    img.src = '/img/earth-equirect.webp';
+    img.src = '/img/earth-equirect-seamless.webp';
     var texOK = false, texData = null, texW = 0, texH = 0;
     img.onload = function () {
       texW = img.naturalWidth;
@@ -68,7 +68,7 @@
       texOK = true;
     };
 
-    // render sphere into offscreen buffer (true per-pixel lon/lat mapping)
+    // render sphere into offscreen buffer (per-pixel lon/lat + Lambert lighting)
     function renderSphere(rot) {
       if (!texOK) {
         octx.clearRect(0, 0, OLEN, OLEN);
@@ -80,6 +80,12 @@
       }
       var R = OLEN / 2, R2 = R * R, iw = texW, ih = texH, td = texData;
       var TWO_PI = Math.PI * 2;
+      // light direction: from upper-left-front, normalized
+      var lx = -0.5, ly = -0.5, lz = 0.707;
+      var llen = Math.sqrt(lx*lx + ly*ly + lz*lz);
+      lx /= llen; ly /= llen; lz /= llen;
+      var ambient = 0.30;   // ambient light floor
+      var diffuseK = 0.70;  // diffuse intensity
       for (var py = 0; py < OLEN; py++) {
         var dy = py - R, dy2 = dy * dy;
         for (var px = 0; px < OLEN; px++) {
@@ -95,15 +101,27 @@
           var lat = -Math.asin(dy / R);
           var u = (lon + Math.PI) / TWO_PI;
           u -= Math.floor(u);
-          var v = 0.5 - lat / Math.PI;      // v=0 north pole
+          var vv = 0.5 - lat / Math.PI;
           var tx = Math.floor(u * iw);
           if (tx >= iw) tx = iw - 1;
-          var ty = Math.floor(v * ih);
+          if (tx < 0) tx = 0;
+          var ty = Math.floor(vv * ih);
           if (ty >= ih) ty = ih - 1;
+          if (ty < 0) ty = 0;
           var ti = (ty * iw + tx) * 4;
-          outPix[oi]     = td[ti];
-          outPix[oi + 1] = td[ti + 1];
-          outPix[oi + 2] = td[ti + 2];
+          // sphere normal (normalized)
+          var nx = dx / R, ny = dy / R, nz = z3 / R;
+          // Lambert diffuse
+          var dot = nx*lx + ny*ly + nz*lz;
+          if (dot < 0) dot = 0;
+          var light = ambient + diffuseK * dot;
+          // rim light for edge glow (atmosphere)
+          var rim = Math.pow(1 - nz, 3) * 0.3;
+          light += rim;
+          if (light > 1) light = 1;
+          outPix[oi]     = Math.min(255, (td[ti]     * light) | 0);
+          outPix[oi + 1] = Math.min(255, (td[ti + 1] * light) | 0);
+          outPix[oi + 2] = Math.min(255, (td[ti + 2] * light) | 0);
           outPix[oi + 3] = 255;
         }
       }
@@ -178,7 +196,7 @@
         // 沿球面法线方向抬升（球面点本身是单位向量，直接乘 (1+hgt)）
         var lift = 1 + hgt;
         var lp = [p[0] * lift, p[1] * lift, p[2] * lift];
-        pts.push(proj(rotY(lp, rot)));
+        pts.push(proj(rotY(lp, -rot)));
       }
 
       // path (front-facing segments only)
@@ -208,7 +226,7 @@
       var pp = slerp(a, b, prog);
       var hgt2 = Math.sin(Math.PI * prog) * 0.22;
       var lp2 = [pp[0] * (1 + hgt2), pp[1] * (1 + hgt2), pp[2] * (1 + hgt2)];
-      var rv = rotY(lp2, rot);
+      var rv = rotY(lp2, -rot);
       if (rv[2] < 0) return;
       var sp = proj(rv);
 
@@ -220,7 +238,7 @@
         var tq = slerp(a, b, tt);
         var th = Math.sin(Math.PI * tt) * 0.22;
         var tl = [tq[0] * (1 + th), tq[1] * (1 + th), tq[2] * (1 + th)];
-        var tv = rotY(tl, rot);
+        var tv = rotY(tl, -rot);
         if (tv[2] < 0) continue;
         var tp = proj(tv);
         ctx.strokeStyle = route.color;
@@ -348,7 +366,7 @@
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       for (var i = 0; i < cities.length; i++) {
-        var v = rotY(cities[i], rot);
+        var v = rotY(cities[i], -rot);
         if (v[2] < 0) continue;
         var p = proj(v);
         // halo ring
