@@ -51,7 +51,7 @@ defaultContentLanguage = 'zh-CN'
 
 [params]
   author = '张鹏超'
-  keyword = ['博客', '代码', '旅行', '摄影', '滑雪', '张鹏超']
+  keywords = ['博客', '代码', '旅行', '摄影', '滑雪', '张鹏超']
   description = '张鹏超 — 记录代码、旅行、摄影与一切在路上的人'
   since = 2026
 
@@ -80,7 +80,7 @@ defaultContentLanguage = 'zh-CN'
   # 社交链接
   [params.social]
     github = 'https://github.com/YiMeng-Zpc'
-    email = 'mailto:Yi.Meng-@outlook.com'
+    # 邮箱改为图标按钮入口（避免明文地址暴露），见 sidebar.html / footer.html 内的 Contact 图标
 
   # 顶部导航栏（name 用于 i18n 翻译）
   [[params.nav]]

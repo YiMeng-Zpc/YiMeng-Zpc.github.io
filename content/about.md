@@ -1,7 +1,7 @@
 ---
 title: "关于"
 slug: "about"
-date: 2021-08-03
+date: 2025-11-11
 display_date: "2025年11月11日"
 ---
 

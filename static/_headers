@@ -1,0 +1,41 @@
+/*
+ * Cloudflare Pages / Netlify 风格的 HTTP 头
+ * GitHub Pages 暂不支持自定义响应头；本文件留作将来迁移 CDN 时一键启用。
+ *
+ * 当前站点大量内联脚本（select dropdown、firework、aosInit 等），
+ * 'unsafe-inline' 仅作短期兼容，长期应改为 nonce 或 hash。
+ */
+
+# 1. 默认 HTML 响应头（安全强化）
+/*.html
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self' https://npm.webcache.cn https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline' https://npm.webcache.cn https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://npm.webcache.cn https://cdn.jsdelivr.net https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# 2. 带 content-hash 的 CSS/JS：长缓存 + immutable
+/*.min.[a-f0-9]{16,}.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.min.[a-f0-9]{16,}.js
+  Cache-Control: public, max-age=31536000, immutable
+
+# 3. 普通静态资源（图片 / 自定义 css / 自定义 js）：一周缓存
+/assets/*
+  Cache-Control: public, max-age=604800
+/img/*
+  Cache-Control: public, max-age=604800
+/css/cyber.css
+  Cache-Control: public, max-age=604800
+/css/hero.css
+  Cache-Control: public, max-age=604800
+/js/*.js
+  Cache-Control: public, max-age=3600
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 4. Sitemap / robots：短缓存，方便搜索引擎重抓
+/sitemap*.xml
+  Cache-Control: public, max-age=3600
+/robots.txt
+  Cache-Control: public, max-age=3600

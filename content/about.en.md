@@ -1,7 +1,7 @@
 ---
 title: "About"
 slug: "about"
-date: 2021-08-03
+date: 2025-11-11
 display_date: "November 11, 2025"
 ---
 
