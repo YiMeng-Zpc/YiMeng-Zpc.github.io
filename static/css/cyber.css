@@ -76,6 +76,27 @@ html[data-theme-mode='light'] #wrap {
   --color-card: rgba(255, 255, 255, 0.55) !important;
 }
 
+/* skip-link 无障碍跳转 (M14) */
+.skip-link {
+  position: fixed;
+  top: -40px;
+  left: 8px;
+  z-index: 9999;
+  padding: 8px 14px;
+  background: var(--ocean-bright, #38bdf8);
+  color: #0a0e1a;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 8px;
+  outline: 2px solid var(--amber-bright, #fbbf24);
+  outline-offset: 2px;
+}
+
 /* ============================================
    动态 4K 风景图背景
    - JS 注入 background-image 到 body 之前的占位 div (#fengjing-bg)

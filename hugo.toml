@@ -180,3 +180,7 @@ defaultContentLanguage = 'zh-CN'
   zh-CN = "加载中..."
   zh-TW = "加载中..."
   en = "Loading..."
+
+# Inject custom HTML at specific body positions (M14: skip-link for a11y)
+[params.injector]
+  body_begin = '<a class="skip-link" href="#content">跳到主内容</a>'

@@ -1,0 +1,17 @@
+{
+  "name": "张鹏超的博客",
+  "short_name": "ZPC Blog",
+  "description": "记录代码、旅行、摄影与一切在路上的人",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0e1a",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "lang": "zh-CN"
+}

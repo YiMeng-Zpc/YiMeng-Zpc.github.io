@@ -1,7 +1,37 @@
-{{/* 保留主题原 head.html 全部内容 (compile main.scss + loader.css + 字体等), 
-    然后追加我们自己的 favicon + apple-touch-icon override */}}
+{{/* ============================================
+   自定义 head.html — 在主题基础上补充 SEO/移动适配 meta
+   - 添加缺失的 viewport / description / keywords
+   - 添加 canonical + hreflang（多语言 SEO）
+   - 修复空 script 漏洞：vendor 名错配、未启用的 cdn 调用
+   - 主页只输出 WebSite schema，不输出 Article schema
+   ============================================ */}}
 
-<!-- icon -->
+<!-- viewport / 移动适配（H1） -->
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<!-- description / keywords（H4） -->
+<meta name="description" content="{{ .Params.description | default .Site.Params.description | safeHTML }}"/>
+{{- $keywords := default .Site.Params.keywords .Params.keywords -}}
+{{- with $keywords }}
+  {{- if reflect.IsSlice . }}
+    <meta name="keywords" content="{{ delimit . ", " }}" />
+  {{- else }}
+    <meta name="keywords" content="{{ . }}" />
+  {{- end }}
+{{- end }}
+
+<!-- canonical + hreflang（H3：多语言 SEO） -->
+<link rel="canonical" href="{{ .Permalink }}" />
+{{- range .Site.Home.AllTranslations }}
+  {{- if eq .Language.Lang "en" }}
+    <link rel="alternate" hreflang="en-US" href="{{ .Permalink }}" />
+  {{- else }}
+    <link rel="alternate" hreflang="zh-CN" href="{{ .Permalink }}" />
+  {{- end }}
+{{- end }}
+<link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}" />
+
+<!-- icon font -->
 {{- $js := hugo.Data.vendor.js -}}
 {{- $css := hugo.Data.vendor.css -}}
 {{- if .Site.Params.icon_font -}}
@@ -19,17 +49,20 @@
     {{- partial "helpers/cdnCss.html" (dict "item" . "ctx" $ "async" true) -}}
   {{- end -}}
 {{- end -}}
+
 <!-- loader -->
 {{- if .Site.Params.preloader.enable -}}
   {{- partial "helpers/scss.html" (dict "source" "css/loader.scss" "temp" "loader.scss" "target" "css/loader.css" "ctx" .) -}}
 {{- end -}}
-<!-- open-graph -->
 
+<!-- open-graph + twitter -->
 {{- template "_internal/opengraph.html" . -}}
-
 {{- template "_internal/twitter_cards.html" . -}}
 
-{{- template "_internal/schema.html" . -}}
+<!-- schema：只在文章页输出 Article schema；首页/列表页只输出 WebSite（H7） -->
+{{- if and (not .IsHome) (not (eq .Type "archives")) (not (eq .Type "tags")) (not (eq .Type "categories")) -}}
+  {{- template "_internal/schema.html" . -}}
+{{- end -}}
 
 {{- if .Site.Params.open_graph_image.enable -}}
   {{- $img := "" -}}
@@ -56,15 +89,22 @@
 <!-- theme color -->
 <meta name="theme-color" content="{{ .Site.Params.theme_color | default "#222831" }}">
 
-<!-- favicon use default -->
+<!-- favicon -->
 <link rel="shortcut icon" href="{{ "favicon.ico" | relURL }}">
 <link rel="icon" type="image/png" sizes="180x180" href="{{ "apple-touch-icon.png" | relURL }}">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 
-<!-- photo-swipe -->
-{{- partial "helpers/cdnCss.html" (dict "name" "photoswipe" "ctx" . "async" true) -}}
+<!-- manifest (L7: PWA 可安装) -->
+<link rel="manifest" href="{{ "manifest.json" | relURL }}">
+
+<!-- photo-swipe (M2: 首页不需要，限定 single) -->
+{{- if .IsPage -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "photoswipe" "ctx" . "async" true) -}}
+{{- end -}}
 <!-- katex -->
-{{- partial "helpers/cdnCss.html" (dict "name" "katex" "ctx" . "async" true) -}}
+{{- if .Site.Params.math.enable -}}
+  {{- partial "helpers/cdnCss.html" (dict "name" "katex" "ctx" . "async" true) -}}
+{{- end -}}
 <!-- waline -->
 {{- if and .Site.Params.waline.enable .Site.Params.waline.serverURL -}}
   {{- partial "helpers/cdnCss.html" (dict "name" "waline" "ctx" .) -}}
@@ -73,55 +113,28 @@
 {{- if and .Site.Params.gitalk.enable .Site.Params.gitalk.clientID .Site.Params.gitalk.clientSecret -}}
   {{- partial "helpers/cdnCss.html" (dict "name" "gitalk" "ctx" .) -}}
 {{- end -}}
-<!-- pace -->
-{{- partial "helpers/cdnJs.html" (dict "name" "pace-js" "ctx" . "async" true) -}}
+
+<!-- pace (H2 修复：vendor key 是 'pace'，不是 'pace-js') -->
+{{- if hugo.Data.vendor.js.pace -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "pace" "ctx" . "async" true) -}}
+{{- end -}}
+
 <!-- aos -->
 {{- if .Site.Params.animation.enable -}}
   {{- partial "helpers/cdnCss.html" (dict "name" "aos" "ctx" .) -}}
 {{- end -}}
 
-{{- if .Site.Params.player.aplayer.enable -}}
-  {{- partial "helpers/cdnCss.html" (dict "name" "aplayer" "ctx" .) -}}
-{{- end -}}
-
-{{- if .Site.Params.player.meting.enable -}}
-  {{- partial "helpers/cdnJs.html" (dict "name" "meting" "ctx" .) -}}
-{{- end -}}
-
-{{- if .Site.Params.math.enable -}}
-  {{- if eq .Site.Params.math.mathjax_enable true -}}
-    {{- partial "helpers/cdnJs.html" (dict "name" "mathjax" "ctx" .) -}}
-  {{- end -}}
-{{- end -}}
-
-{{- if .Site.Params.code.copy -}}
-  {{- partial "helpers/cdnJs.html" (dict "name" "clipboard" "ctx" .) -}}
-{{- end -}}
-
-{{- if and .Site.Params.firework.enable (not .Site.Params.firework.muse) -}}
-  {{- partial "helpers/cdnJs.html" (dict "name" "mouse-firework" "ctx" .) -}}
-{{- end -}}
-
-{{- if .Site.Params.mermaid.enable -}}
-  {{- partial "helpers/cdnCss.html" (dict "name" "mermaid" "ctx" .) -}}
-{{- end -}}
-
-{{- if .Site.Params.algolia_search.enable -}}
-  {{- partial "helpers/cdnCss.html" (dict "name" "algolia" "ctx" .) -}}
-{{- end -}}
-
-{{- if .Site.Params.pangu.enable -}}
-  {{- partial "helpers/cdnJs.html" (dict "name" "pangu" "ctx" .) -}}
-{{- end -}}
-
 <!-- main.scss (主题主样式) -->
 {{- partial "helpers/scss.html" (dict "source" "css/main.scss" "temp" "main.scss" "target" "css/main.css" "ctx" .) -}}
 
-<!-- 自定义: 我们的 cyber.css + hero.css -->
+<!-- 自定义：cyber.css + hero.css（M1: hero.css 不要再在别处重复引用） -->
 <link rel="stylesheet" href="{{ "css/cyber.css" | relURL }}">
 <link rel="stylesheet" href="{{ "css/hero.css" | relURL }}">
 
-{{- partial "helpers/cdnJs.html" (dict "name" "instantsearch" "ctx" .) -}}
+<!-- instantsearch -->
+{{- if .Site.Params.algolia_search.enable -}}
+  {{- partial "helpers/cdnJs.html" (dict "name" "instantsearch" "ctx" .) -}}
+{{- end -}}
 
 {{- if .Site.Params.dark_mode.enable -}}
   {{- partial "helpers/scss.html" (dict "source" "css/dark.scss" "temp" "dark.scss" "target" "css/dark.css" "ctx" .) -}}

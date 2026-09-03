@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /search/
+
+Sitemap: https://www.zhangpengchao.com/sitemap.xml
+Sitemap: https://www.zhangpengchao.com/zh-cn/sitemap.xml
+Sitemap: https://www.zhangpengchao.com/en/sitemap.xml
