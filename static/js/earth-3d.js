@@ -116,7 +116,7 @@
           if (dot < 0) dot = 0;
           var light = ambient + diffuseK * dot;
           // rim light for edge glow (atmosphere)
-          var rim = Math.pow(1 - nz, 3) * 0.3;
+          var rim = Math.pow(1 - nz, 4) * 0.06;
           light += rim;
           if (light > 1) light = 1;
           outPix[oi]     = Math.min(255, (td[ti]     * light) | 0);
