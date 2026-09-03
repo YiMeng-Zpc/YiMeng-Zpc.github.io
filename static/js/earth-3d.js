@@ -166,8 +166,8 @@
       { name: 'Shanghai',   lat: 31.2, lon: 121.5 },   // 上海
       { name: 'Tokyo',      lat: 35.7, lon: 139.7 },   // 东京
       { name: 'Seoul',      lat: 37.6, lon: 127.0 },   // 首尔
-      { name: 'Hong Kong',  lat: 22.3, lon: 114.2 },   // 香港
-      { name: 'Singapore',  lat: 1.35, lon: 103.4 },   // 新加坡（向内陆偏 0.3° 落在马来半岛，避免 4K 贴图海面采样）
+      { name: 'Hong Kong',  lat: 22.64, lon: 113.94 },  // 香港（向西北偏 0.36° 落到广东内陆，避开 4K 贴图海面像素）
+      { name: 'Singapore',  lat: 1.63, lon: 103.59 },  // 新加坡（向东北偏 0.32° 落在马来半岛内陆）
       { name: 'Bangkok',    lat: 13.7, lon: 100.5 },   // 曼谷
       { name: 'Jakarta',    lat: -6.2, lon: 106.8 },   // 雅加达
       { name: 'Mumbai',     lat: 19.1, lon: 72.9 },    // 孟买
@@ -176,7 +176,7 @@
       { name: 'Riyadh',     lat: 24.7, lon: 46.7 },    // 利雅得
       { name: 'Tehran',     lat: 35.7, lon: 51.4 },    // 德黑兰
       { name: 'Moscow',     lat: 55.8, lon: 37.6 },    // 莫斯科
-      { name: 'Istanbul',   lat: 40.7, lon: 29.0 },    // 伊斯坦布尔（向内陆偏 0.3° 落在安那托利亚）
+      { name: 'Istanbul',   lat: 40.29, lon: 29.16 },  // 伊斯坦布尔（向南偏 0.41° 落在安那托利亚内陆）
       { name: 'Cairo',      lat: 30.0, lon: 31.2 },    // 开罗
       { name: 'Paris',      lat: 48.9, lon: 2.35 },    // 巴黎
       { name: 'London',     lat: 51.5, lon: -0.13 },   // 伦敦
@@ -184,7 +184,7 @@
       { name: 'Frankfurt',  lat: 50.1, lon: 8.7 },     // 法兰克福
       { name: 'Rome',       lat: 41.9, lon: 12.5 },    // 罗马
       { name: 'Madrid',     lat: 40.4, lon: -3.7 },    // 马德里
-      { name: 'Barcelona',  lat: 41.4, lon: 2.2 },     // 巴塞罗那
+      { name: 'Barcelona',  lat: 41.8, lon: 2.15 },    // 巴塞罗那（向比利牛斯山方向偏 0.4° 避开地中海沿岸）
       { name: 'Reykjavík',  lat: 64.1, lon: -21.9 },   // 雷克雅未克
       { name: 'New York',   lat: 40.7, lon: -74.0 },   // 纽约
       { name: 'Toronto',    lat: 43.7, lon: -79.4 },   // 多伦多
