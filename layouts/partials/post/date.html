@@ -1,0 +1,27 @@
+<div class="article-date">
+  <span
+    class="article-date-link icon-calendar"
+    data-aos="{{ .Site.Params.animation.options.article.date }}"
+  >
+    {{- $dateText := .Date.Format .Site.Params.dateFormat -}}
+    {{- if .Params.display_date -}}
+      {{- $dateText = .Params.display_date -}}
+    {{- end -}}
+    <time datetime="{{ .Date }}" itemprop="datePublished"
+      >{{ $dateText }}</time
+    >
+    <time style="display: none;" id="post-update-time"
+      >{{ .Lastmod.Format .Site.Params.dateFormat }}</time
+    >
+  </span>
+  {{- if .Site.Params.show_update_time -}}
+    <span
+      class="article-date-link icon-calendar-plus"
+      data-aos="{{ .Site.Params.animation.options.article.date }}"
+    >
+      <time datetime="{{ .Lastmod }}" itemprop="dateModified"
+        >{{ .Lastmod.Format .Site.Params.dateFormat }}</time
+      >
+    </span>
+  {{- end -}}
+</div>

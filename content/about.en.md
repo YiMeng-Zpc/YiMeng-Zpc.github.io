@@ -2,6 +2,7 @@
 title: "About"
 slug: "about"
 date: 2021-08-03
+display_date: "November 11, 2025"
 ---
 
 ![about-avatar](/avatar/default.jpg)

@@ -2,6 +2,7 @@
 title: "关于"
 slug: "about"
 date: 2021-08-03
+display_date: "2025年11月11日"
 ---
 
 ![about-avatar](/avatar/default.jpg)

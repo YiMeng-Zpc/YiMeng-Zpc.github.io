@@ -167,7 +167,7 @@
       { name: 'Tokyo',      lat: 35.7, lon: 139.7 },   // 东京
       { name: 'Seoul',      lat: 37.6, lon: 127.0 },   // 首尔
       { name: 'Hong Kong',  lat: 22.3, lon: 114.2 },   // 香港
-      { name: 'Singapore',  lat: 1.35, lon: 103.7 },   // 新加坡
+      { name: 'Singapore',  lat: 1.35, lon: 103.4 },   // 新加坡（向内陆偏 0.3° 落在马来半岛，避免 4K 贴图海面采样）
       { name: 'Bangkok',    lat: 13.7, lon: 100.5 },   // 曼谷
       { name: 'Jakarta',    lat: -6.2, lon: 106.8 },   // 雅加达
       { name: 'Mumbai',     lat: 19.1, lon: 72.9 },    // 孟买
@@ -194,7 +194,7 @@
       { name: 'Mexico City',lat: 19.4, lon: -99.1 },   // 墨西哥城
       { name: 'Sao Paulo',  lat: -23.5, lon: -46.6 },  // 圣保罗
       { name: 'Buenos Aires',lat: -34.6, lon: -58.4 }, // 布宜诺斯艾利斯
-      { name: 'Lima',       lat: -12.0, lon: -76.55 }, // 利马（4K 贴图下微调 0.05° 落在安第斯山麓）
+      { name: 'Lima',       lat: -12.0, lon: -76.23 }, // 利马（向内陆偏 0.32° 落在安第斯山麓，避开太平洋海面像素）
       { name: 'Bogotá',     lat: 4.7, lon: -74.1 },    // 波哥大
       { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥
       { name: 'Cape Town',  lat: -33.7, lon: 18.4 },   // 开普敦（向内陆偏 0.2° 避开海岸像素）
