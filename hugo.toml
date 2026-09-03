@@ -4,6 +4,8 @@ title = '张鹏超'
 
 theme = 'hugo-theme-reimu'
 defaultContentLanguage = 'zh-CN'
+# 隐藏 <meta name="generator" content="Hugo X.Y.Z"> 避免暴露版本号（L1 audit）
+disableGenerator = true
 
 # mainSections - Hugo defaults to ["posts"] when unset; we just confirm
 
