@@ -1,8 +1,12 @@
 /* ============================================
-   ✦ 忆梦博客 · 主页 3D 旋转地球 ✦
-   - 逐列纹理映射：消除 180° 经线接缝白线
-   - 粒子发射系统：带发光拖尾，向外飞散
-   - 卫星倾斜轨道：z 深度判断，绕到背面自动遮挡
+   YiMeng Blog - Homepage 3D Earth
+   - Per-pixel true-sphere rendering:
+       each pixel maps to lon/lat independently, so
+       continents keep correct shapes and no seam line
+   - Great-circle flight routes between continents:
+       moving signal dots with light trails and
+       z-depth occlusion (airline-route feel)
+   - Tilted satellite orbit with a trailing flyer
    ============================================ */
 
 (function () {
@@ -15,317 +19,380 @@
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    // 球体参数（相对 canvas 周长）
-    var SIZE = 0.5;      // 球半径占画布一半比例
-    var TILT = 30;       // 轨道倾斜角（度）
+    var W = 0, H = 0, cx = 0, cy = 0, ballR = 0;
 
-    var img = new Image();
-    img.src = '/img/earth-equirect.webp';
-
-    // 粒子系统
-    var particles = [];
-    var emitters = [];
-    var MAX_PARTICLES = 60;
-
-    // 卫星轨道
-    var satAngle = 0;
-    var SAT_SPEED = 0.9;   // 弧度/秒
-
-    var W = 0, H = 0;       // canvas 物理像素
-    var cx = 0, cy = 0, R = 0, ballR = 0;
+    // ---------- globals ----------
+    var rotationRad = 0;
+    var ROT_SPEED = 0.22;      // rad/s
+    var dashOffset = 0;
+    var time = 0, last = 0;
 
     function resize() {
       var rect = canvas.getBoundingClientRect();
-      W = Math.round(rect.width * dpr);
-      H = Math.round(rect.height * dpr);
+      W = Math.max(1, Math.round(rect.width * dpr));
+      H = Math.max(1, Math.round(rect.height * dpr));
       canvas.width = W;
       canvas.height = H;
       cx = W / 2;
       cy = H / 2;
-      R = Math.min(W, H) / 2;        // 画布可用半径
-      ballR = R * SIZE;              // 地球像素半径
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    // 发射点（球面固定 3D 方向，球心原点，z 正指向观察者）
-    // 用经纬度表示：lon（经度，绕 y 轴）、lat（纬度）
-    function makeEmitters() {
-      emitters = [
-        { lon: -40, lat: 15,  color: '#00f0ff', acc: 0 },   // 青蓝
-        { lon: 135,  lat: 30,  color: '#9d4edd', acc: 1.2 }, // 紫
-        { lon: 250,  lat: -25, color: '#ff2bd6', acc: 2.4 }, // 粉
-        { lon: 30,   lat: -40, color: '#00f0ff', acc: 3.6 }  // 青蓝
-      ];
-    }
-    makeEmitters();
-
-    // 3D 球面方向 -> 屏幕坐标（正交投影）
-    // 球体自转：经度随时间滚动（纹理旋转）
-    function spherePoint(lonDeg, latDeg, rot, radius) {
-      var lon = (lonDeg + rot) * Math.PI / 180;
-      var lat = latDeg * Math.PI / 180;
-      // 3D 单位向量
-      var x = Math.cos(lat) * Math.cos(lon);
-      var y = Math.sin(lat);
-      var z = Math.cos(lat) * Math.sin(lon);   // 正 z 指向观察者
-      return { x: x, y: y, z: z, sx: cx + x * radius, sy: cy - y * radius };
+      ballR = Math.min(W, H) / 2 * 0.82;   // big globe (0.82 of half-size)
+      buildOffscreen();
     }
 
-    // 发射一粒（从球面径向向外 + 随机扩散）
-    function spawnParticle(emitter, rot) {
-      if (particles.length >= MAX_PARTICLES) return;
-      var p3 = spherePoint(emitter.lon, emitter.lat, rot, 1);
-      // 3D 位置从球面开始
-      var spread = (Math.random() - 0.5) * 40;  // 切向随机散布（度）
-      var rlat = emitter.lat + (Math.random() - 0.5) * 30;
-      var rlon = emitter.lon + (Math.random() - 0.5) * 40;
-      var dir = spherePoint(rlon, rlat, rot, 1);
+    // ---------- offscreen sphere buffer (per-pixel mapping) ----------
+    var off = null, octx = null, outImg = null, outPix = null, OLEN = 0;
 
-      // 径向向外速度（单位向量近似 dir）+ 随机扩散
-      var speed = ballR * (1.4 + Math.random() * 1.6);   // 像素/秒
-      var vx = dir.x + (Math.random() - 0.5) * 0.5;
-      var vy = dir.y + (Math.random() - 0.5) * 0.5;
-      var vz = dir.z + 0.3 + Math.random() * 0.6;        // 偏向观察者（向前喷）
-
-      particles.push({
-        x: p3.x * ballR,
-        y: p3.y * ballR,
-        z: p3.z * ballR,
-        vx: vx * speed,
-        vy: vy * speed,
-        vz: vz * speed,
-        life: 1.0,                        // 1 -> 0
-        decay: 0.5 + Math.random() * 0.7, // 每秒衰减
-        size: 1.5 + Math.random() * 2.5,
-        color: emitter.color,
-        history: []                        // 拖尾轨迹
-      });
+    function buildOffscreen() {
+      OLEN = Math.max(2, Math.round(ballR * 2));
+      off = document.createElement('canvas');
+      off.width = OLEN;
+      off.height = OLEN;
+      octx = off.getContext('2d');
+      outImg = octx.createImageData(OLEN, OLEN);
+      outPix = outImg.data;
     }
 
-    // 更新粒子
-    function updateParticles(dt) {
-      for (var i = particles.length - 1; i >= 0; i--) {
-        var p = particles[i];
-        p.x += p.vx * dt;
-        p.y += p.vy * dt;
-        p.z += p.vz * dt;
-        p.life -= p.decay * dt;
-        // 记录拖尾
-        p.history.push({ x: p.x, y: p.y });
-        if (p.history.length > 4) p.history.shift();
-        if (p.life <= 0 || p.z > ballR * 1.6) {
-          particles.splice(i, 1);
-        }
-      }
-    }
+    // ---------- texture ----------
+    var img = new Image();
+    img.src = '/img/earth-equirect.webp';
+    var texOK = false, texData = null, texW = 0, texH = 0;
+    img.onload = function () {
+      texW = img.naturalWidth;
+      texH = img.naturalHeight;
+      var tc = document.createElement('canvas');
+      tc.width = texW;
+      tc.height = texH;
+      var tctx = tc.getContext('2d');
+      tctx.drawImage(img, 0, 0);
+      texData = tctx.getImageData(0, 0, texW, texH).data;
+      texOK = true;
+    };
 
-    // 发射器周期性喷发
-    var emitAccum = 0;
-    function emit(dt) {
-      emitAccum += dt;
-      var interval = 0.12;   // 每 0.12s 喷一轮
-      if (emitAccum >= interval) {
-        emitAccum = 0;
-        for (var i = 0; i < emitters.length; i++) {
-          // 每轮每个发射点喷 1 粒（随机 skip 制造不规则感）
-          if (Math.random() < 0.8) spawnParticle(emitters[i], rotation);
-        }
-      }
-    }
-
-    // 绘制球体（逐列纹理映射，消除接缝）
-    function drawSphere(rot) {
-      if (!img.complete || img.naturalWidth === 0) {
-        // 图片未加载：画纯色球
-        ctx.fillStyle = '#0c4a6e';
-        ctx.beginPath();
-        ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
-        ctx.fill();
+    // render sphere into offscreen buffer (true per-pixel lon/lat mapping)
+    function renderSphere(rot) {
+      if (!texOK) {
+        octx.clearRect(0, 0, OLEN, OLEN);
+        octx.fillStyle = '#0c4a6e';
+        octx.beginPath();
+        octx.arc(OLEN / 2, OLEN / 2, OLEN / 2, 0, Math.PI * 2);
+        octx.fill();
         return;
       }
-
-      var iw = img.naturalWidth;
-      var ih = img.naturalHeight;
-      var rotFrac = ((rot % 360) + 360) % 360 / 360;  // 0..1
-
-      // 逐列绘制：屏幕列 dx 对应经度，取纹理列
-      var step = 1;  // 每列 1px（物理像素），可调大提升性能
-      for (var dx = -Math.ceil(ballR); dx <= Math.ceil(ballR); dx += step) {
-        var xAbs = Math.abs(dx);
-        if (xAbs > ballR) continue;
-        var h = Math.sqrt(ballR * ballR - xAbs * xAbs);  // 该列半高
-
-        // 经度：屏幕 x 映射到球面经度，asin(dx/R) ∈ [-90°, 90°]
-        var lonRad = Math.asin(dx / ballR);   // 左半边为负经度
-        var lonFrac = (lonRad / (Math.PI * 2)) - rotFrac;
-        lonFrac = ((lonFrac % 1) + 1) % 1;
-        var texX = Math.floor(lonFrac * iw);
-
-        // 从贴图取 1 列（width=1），拉伸到球面对应高度
-        ctx.drawImage(
-          img,
-          texX, 0, step, ih,          // 源：纹理第 texX 列
-          cx + dx, cy - h, step, h * 2  // 目标：屏幕列
-        );
-      }
-    }
-
-    // 绘制粒子（带拖尾，z>0 在球前才可见，粒子均在观察者侧）
-    function drawParticles() {
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        // 粒子始终向前喷（z>0），无需背面遮挡，但拖尾要有发光感
-        var alpha = Math.max(0, p.life);
-        var sx = cx + p.x;
-        var sy = cy - p.y;
-
-        // 拖尾
-        if (p.history.length > 1) {
-          ctx.save();
-          ctx.globalCompositeOperation = 'lighter';
-          for (var k = 1; k < p.history.length; k++) {
-            var h0 = p.history[k - 1];
-            var h1 = p.history[k];
-            var t = k / p.history.length;
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = alpha * t * 0.5;
-            ctx.lineWidth = p.size * t;
-            ctx.beginPath();
-            ctx.moveTo(cx + h0.x, cy - h0.y);
-            ctx.lineTo(cx + h1.x, cy - h1.y);
-            ctx.stroke();
+      var R = OLEN / 2, R2 = R * R, iw = texW, ih = texH, td = texData;
+      var TWO_PI = Math.PI * 2;
+      for (var py = 0; py < OLEN; py++) {
+        var dy = py - R, dy2 = dy * dy;
+        for (var px = 0; px < OLEN; px++) {
+          var oi = (py * OLEN + px) * 4;
+          var dx = px - R;
+          var d2 = dx * dx + dy2;
+          if (d2 > R2) {
+            outPix[oi + 3] = 0;
+            continue;
           }
-          ctx.restore();
+          var z3 = Math.sqrt(R2 - d2);
+          var lon = Math.atan2(dx, z3) + rot;
+          var lat = -Math.asin(dy / R);
+          var u = (lon + Math.PI) / TWO_PI;
+          u -= Math.floor(u);
+          var v = 0.5 - lat / Math.PI;      // v=0 north pole
+          var tx = Math.floor(u * iw);
+          if (tx >= iw) tx = iw - 1;
+          var ty = Math.floor(v * ih);
+          if (ty >= ih) ty = ih - 1;
+          var ti = (ty * iw + tx) * 4;
+          outPix[oi]     = td[ti];
+          outPix[oi + 1] = td[ti + 1];
+          outPix[oi + 2] = td[ti + 2];
+          outPix[oi + 3] = 255;
         }
-
-        // 粒子光点
-        ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
-        ctx.globalAlpha = alpha;
-        var g = ctx.createRadialGradient(sx, sy, 0, sx, sy, p.size * 3);
-        g.addColorStop(0, p.color);
-        g.addColorStop(0.4, p.color);
-        g.addColorStop(1, 'transparent');
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(sx, sy, p.size * 3, 0, Math.PI * 2);
-        ctx.fill();
-        // 白色高光芯
-        ctx.globalAlpha = alpha * 0.8;
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(sx, sy, p.size * 0.7, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
       }
+      octx.putImageData(outImg, 0, 0);
     }
 
-    // 球体光影（径向高光 + 底部暗影，增强立体感）
-    function drawShading() {
-      var g = ctx.createRadialGradient(
-        cx - ballR * 0.35, cy - ballR * 0.35, ballR * 0.1,
-        cx, cy, ballR * 1.1
-      );
-      g.addColorStop(0, 'rgba(255,255,255,0.20)');
-      g.addColorStop(0.35, 'rgba(255,255,255,0.05)');
-      g.addColorStop(1, 'rgba(0,0,0,0.55)');
+    // ---------- geo helpers ----------
+    var D2R = Math.PI / 180;
+
+    function ll2vec(latDeg, lonDeg) {
+      var la = latDeg * D2R, lo = lonDeg * D2R;
+      var cl = Math.cos(la);
+      return [cl * Math.cos(lo), Math.sin(la), cl * Math.sin(lo)];
+    }
+
+    function rotY(v, a) {
+      var c = Math.cos(a), s = Math.sin(a);
+      return [v[0] * c + v[2] * s, v[1], -v[0] * s + v[2] * c];
+    }
+
+    function slerp(a, b, t) {
+      var dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      if (dot > 1) dot = 1; else if (dot < -1) dot = -1;
+      var theta = Math.acos(dot);
+      if (theta < 1e-6) return a.slice();
+      var st = Math.sin(theta);
+      var s0 = Math.sin((1 - t) * theta) / st;
+      var s1 = Math.sin(t * theta) / st;
+      return [a[0] * s0 + b[0] * s1, a[1] * s0 + b[1] * s1, a[2] * s0 + b[2] * s1];
+    }
+
+    function proj(v) {
+      return [cx + v[0] * ballR, cy - v[1] * ballR, v[2]];
+    }
+
+    // ---------- cities & flight routes ----------
+    var cities = [
+      ll2vec(39.9, 116.4),    // 0 Beijing
+      ll2vec(31.2, 121.5),    // 1 Shanghai
+      ll2vec(35.7, 139.7),    // 2 Tokyo
+      ll2vec(25.2, 55.3),     // 3 Dubai
+      ll2vec(48.9, 2.35),     // 4 Paris
+      ll2vec(51.5, -0.13),    // 5 London
+      ll2vec(40.7, -74.0),    // 6 New York
+      ll2vec(34.1, -118.2),   // 7 Los Angeles
+      ll2vec(-33.9, 151.2),   // 8 Sydney
+      ll2vec(30.0, 31.2),     // 9 Cairo
+      ll2vec(-23.5, -46.6),   // 10 Sao Paulo
+      ll2vec(55.8, 37.6)      // 11 Moscow
+    ];
+
+    var routes = [
+      { a: 0, b: 4,  color: '#00f0ff', speed: 0.045, phase: 0.00 },
+      { a: 2, b: 6,  color: '#ff2bd6', speed: 0.038, phase: 0.31 },
+      { a: 3, b: 5,  color: '#f59e0b', speed: 0.052, phase: 0.62 },
+      { a: 1, b: 8,  color: '#34d399', speed: 0.046, phase: 0.47 },
+      { a: 6, b: 7,  color: '#9d4edd', speed: 0.060, phase: 0.15 },
+      { a: 4, b: 10, color: '#00f0ff', speed: 0.042, phase: 0.78 },
+      { a: 0, b: 9,  color: '#9d4edd', speed: 0.050, phase: 0.24 },
+      { a: 11, b: 5, color: '#f59e0b', speed: 0.048, phase: 0.88 }
+    ];
+
+    function drawRoute(route, rot) {
+      var a = cities[route.a], b = cities[route.b];
+      var N = 64, pts = [];
+      // 大圆弧爬升航线：从城市出发爬升离球面 → 跨越大洋 → 降落
+      for (var i = 0; i <= N; i++) {
+        var t = i / N;
+        var p = slerp(a, b, t);
+        // 高度曲线：正弦拱形，最高处离球面 0.22R
+        var hgt = Math.sin(Math.PI * t) * 0.22;
+        // 沿球面法线方向抬升（球面点本身是单位向量，直接乘 (1+hgt)）
+        var lift = 1 + hgt;
+        var lp = [p[0] * lift, p[1] * lift, p[2] * lift];
+        pts.push(proj(rotY(lp, rot)));
+      }
+
+      // path (front-facing segments only)
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = route.color;
+      ctx.globalAlpha = 0.55;
+      ctx.lineWidth = 1.6;
+      ctx.setLineDash([4, 6]);
+      ctx.lineDashOffset = -dashOffset;
+      ctx.beginPath();
+      var drawing = false;
+      for (var j = 0; j <= N; j++) {
+        if (pts[j][2] >= 0) {
+          if (!drawing) { ctx.moveTo(pts[j][0], pts[j][1]); drawing = true; }
+          else ctx.lineTo(pts[j][0], pts[j][1]);
+        } else {
+          drawing = false;
+        }
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // moving signal dot + trail (on the lifted arc)
+      var prog = (time * route.speed + route.phase) % 1;
+      var pp = slerp(a, b, prog);
+      var hgt2 = Math.sin(Math.PI * prog) * 0.22;
+      var lp2 = [pp[0] * (1 + hgt2), pp[1] * (1 + hgt2), pp[2] * (1 + hgt2)];
+      var rv = rotY(lp2, rot);
+      if (rv[2] < 0) return;
+      var sp = proj(rv);
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+      for (var k = 9; k >= 1; k--) {
+        var tt = Math.max(0, prog - 0.022 * k);
+        var tq = slerp(a, b, tt);
+        var th = Math.sin(Math.PI * tt) * 0.22;
+        var tl = [tq[0] * (1 + th), tq[1] * (1 + th), tq[2] * (1 + th)];
+        var tv = rotY(tl, rot);
+        if (tv[2] < 0) continue;
+        var tp = proj(tv);
+        ctx.strokeStyle = route.color;
+        ctx.globalAlpha = 0.03 + (1 - k / 9) * 0.55;
+        ctx.lineWidth = 1 + (1 - k / 9) * 2.4;
+        ctx.beginPath();
+        ctx.moveTo(tp[0], tp[1]);
+        ctx.lineTo(sp[0], sp[1]);
+        ctx.stroke();
+      }
+      // glow
+      var g = ctx.createRadialGradient(sp[0], sp[1], 0, sp[0], sp[1], 12);
+      g.addColorStop(0, 'rgba(255,255,255,0.95)');
+      g.addColorStop(0.3, route.color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalAlpha = 1;
       ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(sp[0], sp[1], 12, 0, Math.PI * 2);
+      ctx.fill();
+      // core
+      ctx.fillStyle = '#ffffff';
+      ctx.beginPath();
+      ctx.arc(sp[0], sp[1], 2.4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // ---------- tilted orbit + flyer ----------
+    var tilt = 26 * D2R;
+    var orbitAngle = 0;
+    var ORB_SPEED = 0.5;
+
+    function drawOrbit(dt) {
+      orbitAngle += ORB_SPEED * dt;
+      var Ro = ballR * 1.22;
+      var N = 96, began = false;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = 'rgba(0,240,255,0.45)';
+      ctx.lineWidth = 1.3;
+      ctx.setLineDash([6, 9]);
+      ctx.lineDashOffset = -dashOffset * 1.6;
+      ctx.beginPath();
+      for (var i = 0; i < N; i++) {
+        var ang = i / N * Math.PI * 2;
+        var x = Ro * Math.cos(ang);
+        var y = Ro * Math.sin(ang);
+        var z = y * Math.sin(tilt);
+        if (z < 0) { began = false; continue; }
+        var sy = y * Math.cos(tilt);
+        if (!began) { ctx.moveTo(cx + x, cy - sy); began = true; }
+        else ctx.lineTo(cx + x, cy - sy);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+
+      // flyer with trail
+      var fx = Ro * Math.cos(orbitAngle);
+      var fy = Ro * Math.sin(orbitAngle);
+      var fz = fy * Math.sin(tilt);
+      if (fz < 0) return;
+      var fsy = fy * Math.cos(tilt);
+      var fpx = cx + fx, fpy = cy - fsy;
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.lineCap = 'round';
+      for (var k = 10; k >= 1; k--) {
+        var aa = orbitAngle - k * 0.04;
+        var tx2 = Ro * Math.cos(aa), ty2 = Ro * Math.sin(aa);
+        var tz2 = ty2 * Math.sin(tilt);
+        if (tz2 < 0) continue;
+        var tsy2 = ty2 * Math.cos(tilt);
+        ctx.strokeStyle = '#7df9ff';
+        ctx.globalAlpha = 0.02 + (1 - k / 10) * 0.45;
+        ctx.lineWidth = 1 + (1 - k / 10) * 2.2;
+        ctx.beginPath();
+        ctx.moveTo(cx + tx2, cy - tsy2);
+        ctx.lineTo(fpx, fpy);
+        ctx.stroke();
+      }
+      var g = ctx.createRadialGradient(fpx, fpy, 0, fpx, fpy, 10);
+      g.addColorStop(0, '#ffffff');
+      g.addColorStop(0.25, '#7df9ff');
+      g.addColorStop(1, 'rgba(0,240,255,0)');
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(fpx, fpy, 10, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // ---------- glow & shading ----------
+    function drawGlow() {
+      var g = ctx.createRadialGradient(cx, cy, ballR * 0.9, cx, cy, ballR * 1.5);
+      g.addColorStop(0, 'rgba(56,189,248,0.30)');
+      g.addColorStop(0.5, 'rgba(56,189,248,0.10)');
+      g.addColorStop(1, 'rgba(56,189,248,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(cx, cy, ballR * 1.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function drawShade() {
+      var s = ctx.createRadialGradient(
+        cx - ballR * 0.35, cy - ballR * 0.35, ballR * 0.1,
+        cx, cy, ballR * 1.05
+      );
+      s.addColorStop(0, 'rgba(255,255,255,0.18)');
+      s.addColorStop(0.4, 'rgba(255,255,255,0.02)');
+      s.addColorStop(1, 'rgba(0,0,0,0.5)');
+      ctx.fillStyle = s;
       ctx.beginPath();
       ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // 大气辉光
-    function drawGlow() {
-      var g = ctx.createRadialGradient(cx, cy, ballR, cx, cy, ballR * 1.35);
-      g.addColorStop(0, 'rgba(56,189,248,0.30)');
-      g.addColorStop(0.6, 'rgba(56,189,248,0.10)');
-      g.addColorStop(1, 'rgba(56,189,248,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(cx, cy, ballR * 1.35, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // 卫星倾斜轨道 + 前后遮挡
-    function drawSatellite(dt) {
-      satAngle += SAT_SPEED * dt;
-      var tilt = TILT * Math.PI / 180;
-      var Ro = ballR * 1.45;   // 轨道半径
-
-      // 3D 轨道（绕 x 轴倾斜 tilt）
-      var ox = Ro * Math.cos(satAngle);
-      var oy = Ro * Math.sin(satAngle) * Math.cos(tilt);
-      var oz = Ro * Math.sin(satAngle) * Math.sin(tilt);
-
-      var sx = cx + ox;
-      var sy = cy - oy;
-
-      // 轨道椭圆：完整画（地球后侧轨道用较暗虚线，前侧亮）
+    // ---------- city anchor points (glowing) ----------
+    function drawCities(rot) {
       ctx.save();
-      ctx.strokeStyle = 'rgba(0,240,255,0.35)';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 5]);
-      ctx.beginPath();
-      ctx.ellipse(cx, cy, Ro, Ro * Math.cos(tilt), 0, 0, Math.PI * 2);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.restore();
-
-      // 卫星本体（z 判断前后遮挡）
-      if (oz >= 0) {
-        // 前侧：正常亮度
-        ctx.save();
-        ctx.shadowColor = '#00f0ff';
-        ctx.shadowBlur = 12;
-        ctx.fillStyle = '#00f0ff';
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < cities.length; i++) {
+        var v = rotY(cities[i], rot);
+        if (v[2] < 0) continue;
+        var p = proj(v);
+        // halo ring
+        ctx.strokeStyle = 'rgba(125,249,255,0.55)';
+        ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(sx, sy, 4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#ffffff';
+        ctx.arc(p[0], p[1], 3.5, 0, Math.PI * 2);
+        ctx.stroke();
+        // core dot
+        ctx.fillStyle = 'rgba(125,249,255,0.95)';
         ctx.beginPath();
-        ctx.arc(sx, sy, 2, 0, Math.PI * 2);
+        ctx.arc(p[0], p[1], 1.4, 0, Math.PI * 2);
         ctx.fill();
-        ctx.restore();
-      } else {
-        // 后侧：被地球遮挡，隐藏（或画微弱投影）
-        // 此处不绘制，实现遮挡
       }
+      ctx.restore();
     }
 
-    var rotation = 0;
-    var ROT_SPEED = 20;   // 度/秒
-    var lastTime = 0;
+    // ---------- main loop ----------
+    function frame(ts) {
+      if (!last) last = ts;
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      time += dt;
+      rotationRad += ROT_SPEED * dt;
+      dashOffset += dt * 16;
 
-    function frame(t) {
-      if (!lastTime) lastTime = t;
-      var dt = Math.min((t - lastTime) / 1000, 0.05);  // 限制 dt 防跳帧
-      lastTime = t;
-
-      rotation += ROT_SPEED * dt;
-
-      // 清空
       ctx.clearRect(0, 0, W, H);
 
-      // 1. 大气辉光（最底）
       drawGlow();
+      renderSphere(rotationRad);
+      ctx.drawImage(off, cx - ballR, cy - ballR, ballR * 2, ballR * 2);
+      drawShade();
 
-      // 2. 地球球体
-      drawSphere(rotation);
-      drawShading();
-
-      // 3. 卫星轨道（含前后遮挡）
-      drawSatellite(dt);
-
-      // 4. 粒子发射（最前层）
-      emit(dt);
-      updateParticles(dt);
-      drawParticles();
+      drawOrbit(dt);
+      drawCities(rotationRad);
+      for (var i = 0; i < routes.length; i++) {
+        drawRoute(routes[i], rotationRad);
+      }
 
       requestAnimationFrame(frame);
     }
 
+    resize();
+    window.addEventListener('resize', resize);
     requestAnimationFrame(frame);
   }
 
