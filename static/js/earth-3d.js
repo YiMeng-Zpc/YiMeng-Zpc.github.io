@@ -84,8 +84,8 @@
       var lx = -0.5, ly = -0.5, lz = 0.707;
       var llen = Math.sqrt(lx*lx + ly*ly + lz*lz);
       lx /= llen; ly /= llen; lz /= llen;
-      var ambient = 0.30;   // ambient light floor
-      var diffuseK = 0.70;  // diffuse intensity
+      var ambient = 0.42;   // ambient light floor
+      var diffuseK = 0.58;  // diffuse intensity
       for (var py = 0; py < OLEN; py++) {
         var dy = py - R, dy2 = dy * dy;
         for (var px = 0; px < OLEN; px++) {
@@ -437,7 +437,7 @@
       );
       s.addColorStop(0, 'rgba(255,255,255,0.05)');     // 上左高光（强度 0.18 -> 0.05，避免球面"发雾"）
       s.addColorStop(0.4, 'rgba(255,255,255,0.01)');
-      s.addColorStop(1, 'rgba(0,0,0,0.5)');
+      s.addColorStop(1, 'rgba(0,0,0,0.32)');   // 右下暗角（0.5 -> 0.32，不再过度压暗南半球）
       ctx.fillStyle = s;
       ctx.beginPath();
       ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
