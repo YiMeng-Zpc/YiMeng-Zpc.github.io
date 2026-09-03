@@ -185,21 +185,21 @@
       { name: 'Rome',       lat: 41.9, lon: 12.5 },    // 罗马
       { name: 'Madrid',     lat: 40.4, lon: -3.7 },    // 马德里
       { name: 'Barcelona',  lat: 41.8, lon: 2.15 },    // 巴塞罗那（向比利牛斯山方向偏 0.4° 避开地中海沿岸）
-      { name: 'Reykjavík',  lat: 64.1, lon: -21.9 },   // 雷克雅未克
+      { name: 'Reykjavík',  lat: 64.20, lon: -21.60 },  // 雷克雅未克（向东偏 0.3° 落到冰岛内陆，避开西海岸）
       { name: 'New York',   lat: 40.7, lon: -74.0 },   // 纽约
       { name: 'Toronto',    lat: 43.7, lon: -79.4 },   // 多伦多
       { name: 'Chicago',    lat: 41.9, lon: -87.6 },   // 芝加哥
       { name: 'Los Angeles',lat: 34.1, lon: -118.2 },  // 洛杉矶
-      { name: 'Vancouver',  lat: 49.3, lon: -123.1 },  // 温哥华
+      { name: 'Vancouver',  lat: 49.35, lon: -122.95 }, // 温哥华（向东北偏 ~0.2° 落到北温哥华内陆，避开海湾）
       { name: 'Mexico City',lat: 19.4, lon: -99.1 },   // 墨西哥城
       { name: 'Sao Paulo',  lat: -23.5, lon: -46.6 },  // 圣保罗
       { name: 'Buenos Aires',lat: -34.6, lon: -58.4 }, // 布宜诺斯艾利斯
       { name: 'Lima',       lat: -12.0, lon: -76.23 }, // 利马（向内陆偏 0.32° 落在安第斯山麓，避开太平洋海面像素）
       { name: 'Bogotá',     lat: 4.7, lon: -74.1 },    // 波哥大
       { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥
-      { name: 'Cape Town',  lat: -33.7, lon: 18.4 },   // 开普敦（向内陆偏 0.2° 避开海岸像素）
+      { name: 'Cape Town',  lat: -33.70, lon: 18.65 },  // 开普敦（向东偏 0.25° 落到内陆山麓）
       { name: 'Nairobi',    lat: -1.3, lon: 36.8 },    // 内罗毕
-      { name: 'Lagos',      lat: 6.5, lon: 3.4 },      // 拉各斯
+      { name: 'Lagos',      lat: 6.70, lon: 3.40 },     // 拉各斯（向北偏 0.2° 落到内陆，避开 Lagos 岛礁）
       { name: 'Sydney',     lat: -33.7, lon: 150.4 },  // 悉尼（向内陆偏 ~0.8° 落在蓝山区域）
       { name: 'Melbourne',  lat: -37.8, lon: 144.9 },  // 墨尔本
       { name: 'Auckland',   lat: -36.85, lon: 174.76 }, // 奥克兰（4K 贴图下新西兰可见，精确真实坐标）
@@ -296,7 +296,7 @@
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       ctx.strokeStyle = route.color;
-      ctx.globalAlpha = 0.55;
+      ctx.globalAlpha = 0.62;
       ctx.lineWidth = 1.6;
       ctx.setLineDash([4, 6]);
       ctx.lineDashOffset = -dashOffset;
@@ -437,7 +437,7 @@
       );
       s.addColorStop(0, 'rgba(255,255,255,0.05)');     // 上左高光（强度 0.18 -> 0.05，避免球面"发雾"）
       s.addColorStop(0.4, 'rgba(255,255,255,0.01)');
-      s.addColorStop(1, 'rgba(0,0,0,0.32)');   // 右下暗角（0.5 -> 0.32，不再过度压暗南半球）
+      s.addColorStop(1, 'rgba(0,0,0,0.22)');   // 右下暗角（0.32 -> 0.22，避免压暗南部陆地）
       ctx.fillStyle = s;
       ctx.beginPath();
       ctx.arc(cx, cy, ballR, 0, Math.PI * 2);
