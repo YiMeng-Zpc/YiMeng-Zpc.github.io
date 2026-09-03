@@ -137,171 +137,35 @@
   letter-spacing: 2px;
 }
 
-/* ---------- 2. 旋转地球（真实 NASA 卫星等距投影图 + 信号弹射） ---------- */
+/* ---------- 2. 旋转地球（Canvas 3D 渲染：真球体 + 粒子发射 + 前后遮挡） ---------- */
 .earth-wrap {
   position: relative;
-  width: 140px;
-  height: 140px;
+  width: 200px;
+  height: 200px;
   margin: 6px auto 4px;
-  perspective: 600px;
 }
 
-/* 雷达信号波纹（最底层） */
-.earth-radar {
-  position: absolute;
-  inset: -6px;
-  pointer-events: none;
-}
-.radar-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 240, 255, 0.55);
-  animation: radar-expand 3.2s ease-out infinite;
-}
-.radar-ring.r2 { animation-delay: 1.06s; }
-.radar-ring.r3 { animation-delay: 2.12s; }
-@keyframes radar-expand {
-  0%   { transform: scale(0.25); opacity: 0.9; }
-  100% { transform: scale(1.25); opacity: 0; }
+/* Canvas 画布：全尺寸绘制地球 + 粒子 + 轨道 */
+.earth-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-/* 信号弹射弧线 + 卫星轨道（SVG 层，位于地球上方） */
-.earth-signals {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 240px;
-  height: 240px;
-  margin: -120px 0 0 -120px;   /* 240x240 居中在 140x140 地球之上，四周各溢出 50px */
-  pointer-events: none;
-  z-index: 3;
-}
-.signal-orbit {
-  stroke: rgba(0, 240, 255, 0.45);
-  stroke-width: 1;
-  stroke-dasharray: 4 6;
-  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.6));
-}
-.signal-satellite {
-  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.9));
-}
-.signal-arc {
-  fill: none;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-  opacity: 0.85;
-}
-.signal-arc.arc1 {
-  stroke: url(#signalGrad);
-  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.8));
-}
-.signal-arc.arc2 {
-  stroke: url(#signalGrad2);
-  filter: drop-shadow(0 0 6px rgba(157, 78, 221, 0.8));
-}
-.signal-arc.arc3 {
-  stroke: url(#signalGrad);
-  filter: drop-shadow(0 0 6px rgba(255, 43, 214, 0.8));
-}
-.signal-dot {
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
-}
-
-/* 地球本体：外层容器负责圆形裁剪 */
-.earth {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: #0c4a6e;
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.45),
-    0 0 36px rgba(56, 189, 248, 0.45),
-    0 0 70px rgba(14, 165, 233, 0.22);
-  /* 球体立体感：径向 mask 柔化边缘 */
-  -webkit-mask-image: radial-gradient(circle, #000 72%, transparent 100%);
-          mask-image: radial-gradient(circle, #000 72%, transparent 100%);
-}
-
-/* 地球表面：内层 2 倍宽贴图 + GPU transform 平移旋转（无缝，无接缝线） */
-.earth-surface {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 280px;                 /* 2x 容器宽 */
-  height: 140px;
-  background-image: url('/img/earth-equirect.webp');
-  background-size: 140px 140px; /* 每张贴图撑满一次旋转 */
-  background-repeat: repeat-x;
-  background-position: 0 0;
-  will-change: transform;
-  animation: earth-move 28s linear infinite;
-}
-@keyframes earth-move {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-140px); }
-}
-
-/* 球面光影（覆盖在地表之上，产生立体球感） */
-.earth-shade {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 30%,
-    rgba(255, 255, 255, 0.16) 0%,
-    transparent 34%),
-    radial-gradient(circle at 68% 72%,
-    rgba(0, 0, 0, 0.55) 0%,
-    transparent 62%);
-  pointer-events: none;
-}
-
-/* 大气辉光（在外层，柔化球边） */
-.earth-glow {
-  position: absolute;
-  inset: -6%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%,
-    rgba(125, 211, 252, 0.30) 0%,
-    rgba(56, 189, 248, 0.18) 50%,
-    transparent 75%);
-  pointer-events: none;
-  animation: glow-pulse 4s ease-in-out infinite alternate;
-  z-index: 2;
-}
-
-@keyframes glow-pulse {
-  from { opacity: 0.65; transform: scale(1); }
-  to   { opacity: 1.0; transform: scale(1.04); }
-}
-
-.earth-orbit {
-  position: absolute;
-  inset: -14px;
-  border: 1px dashed rgba(56, 189, 248, 0.30);
-  border-radius: 50%;
-  animation: orbit-spin 30s linear infinite;
-}
-
+/* 椭圆投影阴影（Canvas 底部） */
 .earth-shadow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150px;
-  height: 22px;
-  margin: -11px 0 0 -75px;
+  width: 170px;
+  height: 24px;
+  margin: 20px 0 0 -85px;   /* 略低于球心，模拟地面投影 */
   background: radial-gradient(ellipse at center,
     rgba(0, 0, 0, 0.55) 0%,
     rgba(0, 0, 0, 0.20) 50%,
     transparent 80%);
-  filter: blur(5px);
-  animation: orbit-spin 30s linear infinite reverse;
-}
-
-@keyframes orbit-spin {
-  to { transform: rotate(360deg); }
+  filter: blur(6px);
+  pointer-events: none;
 }
 
 /* 响应式：小屏单列 */
@@ -311,23 +175,13 @@
     gap: 14px;
     margin: 24px auto;
   }
-  .earth-wrap, .earth {
-    width: 120px;
-    height: 120px;
-  }
-  .earth-surface {
-    width: 240px;
-    height: 120px;
-    background-size: 120px 120px;
-  }
-  .earth-signals {
-    width: 200px;
-    height: 200px;
-    inset: -30px;
+  .earth-wrap {
+    width: 160px;
+    height: 160px;
   }
   .earth-shadow {
     width: 130px;
-    margin-left: -65px;
+    margin: 16px 0 0 -65px;
   }
   .uptime-counter b { font-size: 1.2rem; }
   .uptime-counter span { min-width: 44px; padding: 6px 4px; }
@@ -335,14 +189,10 @@
 
 /* 减少动效偏好 */
 @media (prefers-reduced-motion: reduce) {
-  .earth-surface,
-  .earth-orbit,
-  .earth-shadow,
-  .earth-glow,
-  .radar-ring,
-  .signal-dot,
-  .signal-satellite,
   .hero-cell::before {
     animation: none !important;
+  }
+  .earth-canvas {
+    /* Canvas 动画由 JS 控制，静态显示一帧 */
   }
 }

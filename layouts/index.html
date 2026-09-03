@@ -61,56 +61,7 @@
       <div class="hero-cell hero-globe">
         <div class="hero-cell-inner">
           <div class="earth-wrap" aria-hidden="true">
-            <!-- 雷达信号波纹 -->
-            <div class="earth-radar">
-              <span class="radar-ring r1"></span>
-              <span class="radar-ring r2"></span>
-              <span class="radar-ring r3"></span>
-            </div>
-            <!-- 信号弹射弧线 + 卫星轨道 -->
-            <svg class="earth-signals" viewBox="0 0 240 240" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="signalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#00f0ff"/>
-                  <stop offset="100%" stop-color="#9d4edd"/>
-                </linearGradient>
-                <linearGradient id="signalGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#9d4edd"/>
-                  <stop offset="100%" stop-color="#ff2bd6"/>
-                </linearGradient>
-              </defs>
-              <!-- 卫星环绕轨道（倾斜椭圆） -->
-              <g transform="rotate(-18 120 120)">
-                <ellipse class="signal-orbit" cx="120" cy="120" rx="112" ry="44" fill="none"/>
-                <circle class="signal-satellite" r="3.5" fill="#00f0ff">
-                  <animateMotion dur="9s" repeatCount="indefinite"
-                    path="M8,120 A112,44 0 1,1 232,120 A112,44 0 1,1 8,120"/>
-                </circle>
-              </g>
-              <!-- 信号弹射弧线 x3 -->
-              <path class="signal-arc arc1" d="M25,120 Q2,78 6,36"/>
-              <circle class="signal-dot" r="3" fill="#00f0ff">
-                <animateMotion dur="2.4s" begin="0s" repeatCount="indefinite"
-                  path="M25,120 Q2,78 6,36"/>
-              </circle>
-              <path class="signal-arc arc2" d="M187,187 Q205,210 230,225"/>
-              <circle class="signal-dot" r="3" fill="#9d4edd">
-                <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite"
-                  path="M187,187 Q205,210 230,225"/>
-              </circle>
-              <path class="signal-arc arc3" d="M187,53 Q210,30 232,14"/>
-              <circle class="signal-dot" r="3" fill="#ff2bd6">
-                <animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"
-                  path="M187,53 Q210,30 232,14"/>
-              </circle>
-            </svg>
-            <!-- 地球本体 -->
-            <div class="earth">
-              <div class="earth-surface"></div>
-              <div class="earth-shade"></div>
-            </div>
-            <div class="earth-glow"></div>
-            <div class="earth-orbit"></div>
+            <canvas id="earth-canvas" class="earth-canvas"></canvas>
             <div class="earth-shadow"></div>
           </div>
           <p class="hero-sub">{{ i18n "hero.tagline" }}</p>
