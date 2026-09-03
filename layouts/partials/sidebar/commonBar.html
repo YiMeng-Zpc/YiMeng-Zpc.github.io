@@ -35,7 +35,8 @@
   <img
     src="{{ "avatar/" | relURL }}{{ $avatar }}"
     alt="{{ $author }}"
-    loading="lazy"
+    {{/* 头像位于首屏 <header>：保留 decoding=async 但移除 loading=lazy，
+        否则浏览器原生 lazy 会延迟 IntersectionObserver 触发后才 fetch 资源 */ -}}
     decoding="async"
   />
   <div class="sidebar-author-name">{{ $author }}</div>
