@@ -165,16 +165,16 @@
       { name: 'Tokyo',      lat: 35.7, lon: 139.7 },   // 东京
       { name: 'Seoul',      lat: 37.6, lon: 127.0 },   // 首尔
       { name: 'Hong Kong',  lat: 22.3, lon: 114.2 },   // 香港
-      { name: 'Singapore',  lat: 1.35, lon: 103.8 },   // 新加坡
+      { name: 'Singapore',  lat: 1.35, lon: 103.7 },   // 新加坡
       { name: 'Bangkok',    lat: 13.7, lon: 100.5 },   // 曼谷
       { name: 'Jakarta',    lat: -6.2, lon: 106.8 },   // 雅加达
       { name: 'Mumbai',     lat: 19.1, lon: 72.9 },    // 孟买
       { name: 'Karachi',    lat: 24.9, lon: 67.0 },    // 卡拉奇
-      { name: 'Dubai',      lat: 25.2, lon: 55.3 },    // 迪拜
+      { name: 'Dubai',      lat: 24.7, lon: 55.5 },    // 迪拜（向内陆偏 0.5° 落在沙漠）
       { name: 'Riyadh',     lat: 24.7, lon: 46.7 },    // 利雅得
       { name: 'Tehran',     lat: 35.7, lon: 51.4 },    // 德黑兰
       { name: 'Moscow',     lat: 55.8, lon: 37.6 },    // 莫斯科
-      { name: 'Istanbul',   lat: 41.0, lon: 29.0 },    // 伊斯坦布尔
+      { name: 'Istanbul',   lat: 40.7, lon: 29.0 },    // 伊斯坦布尔（向内陆偏 0.3° 落在安那托利亚）
       { name: 'Cairo',      lat: 30.0, lon: 31.2 },    // 开罗
       { name: 'Paris',      lat: 48.9, lon: 2.35 },    // 巴黎
       { name: 'London',     lat: 51.5, lon: -0.13 },   // 伦敦
@@ -192,15 +192,15 @@
       { name: 'Mexico City',lat: 19.4, lon: -99.1 },   // 墨西哥城
       { name: 'Sao Paulo',  lat: -23.5, lon: -46.6 },  // 圣保罗
       { name: 'Buenos Aires',lat: -34.6, lon: -58.4 }, // 布宜诺斯艾利斯
-      { name: 'Lima',       lat: -12.0, lon: -77.0 },  // 利马
+      { name: 'Lima',       lat: -12.0, lon: -76.6 },  // 利马（向内陆偏 0.4° 落在安第斯山麓）
       { name: 'Bogotá',     lat: 4.7, lon: -74.1 },    // 波哥大
-      { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥 (注释占位)
-      { name: 'Cape Town',  lat: -33.9, lon: 18.4 },   // 开普敦
+      { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥
+      { name: 'Cape Town',  lat: -33.7, lon: 18.4 },   // 开普敦（向内陆偏 0.2° 避开海岸像素）
       { name: 'Nairobi',    lat: -1.3, lon: 36.8 },    // 内罗毕
       { name: 'Lagos',      lat: 6.5, lon: 3.4 },      // 拉各斯
-      { name: 'Sydney',     lat: -33.9, lon: 151.2 },  // 悉尼
-      { name: 'Auckland',   lat: -36.8, lon: 174.8 },  // 奥克兰
-      { name: 'Johannesburg',lat: -26.2, lon: 28.0 }   // 约翰内斯堡
+      { name: 'Sydney',     lat: -33.7, lon: 150.4 },  // 悉尼（向内陆偏 ~0.8° 落在蓝山区域）
+      { name: 'Melbourne',  lat: -37.8, lon: 144.9 },  // 墨尔本（替代奥克兰，新西兰贴图分辨率不足）
+      { name: 'Johannesburg', lat: -26.2, lon: 28.0 }   // 约翰内斯堡
     ];
 
     var cities = [];
