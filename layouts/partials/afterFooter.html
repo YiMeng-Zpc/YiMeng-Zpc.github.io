@@ -4,7 +4,7 @@
 {{- $css := hugo.Data.vendor.css -}}
 
 {{- /* lazysizes 已移除（L4）：avatar 改用原生 loading="lazy" */ -}}
-{{- partial "helpers/cdnJs.html" (dict "name" "clipboard" "ctx" .) }}
+{{- /* firework 保留主题默认（用户确认保持开启）；clipboard 已并入下方 not .IsHome 块（M2）*/ -}}
 
 {{- if $params.material_theme.enable -}}
   {{- partial "helpers/cdnJs.html" (dict "name" "material_theme" "ctx" .) -}}
@@ -216,6 +216,7 @@
       </script>
     {{- end -}}
     {{- if not .IsHome -}}
+      {{- partial "helpers/cdnJs.html" (dict "name" "clipboard" "ctx" .) -}}
       {{- partial "helpers/ts.html" (dict "source" "js/insert_highlight.ts" "pjax" true "ctx" .) -}}
       {{- if or $params.anchor.explicit.enable $params.anchor.auto.enable -}}
         {{- partial "helpers/ts.html" (dict "source" "js/anchor.ts" "pjax" true "ctx" .) -}}
