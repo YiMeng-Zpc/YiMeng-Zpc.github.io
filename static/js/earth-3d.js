@@ -158,7 +158,7 @@
     }
 
     // ---------- cities & flight routes ----------
-    // 全球 41 个真实大城市（首都/经济中心），经纬度精确
+    // 全球 42 个真实大城市（首都/经济中心），经纬度精确（4K 贴图下可使用真实坐标无需偏移）
     var CITY_DEFS = [
       { name: 'Beijing',    lat: 39.9, lon: 116.4 },   // 北京
       { name: 'Shanghai',   lat: 31.2, lon: 121.5 },   // 上海
@@ -192,14 +192,15 @@
       { name: 'Mexico City',lat: 19.4, lon: -99.1 },   // 墨西哥城
       { name: 'Sao Paulo',  lat: -23.5, lon: -46.6 },  // 圣保罗
       { name: 'Buenos Aires',lat: -34.6, lon: -58.4 }, // 布宜诺斯艾利斯
-      { name: 'Lima',       lat: -12.0, lon: -76.6 },  // 利马（向内陆偏 0.4° 落在安第斯山麓）
+      { name: 'Lima',       lat: -12.0, lon: -76.55 }, // 利马（4K 贴图下微调 0.05° 落在安第斯山麓）
       { name: 'Bogotá',     lat: 4.7, lon: -74.1 },    // 波哥大
       { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥
       { name: 'Cape Town',  lat: -33.7, lon: 18.4 },   // 开普敦（向内陆偏 0.2° 避开海岸像素）
       { name: 'Nairobi',    lat: -1.3, lon: 36.8 },    // 内罗毕
       { name: 'Lagos',      lat: 6.5, lon: 3.4 },      // 拉各斯
       { name: 'Sydney',     lat: -33.7, lon: 150.4 },  // 悉尼（向内陆偏 ~0.8° 落在蓝山区域）
-      { name: 'Melbourne',  lat: -37.8, lon: 144.9 },  // 墨尔本（替代奥克兰，新西兰贴图分辨率不足）
+      { name: 'Melbourne',  lat: -37.8, lon: 144.9 },  // 墨尔本
+      { name: 'Auckland',   lat: -36.85, lon: 174.76 }, // 奥克兰（4K 贴图下新西兰可见，精确真实坐标）
       { name: 'Johannesburg', lat: -26.2, lon: 28.0 }   // 约翰内斯堡
     ];
 
@@ -207,7 +208,7 @@
     for (var ci = 0; ci < CITY_DEFS.length; ci++) {
       cities.push(ll2vec(CITY_DEFS[ci].lat, CITY_DEFS[ci].lon));
     }
-    var C = cities.length;   // 41 个城市
+    var C = cities.length;   // 42 个城市
 
     var ROUTE_COLORS = ['#00f0ff', '#ff2bd6', '#9d4edd', '#f59e0b', '#34d399', '#ff6b6b'];
 

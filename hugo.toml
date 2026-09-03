@@ -37,19 +37,29 @@ defaultContentLanguage = 'zh-CN'
       enable = true
       description = 'A developer who loves technology and documenting life ✦ thoughts on blog, code, and daily life.'
 
-    [languages.en.params.footer]
-      since = 2026
-      author = 'Zhang Pengchao'
-      custom = 'Powered by Hugo · Every step counts ✦ by ZhangPengchao'
-      powered = false
-      busuanzi = false
-      count = false
+[languages.en.params.footer]
+    since = 2026
+    author = 'Zhang Pengchao'
+    custom = 'Powered by Hugo · Every step counts ✦ by ZhangPengchao'
+    powered = false
+    busuanzi = false
+    count = false
+
+    [languages.en.params.uptime]
+    start_date = '2021-08-03'
+    display_date = 'November 11, 2025'
 
 [params]
   author = '张鹏超'
   keyword = ['博客', '代码', '旅行', '摄影', '滑雪', '张鹏超']
   description = '张鹏超 — 记录代码、旅行、摄影与一切在路上的人'
   since = 2026
+
+  # 计时器起始日期（支持完整 ISO 日期 'YYYY-MM-DD' 或仅年份 'YYYY'）
+  # 用于 JS 解析 Date.UTC(年, 月-1, 日, 0, 0, 0) 计算已运行时间
+  [params.uptime]
+    start_date = '2021-08-03'   # 博客创立日
+    display_date = '2025年11月11日'   # 显示在「始于 XXXX ✦」处的日期
   mainSections = ['posts', 'blog']
 
   # footer 个性化署名（覆盖 Reimu 主题的 'Hugo / Theme.Reimu' 署名）
