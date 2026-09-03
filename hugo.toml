@@ -63,9 +63,9 @@ defaultContentLanguage = 'zh-CN'
   [params.reimu_cursor]
     enable = true
     [params.reimu_cursor.cursor]
-      default = '/images/cursor/cyber-cursor-default.png'
-      pointer = '/images/cursor/cyber-cursor-pointer.png'
-      text = '/images/cursor/cyber-cursor-text.png'
+      default = '/images/cursor/cyber-cursor-default.svg'
+      pointer = '/images/cursor/cyber-cursor-pointer.svg'
+      text = '/images/cursor/cyber-cursor-text.svg'
 
   # 社交链接
   [params.social]
