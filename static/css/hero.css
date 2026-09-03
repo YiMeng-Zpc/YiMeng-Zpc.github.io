@@ -36,12 +36,19 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* 地球卡片：允许信号弧线/卫星轨道溢出可见（覆盖父级 overflow:hidden） */
+/* 地球卡片：无背景、无边框、无方块感（地球+航线直接浮在页面上） */
 .hero-globe {
   overflow: visible;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .hero-globe::before {
-  display: none;  /* 关闭 conic 旋转背景，避免溢出到卡片外 */
+  display: none;  /* 关闭 conic 旋转背景 */
 }
 
 .hero-cell::before {

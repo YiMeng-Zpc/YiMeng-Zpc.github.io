@@ -158,31 +158,121 @@
     }
 
     // ---------- cities & flight routes ----------
-    var cities = [
-      ll2vec(39.9, 116.4),    // 0 Beijing
-      ll2vec(31.2, 121.5),    // 1 Shanghai
-      ll2vec(35.7, 139.7),    // 2 Tokyo
-      ll2vec(25.2, 55.3),     // 3 Dubai
-      ll2vec(48.9, 2.35),     // 4 Paris
-      ll2vec(51.5, -0.13),    // 5 London
-      ll2vec(40.7, -74.0),    // 6 New York
-      ll2vec(34.1, -118.2),   // 7 Los Angeles
-      ll2vec(-33.9, 151.2),   // 8 Sydney
-      ll2vec(30.0, 31.2),     // 9 Cairo
-      ll2vec(-23.5, -46.6),   // 10 Sao Paulo
-      ll2vec(55.8, 37.6)      // 11 Moscow
+    // 全球 41 个真实大城市（首都/经济中心），经纬度精确
+    var CITY_DEFS = [
+      { name: 'Beijing',    lat: 39.9, lon: 116.4 },   // 北京
+      { name: 'Shanghai',   lat: 31.2, lon: 121.5 },   // 上海
+      { name: 'Tokyo',      lat: 35.7, lon: 139.7 },   // 东京
+      { name: 'Seoul',      lat: 37.6, lon: 127.0 },   // 首尔
+      { name: 'Hong Kong',  lat: 22.3, lon: 114.2 },   // 香港
+      { name: 'Singapore',  lat: 1.35, lon: 103.8 },   // 新加坡
+      { name: 'Bangkok',    lat: 13.7, lon: 100.5 },   // 曼谷
+      { name: 'Jakarta',    lat: -6.2, lon: 106.8 },   // 雅加达
+      { name: 'Mumbai',     lat: 19.1, lon: 72.9 },    // 孟买
+      { name: 'Karachi',    lat: 24.9, lon: 67.0 },    // 卡拉奇
+      { name: 'Dubai',      lat: 25.2, lon: 55.3 },    // 迪拜
+      { name: 'Riyadh',     lat: 24.7, lon: 46.7 },    // 利雅得
+      { name: 'Tehran',     lat: 35.7, lon: 51.4 },    // 德黑兰
+      { name: 'Moscow',     lat: 55.8, lon: 37.6 },    // 莫斯科
+      { name: 'Istanbul',   lat: 41.0, lon: 29.0 },    // 伊斯坦布尔
+      { name: 'Cairo',      lat: 30.0, lon: 31.2 },    // 开罗
+      { name: 'Paris',      lat: 48.9, lon: 2.35 },    // 巴黎
+      { name: 'London',     lat: 51.5, lon: -0.13 },   // 伦敦
+      { name: 'Berlin',     lat: 52.5, lon: 13.4 },    // 柏林
+      { name: 'Frankfurt',  lat: 50.1, lon: 8.7 },     // 法兰克福
+      { name: 'Rome',       lat: 41.9, lon: 12.5 },    // 罗马
+      { name: 'Madrid',     lat: 40.4, lon: -3.7 },    // 马德里
+      { name: 'Barcelona',  lat: 41.4, lon: 2.2 },     // 巴塞罗那
+      { name: 'Reykjavík',  lat: 64.1, lon: -21.9 },   // 雷克雅未克
+      { name: 'New York',   lat: 40.7, lon: -74.0 },   // 纽约
+      { name: 'Toronto',    lat: 43.7, lon: -79.4 },   // 多伦多
+      { name: 'Chicago',    lat: 41.9, lon: -87.6 },   // 芝加哥
+      { name: 'Los Angeles',lat: 34.1, lon: -118.2 },  // 洛杉矶
+      { name: 'Vancouver',  lat: 49.3, lon: -123.1 },  // 温哥华
+      { name: 'Mexico City',lat: 19.4, lon: -99.1 },   // 墨西哥城
+      { name: 'Sao Paulo',  lat: -23.5, lon: -46.6 },  // 圣保罗
+      { name: 'Buenos Aires',lat: -34.6, lon: -58.4 }, // 布宜诺斯艾利斯
+      { name: 'Lima',       lat: -12.0, lon: -77.0 },  // 利马
+      { name: 'Bogotá',     lat: 4.7, lon: -74.1 },    // 波哥大
+      { name: 'Santiago',   lat: -33.4, lon: -70.7 },  // 圣地亚哥 (注释占位)
+      { name: 'Cape Town',  lat: -33.9, lon: 18.4 },   // 开普敦
+      { name: 'Nairobi',    lat: -1.3, lon: 36.8 },    // 内罗毕
+      { name: 'Lagos',      lat: 6.5, lon: 3.4 },      // 拉各斯
+      { name: 'Sydney',     lat: -33.9, lon: 151.2 },  // 悉尼
+      { name: 'Auckland',   lat: -36.8, lon: 174.8 },  // 奥克兰
+      { name: 'Johannesburg',lat: -26.2, lon: 28.0 }   // 约翰内斯堡
     ];
 
-    var routes = [
-      { a: 0, b: 4,  color: '#00f0ff', speed: 0.045, phase: 0.00 },
-      { a: 2, b: 6,  color: '#ff2bd6', speed: 0.038, phase: 0.31 },
-      { a: 3, b: 5,  color: '#f59e0b', speed: 0.052, phase: 0.62 },
-      { a: 1, b: 8,  color: '#34d399', speed: 0.046, phase: 0.47 },
-      { a: 6, b: 7,  color: '#9d4edd', speed: 0.060, phase: 0.15 },
-      { a: 4, b: 10, color: '#00f0ff', speed: 0.042, phase: 0.78 },
-      { a: 0, b: 9,  color: '#9d4edd', speed: 0.050, phase: 0.24 },
-      { a: 11, b: 5, color: '#f59e0b', speed: 0.048, phase: 0.88 }
-    ];
+    var cities = [];
+    for (var ci = 0; ci < CITY_DEFS.length; ci++) {
+      cities.push(ll2vec(CITY_DEFS[ci].lat, CITY_DEFS[ci].lon));
+    }
+    var C = cities.length;   // 41 个城市
+
+    var ROUTE_COLORS = ['#00f0ff', '#ff2bd6', '#9d4edd', '#f59e0b', '#34d399', '#ff6b6b'];
+
+    // 大圆弧角距离（弧度）
+    function arcLen(a, b) {
+      var d = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      if (d > 1) d = 1; else if (d < -1) d = -1;
+      return Math.acos(d);
+    }
+
+    // 随机生成一条长途航线（≥60° 大圆弧），颜色/速度/相位/拱高全随机
+    function makeRandomRoute() {
+      var MIN_ARC = Math.PI / 3;   // 60° —— 避免同城或同城郊区小圈圈
+      for (var tries = 0; tries < 40; tries++) {
+        var a = Math.floor(Math.random() * C);
+        var b = Math.floor(Math.random() * C);
+        if (a === b) continue;
+        // 同时避开已存在的端点重复（同一个城市同时出现在太多条航线上视觉杂乱）
+        var dup = 0;
+        for (var r = 0; r < routes.length; r++) {
+          if (routes[r].a === a || routes[r].b === a ||
+              routes[r].a === b || routes[r].b === b) dup++;
+        }
+        if (dup > 2) continue;   // 任一端点关联航线 ≤ 2 条
+        if (arcLen(cities[a], cities[b]) >= MIN_ARC) {
+          return {
+            a: a, b: b,
+            color: ROUTE_COLORS[Math.floor(Math.random() * ROUTE_COLORS.length)],
+            speed: 0.030 + Math.random() * 0.040,    // 0.030 ~ 0.070
+            phase: Math.random(),
+            lift: 0.13 + Math.random() * 0.18        // 0.13 ~ 0.31
+          };
+        }
+      }
+      return null;
+    }
+
+    // 航线池：每次页面加载随机生成（不再固定主干航线）
+    var routes = [];
+    var MAX_ROUTES = 18;          // 最多同时 18 条
+    var INITIAL_ROUTES = 12;      // 启动时 12 条
+
+    for (var sp = 0; sp < INITIAL_ROUTES; sp++) {
+      var r0 = makeRandomRoute();
+      if (r0) routes.push(r0);
+    }
+
+    // 定期添加随机新航线
+    function spawnRandomRoute() {
+      if (routes.length >= MAX_ROUTES) {
+        routes.shift();   // 移除最旧的一条
+      }
+      var r = makeRandomRoute();
+      if (r) routes.push(r);
+    }
+
+    // 4-9 秒添加一条
+    var nextRouteAt = 3 + Math.random() * 4;
+    function updateRoutePool(dt) {
+      nextRouteAt -= dt;
+      if (nextRouteAt <= 0) {
+        spawnRandomRoute();
+        nextRouteAt = 4 + Math.random() * 5;
+      }
+    }
 
     function drawRoute(route, rot) {
       var a = cities[route.a], b = cities[route.b];
@@ -191,8 +281,8 @@
       for (var i = 0; i <= N; i++) {
         var t = i / N;
         var p = slerp(a, b, t);
-        // 高度曲线：正弦拱形，最高处离球面 0.22R
-        var hgt = Math.sin(Math.PI * t) * 0.22;
+        // 高度曲线：正弦拱形，最高处离球面 route.lift * R
+        var hgt = Math.sin(Math.PI * t) * route.lift;
         // 沿球面法线方向抬升（球面点本身是单位向量，直接乘 (1+hgt)）
         var lift = 1 + hgt;
         var lp = [p[0] * lift, p[1] * lift, p[2] * lift];
@@ -224,7 +314,7 @@
       // moving signal dot + trail (on the lifted arc)
       var prog = (time * route.speed + route.phase) % 1;
       var pp = slerp(a, b, prog);
-      var hgt2 = Math.sin(Math.PI * prog) * 0.22;
+      var hgt2 = Math.sin(Math.PI * prog) * route.lift;
       var lp2 = [pp[0] * (1 + hgt2), pp[1] * (1 + hgt2), pp[2] * (1 + hgt2)];
       var rv = rotY(lp2, -rot);
       if (rv[2] < 0) return;
@@ -236,7 +326,7 @@
       for (var k = 9; k >= 1; k--) {
         var tt = Math.max(0, prog - 0.022 * k);
         var tq = slerp(a, b, tt);
-        var th = Math.sin(Math.PI * tt) * 0.22;
+        var th = Math.sin(Math.PI * tt) * route.lift;
         var tl = [tq[0] * (1 + th), tq[1] * (1 + th), tq[2] * (1 + th)];
         var tv = rotY(tl, -rot);
         if (tv[2] < 0) continue;
@@ -336,17 +426,7 @@
     }
 
     // ---------- glow & shading ----------
-    function drawGlow() {
-      var g = ctx.createRadialGradient(cx, cy, ballR * 0.9, cx, cy, ballR * 1.5);
-      g.addColorStop(0, 'rgba(56,189,248,0.30)');
-      g.addColorStop(0.5, 'rgba(56,189,248,0.10)');
-      g.addColorStop(1, 'rgba(56,189,248,0)');
-      ctx.fillStyle = g;
-      ctx.beginPath();
-      ctx.arc(cx, cy, ballR * 1.5, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
+    // 球体上光：高光（左上）+ 暗角（右下）—— 突出立体感
     function drawShade() {
       var s = ctx.createRadialGradient(
         cx - ballR * 0.35, cy - ballR * 0.35, ballR * 0.1,
@@ -362,6 +442,8 @@
     }
 
     // ---------- city anchor points (glowing) ----------
+    // 三层环：外晕圈（半径 5，淡青）+ 中环（半径 2.8，实色）+ 亮芯（半径 1.6，白色）
+    // 加强后即使在 240px 球体上也清晰可见
     function drawCities(rot) {
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
@@ -369,16 +451,22 @@
         var v = rotY(cities[i], -rot);
         if (v[2] < 0) continue;
         var p = proj(v);
-        // halo ring
-        ctx.strokeStyle = 'rgba(125,249,255,0.55)';
+        // outer halo ring
+        ctx.strokeStyle = 'rgba(125,249,255,0.45)';
         ctx.lineWidth = 1;
         ctx.beginPath();
-        ctx.arc(p[0], p[1], 3.5, 0, Math.PI * 2);
+        ctx.arc(p[0], p[1], 5, 0, Math.PI * 2);
         ctx.stroke();
-        // core dot
-        ctx.fillStyle = 'rgba(125,249,255,0.95)';
+        // mid ring (实色，可见度更高)
+        ctx.strokeStyle = 'rgba(125,249,255,0.85)';
+        ctx.lineWidth = 1.2;
         ctx.beginPath();
-        ctx.arc(p[0], p[1], 1.4, 0, Math.PI * 2);
+        ctx.arc(p[0], p[1], 2.8, 0, Math.PI * 2);
+        ctx.stroke();
+        // bright core dot
+        ctx.fillStyle = 'rgba(255,255,255,0.95)';
+        ctx.beginPath();
+        ctx.arc(p[0], p[1], 1.6, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.restore();
@@ -395,13 +483,13 @@
 
       ctx.clearRect(0, 0, W, H);
 
-      drawGlow();
       renderSphere(rotationRad);
       ctx.drawImage(off, cx - ballR, cy - ballR, ballR * 2, ballR * 2);
       drawShade();
 
       drawOrbit(dt);
       drawCities(rotationRad);
+      updateRoutePool(dt);
       for (var i = 0; i < routes.length; i++) {
         drawRoute(routes[i], rotationRad);
       }
