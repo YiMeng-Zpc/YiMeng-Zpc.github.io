@@ -3,7 +3,7 @@
 {{- $js := hugo.Data.vendor.js -}}
 {{- $css := hugo.Data.vendor.css -}}
 
-{{- partial "helpers/cdnJs.html" (dict "name" "lazysizes" "ctx" .) }}
+{{- /* lazysizes 已移除（L4）：avatar 改用原生 loading="lazy" */ -}}
 {{- partial "helpers/cdnJs.html" (dict "name" "clipboard" "ctx" .) }}
 
 {{- if $params.material_theme.enable -}}

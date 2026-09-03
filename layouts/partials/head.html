@@ -9,6 +9,12 @@
 <!-- viewport / 移动适配（H1） -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
+<!-- preconnect / dns-prefetch（M3：首屏 DNS+TLS 握手并行化）-->
+<link rel="preconnect" href="https://npm.webcache.cn" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="//npm.webcache.cn">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+
 <!-- description / keywords（H4） -->
 <meta name="description" content="{{ .Params.description | default .Site.Params.description | safeHTML }}"/>
 {{- $keywords := default .Site.Params.keywords .Params.keywords -}}

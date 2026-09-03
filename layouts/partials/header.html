@@ -1,8 +1,9 @@
 ﻿{{- $params := .Site.Params -}}
 {{- $customCSS := $params.custom_css -}}
 
-<!-- FontAwesome 6 Free CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- FontAwesome 6 Free 子集（替换全量 all.min.css 节省约 60KB） -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/solid.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/brands.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- 自定义炫酷主题样式 -->
 {{- with $customCSS -}}
@@ -119,9 +120,6 @@
 
 <header id="header" aria-label="Site header">
   {{- /* 关闭 Reimu 主题的 banner image（女性化二次元封面）——让背景图 div 接管 */ -}}
-  {{- $coverImage := "" -}}
-  <picture></picture>
-  <img style="visibility:hidden" alt="" />
   <div id="header-outer">
     <div id="header-title">
       <span id="logo">

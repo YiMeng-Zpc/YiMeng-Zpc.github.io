@@ -16,6 +16,15 @@
     var canvas = document.getElementById('earth-canvas');
     if (!canvas) return;
 
+    // M8: 尊重用户偏好 — 减少动画或触屏设备直接跳过重特效
+    if (window.matchMedia && (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(pointer: coarse)').matches
+    )) {
+      canvas.style.display = 'none';
+      return;
+    }
+
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
 
