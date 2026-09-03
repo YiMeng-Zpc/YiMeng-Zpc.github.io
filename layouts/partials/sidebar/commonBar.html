@@ -35,8 +35,10 @@
   <img
     src="{{ "avatar/" | relURL }}{{ $avatar }}"
     alt="{{ $author }}"
-    {{/* 头像位于首屏 <header>：保留 decoding=async 但移除 loading=lazy，
-        否则浏览器原生 lazy 会延迟 IntersectionObserver 触发后才 fetch 资源 */ -}}
+    {{/* Reimu 主题 .sidebar-author img{opacity:0}，依赖 lazysizes 处理完毕加 .lazyloaded
+        类才会变成 opacity:1。首屏头像绝不能保持透明——手动加 lazyloaded 跳过 lazysizes */ -}}
+    class="lazyloaded"
+    {{/* 加 decoding=async，让浏览器把头像解码从主线程挪到 worker，不阻塞渲染 */ -}}
     decoding="async"
   />
   <div class="sidebar-author-name">{{ $author }}</div>
