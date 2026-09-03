@@ -186,3 +186,10 @@ disableGenerator = true
 # Inject custom HTML at specific body positions (M14: skip-link for a11y)
 [params.injector]
   body_begin = '<a class="skip-link" href="#content">跳到主内容</a>'
+
+# Mouse-firework 缩小范围：保留主题默认开关，但在 nav / header / footer / 卡片等
+# 关键交互区不触发烟花，避免破坏导航/卡片点击的视觉反馈
+[params.firework]
+  enable = true
+  disable_on_mobile = false
+  options = { excludeelements = ['a', 'button', '#header', '#main-nav', '#sub-nav', '#i18n-nav', '#header-nav', '#footer', '.sidebar', '.skip-link', 'aside'] }
