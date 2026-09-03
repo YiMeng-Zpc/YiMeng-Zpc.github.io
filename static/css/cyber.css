@@ -63,7 +63,7 @@ html[data-theme-mode='light'] #wrap {
   --color-link: var(--ocean-bright) !important;
   --color-link-hover: var(--amber) !important;
   --color-border: rgba(14, 165, 233, 0.22) !important;
-  --color-card: rgba(17, 24, 39, 0.82) !important;
+  --color-card: rgba(17, 24, 39, 0.55) !important;
 }
 
 /* 亮色模式：保持科技感但换成浅底 */
@@ -73,7 +73,7 @@ html[data-theme-mode='light'] #wrap {
   --color-link: #0284c7 !important;
   --color-link-hover: #d97706 !important;
   --color-border: rgba(14, 165, 233, 0.25) !important;
-  --color-card: rgba(255, 255, 255, 0.86) !important;
+  --color-card: rgba(255, 255, 255, 0.55) !important;
 }
 
 /* ============================================
@@ -107,9 +107,9 @@ body.fengjing-loaded #fengjing-bg {
   z-index: -2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(10, 14, 26, 0.55) 0%, rgba(10, 14, 26, 0.78) 100%),
-    radial-gradient(ellipse at top left, rgba(14, 165, 233, 0.08), transparent 55%),
-    radial-gradient(ellipse at bottom right, rgba(245, 158, 11, 0.06), transparent 60%);
+    linear-gradient(180deg, rgba(10, 14, 26, 0.18) 0%, rgba(10, 14, 26, 0.32) 100%),
+    radial-gradient(ellipse at top left, rgba(14, 165, 233, 0.05), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(245, 158, 11, 0.04), transparent 60%);
 }
 
 /* 主体覆盖（防止透明看到风景图太刺眼） */
@@ -500,7 +500,7 @@ a:hover {
 
 
 [data-theme-mode='dark'] .home-posts-grid .post-card {
-  background: rgba(17, 24, 39, 0.85);
+  background: rgba(17, 24, 39, 0.55);
 }
 
 #nav-dark-btn, #dark-mode-toggle {
