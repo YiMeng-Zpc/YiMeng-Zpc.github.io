@@ -36,24 +36,21 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-/* 计时器卡片：与地球背景统一——深空透明 + 极细琥珀金边框（无方块感） */
+/* 计时器卡片：与地球卡片完全统一——无背景、无边框、无 box-shadow（圆形计时数字直接浮在页面上） */
 .hero-uptime {
-  overflow: hidden;
+  overflow: visible;
   background: transparent;
-  border: 1px solid rgba(245, 158, 11, 0.18);
-  box-shadow:
-    0 4px 18px rgba(245, 158, 11, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: none;
+  box-shadow: none;
+  padding: 18px 20px;
 }
 .hero-uptime::before {
-  /* 内部 conic 旋转背景（关闭——与地球卡片保持简洁） */
+  /* 关闭 conic 旋转背景 */
   display: none;
 }
 .hero-uptime:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    0 10px 28px rgba(245, 158, 11, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  /* 不再有 transform/shadow 变化，保持简洁 */
+  transform: none;
 }
 
 /* 地球卡片：无背景、无边框、无方块感（地球+航线直接浮在页面上） */

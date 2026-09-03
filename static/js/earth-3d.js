@@ -134,7 +134,9 @@
     function ll2vec(latDeg, lonDeg) {
       var la = latDeg * D2R, lo = lonDeg * D2R;
       var cl = Math.cos(la);
-      return [cl * Math.cos(lo), Math.sin(la), cl * Math.sin(lo)];
+      // 经度映射：lon=0 → +Z 方向（与 renderSphere 的 atan2(dx, z3) 一致）
+      // 之前用 cos(lon) 在 X，sin(lon) 在 Z，导致城市标记偏西 90°（落海）。
+      return [cl * Math.sin(lo), Math.sin(la), cl * Math.cos(lo)];
     }
 
     function rotY(v, a) {

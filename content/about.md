@@ -1,7 +1,7 @@
 ---
 title: "关于"
 slug: "about"
-date: 2026-08-31
+date: 2021-08-03
 ---
 
 ![about-avatar](/avatar/default.jpg)
