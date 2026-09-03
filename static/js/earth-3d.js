@@ -435,8 +435,8 @@
         cx - ballR * 0.35, cy - ballR * 0.35, ballR * 0.1,
         cx, cy, ballR * 1.05
       );
-      s.addColorStop(0, 'rgba(255,255,255,0.18)');
-      s.addColorStop(0.4, 'rgba(255,255,255,0.02)');
+      s.addColorStop(0, 'rgba(255,255,255,0.05)');     // 上左高光（强度 0.18 -> 0.05，避免球面"发雾"）
+      s.addColorStop(0.4, 'rgba(255,255,255,0.01)');
       s.addColorStop(1, 'rgba(0,0,0,0.5)');
       ctx.fillStyle = s;
       ctx.beginPath();
