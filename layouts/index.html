@@ -44,9 +44,8 @@
   {{- partial "pagination.html" . -}}
   {{- end -}}
 
-  {{- /* 主页炫酷核心区（永远渲染在文章+分页之下，仅在第一页）：
+  {{- /* 主页炫酷核心区（永远渲染在文章+分页之下，每页都显示）：
          运行计时器 + 旋转地球 */ -}}
-  {{- if eq .Paginator.PageNumber 1 -}}
   {{- $uptime := .Site.Params.uptime | default (dict "start_date" 2026 "display_date" 2026) -}}
   {{- $sinceDisplay := $uptime.display_date | default 2026 -}}
   {{- $sinceStart := $uptime.start_date | default 2026 -}}
@@ -74,5 +73,4 @@
       </div>
     </div>
   </section>
-  {{- end -}}
 {{- end -}}
