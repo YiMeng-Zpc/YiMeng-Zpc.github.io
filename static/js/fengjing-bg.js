@@ -21,8 +21,11 @@
     overlay.id = 'fengjing-overlay';
     document.body.insertBefore(overlay, bg.nextSibling);
 
-    // 用 ?cb=<timestamp> 绕过 CDN 缓存 → 每次刷新拿到不同图
-    var url = FENGJING_API + '?cb=' + Date.now();
+    // 用 ?cb=<yyyy-mm-dd> 做「天级」缓存：同一天内复用 CDN 缓存，不再每次刷新都重新下载 5.3MB 大图。
+    // 日历跨零点后 cb 变化，才会取一张新图 —— 兼顾「每天换图」与「秒开」。
+    var d = new Date();
+    var cb = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    var url = FENGJING_API + '?cb=' + cb;
 
     // 预加载图片，加载完才显示，避免闪烁
     var img = new Image();
