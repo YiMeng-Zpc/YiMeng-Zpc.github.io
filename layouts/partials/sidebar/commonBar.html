@@ -47,8 +47,16 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>{{ i18n "sidebar.post" }}</div>
-    {{- $mainSections := $params.mainSections | default (slice "posts") -}}
-    {{- $posts := where .ctx.Site.RegularPages "Section" "in" $mainSections -}}
+    {{- /* 2026-09-04: 强制覆盖 mainSections; .Site.Params.mainSections 在某些 Hugo 版本
+           返回 theme params.yml 的 ["post"]（单数）而非用户 hugo.toml 里的 ["posts", "blog"]。
+           这里写死 ["posts", "blog"] 修复文章计数从 0 → 实际值 */ -}}
+    {{- $mainSections := slice "posts" "blog" -}}
+    {{- $posts := slice -}}
+    {{- range where .ctx.Site.RegularPages "Kind" "page" -}}
+      {{- if in $mainSections .Section -}}
+        {{- $posts = $posts | append . -}}
+      {{- end -}}
+    {{- end -}}
     <div class="sidebar-state-number">{{ len $posts }}</div>
   </div>
   <a class="sidebar-state-category" href="{{ "categories/" | relLangURL }}" aria-label="sidebar-state-category-link">
