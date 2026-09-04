@@ -1,0 +1,40 @@
+{{- define "main" -}}
+  {{- /* 2026-09-04: 用户 archives.md 是 single page (kind=page) 而非 section,
+         所以 Hugo 找 single.html 而不是 section.html。
+         这里实现 section.html 的同样逻辑 (列表+分组)，但 single page 不支持 .Paginate */ -}}
+  {{- $sort_config := .Site.Params.sort_order.archive -}}
+  {{- $mainSections := slice "posts" "blog" -}}
+  {{- $posts := slice -}}
+  {{- range where .Site.RegularPages "Kind" "page" -}}
+    {{- if in $mainSections .Section -}}
+      {{- $posts = $posts | append . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* single page 不能用 .Paginate; 直接用 $posts 作为 paginator */ -}}
+  {{- $paginator := $posts -}}
+
+  {{- $sortedPages := $paginator.GroupByDate .Site.Params.yearFormat "desc" -}}
+  {{- if eq $sort_config "weight" -}}
+    {{- $sortedPages = $paginator.ByWeight -}}
+  {{- else if eq $sort_config "weight-reverse" -}}
+    {{- $sortedPages = $paginator.ByWeight.Reverse -}}
+  {{- else if eq $sort_config "date" -}}
+    {{- $sortedPages = $paginator.GroupByDate .Site.Params.yearFormat "asc" -}}
+  {{- else if eq $sort_config "default" -}}
+    {{- $sortedPages = $paginator -}}
+  {{- end -}}
+  <div
+    class="archives-outer-wrap"
+    data-aos="{{ .Site.Params.animation.options.archive.whole }}"
+  >
+    {{- if .Site.Params.only_show_capsule_in_index -}}
+      {{- if eq .Paginator.PageNumber 1 -}}
+        {{- partialCached "archives.html" . -}}
+      {{- end -}}
+    {{- else -}}
+      {{- partialCached "archives.html" . -}}
+    {{- end -}}
+    {{- partial "list.html" (dict "paginator" $sortedPages "ctx" .) -}}
+  </div>
+  {{- /* single page 不支持分页, 跳过 pagination partial */ -}}
+{{- end -}}
