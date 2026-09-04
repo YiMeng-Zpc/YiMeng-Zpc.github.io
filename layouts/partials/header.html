@@ -41,11 +41,9 @@
     <a id="main-nav-toggle" class="nav-icon" aria-label="Toggle navigation" role="button"></a>
   </nav>
   <nav id="sub-nav" aria-label="Secondary navigation">
-    {{- /* 2026-09-04: 移除 RSS 按钮。原因：用户反馈不理解 RSS 是什么；中文访客极少用 RSS 阅读器；
-           角标位置不显眼但视觉冗余。如需恢复，取消下面注释即可。 */ -}}
-    {{- /* {{- with .OutputFormats.Get "rss" -}}
+    {{- with .OutputFormats.Get "rss" -}}
       <a id="nav-rss-link" class="nav-icon" href="{{ .Permalink | relURL }}" title="{{ i18n "rss_feed" }}" aria-label="{{ i18n "rss_feed" }}" target="_blank"></a>
-    {{- end -}} */ -}}
+    {{- end -}}
     {{- if .Site.Params.algolia_search.enable -}}
       <a id="nav-search-btn" class="nav-icon popup-trigger" title="{{ i18n "search" }}" aria-label="{{ i18n "search" }}"></a>
     {{- end -}}
