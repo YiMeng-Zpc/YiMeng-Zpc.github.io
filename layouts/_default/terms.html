@@ -1,0 +1,37 @@
+{{- define "main" -}}
+  {{- /* 2026-09-04: 复刻主题 _default/terms.html 但跳过 partial "article.html"，
+         避免 term 页本身 .Date=0 时渲染 0001-01-01 + 空 article-body */ -}}
+  <div
+    class="archives-outer-wrap"
+    data-aos="{{ .Site.Params.animation.options.archive.whole }}"
+  >
+    <div
+      class="{{ if eq .Name "Tags" }}
+        tag-wrap
+      {{ else }}
+        category-wrap
+      {{ end }}"
+    >
+      {{- range .Pages -}}
+        <div
+          class="{{ if eq $.Name "Tags" }}
+            archives-tag-list-item
+          {{ else }}
+            archives-category-list-item
+          {{ end }}"
+          data-aos="{{ $.Site.Params.animation.options.archive.tag }}"
+        >
+          <a
+            class="{{ if eq $.Name "Tags" }}
+              archives-tag-list-link
+            {{ else }}
+              archives-category-list-link
+            {{ end }}"
+            href="{{ .RelPermalink }}"
+            >{{ .LinkTitle }}</a
+          >
+        </div>
+      {{- end -}}
+    </div>
+  </div>
+{{- end -}}

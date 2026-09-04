@@ -1,3 +1,8 @@
+{{- if .IsNode -}}
+  {{- /* 2026-09-04: taxonomy term 页（/tags/<name>/、/categories/<name>/）无 .Date，
+         会渲染 0001-01-01。这里只在 IsPage 时输出 date 块 */ -}}
+  {{- /* 节点页（term 列表页）静默跳过 */ -}}
+{{- else -}}
 <div class="article-date">
   <span
     class="article-date-link icon-calendar"
@@ -25,3 +30,4 @@
     </span>
   {{- end -}}
 </div>
+{{- end -}}

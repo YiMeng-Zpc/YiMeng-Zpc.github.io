@@ -4,7 +4,8 @@
   {{- with $.Site.Params.paginate.post -}}
     {{- $pageSize = . -}}
   {{- end -}}
-  {{- $mainSections := .Site.Params.mainSections | default (slice "posts") -}}
+  {{- /* 2026-09-04: 硬编码 [posts] 绕过 theme params 覆盖 bug；.Site.Params.mainSections 会被 theme 的 [post] 覆盖 */ -}}
+  {{- $mainSections := slice "posts" "blog" -}}
   {{- $paginator := "" -}}
   {{- if gt $pageSize 0 -}}
     {{- $paginator = .Paginate (where .Site.RegularPages "Section" "in" $mainSections) $pageSize -}}
