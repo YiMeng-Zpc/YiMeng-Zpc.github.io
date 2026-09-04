@@ -27,11 +27,11 @@ Rather than staying comfortable, I prefer to live life as a constantly-updated m
 
 - 🌍 **Travel** — I have visited most countries in Asia and Europe. From the Northern Lights in Iceland to diving in Southeast Asia, from the ancient alleys of Kyoto to the mosques of Istanbul, from the snowy peaks of the Pamir Plateau to the villages of the Apennines — my map keeps lighting up, one dot at a time. The next stop is always on the road.
 - 📷 **Photography** — Landscapes, street shots, portraits — I shoot them all; I favor natural light and long exposures.
-- 💻 **Coding** — Turning ideas into things that run is my most relaxed state.
+- 💻 **Coding** — Turning ideas into things that run is my most relaxed state. I maintain personal projects on GitHub and occasionally submit PRs to open-source repos.
 - 🎿 **Skiing** — Powder snow, groomed runs, night skiing — the colder it gets, the more I'm hooked.
 - 🏊 **Swimming** — In the rhythm of each stroke, my mind somehow clears.
 - 🐎 **Horseback riding** — Wind past my ears, the rhythm of the horse, and a different view of the world.
-- 🎯 **Shooting** — Focus, calm, breath — every shot calibrates yourself.
+- 🎯 **Shooting** — Focus, calm, breath — every shot calibrates yourself. I practice at licensed ranges and don't chase competition results.
 
 ### About this blog
 
