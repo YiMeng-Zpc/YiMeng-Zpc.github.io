@@ -18,20 +18,18 @@
 
     // M8: 尊重用户偏好
     // - 「减少动效 (prefers-reduced-motion)」是系统级无障碍偏好，明确要求少动画 → 隐藏重特效
-    // - 「触屏 (pointer: coarse)」只是设备特征，不是用户偏好；手机端改为轻量模式：
-    //   贴图已压缩到 2048，offscreen 上限 256px，地球正常显示，仅降低航线/轨道密度
+    // - 触屏 (pointer: coarse) 不再当作轻量模式：渲染缓冲已优化到 512px + 隔帧重算，
+    //   手机端与桌面端共享同一渲染管线，视觉一致
     var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var isCoarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
 
     if (reduceMotion) {
       canvas.style.display = 'none';
       return;
     }
-    var lightweight = isCoarsePointer;
 
     var ctx = canvas.getContext('2d');
-    // 触屏设备 dpr 上限 1.5，其余 2.0 —— 降低手机 GPU 填充压力
-    var dpr = Math.min(window.devicePixelRatio || 1, lightweight ? 1.5 : 2);
+    // 用真实 dpr（不超过 3），让手机端 3xDPR 屏幕显示原生像素密度，不再模糊
+    var dpr = Math.min(window.devicePixelRatio || 1, 3);
 
     var W = 0, H = 0, cx = 0, cy = 0, ballR = 0;
 
@@ -56,10 +54,12 @@
     // ---------- offscreen sphere buffer (per-pixel mapping) ----------
     var off = null, octx = null, outImg = null, outPix = null, OLEN = 0;
 
-    // M18: 渲染缓冲上限 256px —— 球体在页面上最多 ~500px 宽，256px offscreen
-    // 已远超显示分辨率；把 OLEN 从 ~574(2xDPR) 压到 256，逐像素重算量减少约 5 倍，
-    // 主线程每帧从 ~30-80ms 降到 ~3-6ms，消除掉帧/卡顿。
-    var OLEN_MAX = 256;
+    // M18-r2: 渲染缓冲上限 512px
+    // 手机端 180css×3dpr=540 物理像素，桌面 240css×2dpr=480 物理像素
+    // 512px offscreen 足够覆盖显示物理像素，1:1 绘制无放大模糊
+    // 配合「隔帧重算」节流（每帧重算 256²≈6.5万像素，每像素 6 次三角函数，约 3-5ms），
+    // 整体帧时间 <16ms
+    var OLEN_MAX = 512;
 
     function buildOffscreen() {
       OLEN = Math.max(2, Math.min(Math.round(ballR * 2), OLEN_MAX));
@@ -67,7 +67,6 @@
       off.width = OLEN;
       off.height = OLEN;
       octx = off.getContext('2d');
-      // 256px → 更大画布：打开平滑，避免像素感
       octx.imageSmoothingEnabled = true;
       octx.imageSmoothingQuality = 'medium';
       outImg = octx.createImageData(OLEN, OLEN);
@@ -271,9 +270,11 @@
     }
 
     // 航线池：每次页面加载随机生成（不再固定主干航线）
+    // M18-r2 移除「触屏轻量」航线数量降级 —— 隔帧重算后手机端也能跑满 18 条，
+    // 视觉与桌面端一致（用户反馈 '手机端效果要和电脑一样'）
     var routes = [];
-    var MAX_ROUTES = lightweight ? 10 : 18;          // 触屏轻量模式：最多 10 条
-    var INITIAL_ROUTES = lightweight ? 6 : 12;       // 触屏轻量模式：启动 6 条（保留视觉但不吃性能）
+    var MAX_ROUTES = 18;
+    var INITIAL_ROUTES = 12;
 
     for (var sp = 0; sp < INITIAL_ROUTES; sp++) {
       var r0 = makeRandomRoute();
@@ -498,6 +499,7 @@
     }
 
     // ---------- main loop ----------
+    var frameCount = 0;
     function frame(ts) {
       if (!last) last = ts;
       var dt = Math.min((ts - last) / 1000, 0.05);
@@ -505,10 +507,15 @@
       time += dt;
       rotationRad += ROT_SPEED * dt;
       dashOffset += dt * 16;
+      frameCount++;
 
       ctx.clearRect(0, 0, W, H);
 
-      renderSphere(rotationRad);
+      // M18-r2 隔帧重算：球体每两帧重算一次（旋转角变化 ~0.22*0.033=0.007rad 几乎不可察）
+      // 航线/城市/轨道每帧都画（它们没有 6 个三角函数的重计算）
+      if (frameCount % 2 === 1 || !texOK) {
+        renderSphere(rotationRad);
+      }
       ctx.drawImage(off, cx - ballR, cy - ballR, ballR * 2, ballR * 2);
       drawShade();
 
