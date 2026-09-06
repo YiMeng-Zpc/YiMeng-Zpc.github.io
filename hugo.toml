@@ -79,10 +79,28 @@ disableGenerator = true
       pointer = '/images/cursor/cyber-cursor-pointer.svg'
       text = '/images/cursor/cyber-cursor-text.svg'
 
-  # 社交链接
+  # 社交链接（sidebar/footer 展示 + sameAs SEO 信号）
   [params.social]
     github = 'https://github.com/YiMeng-Zpc'
+    zhihu = 'https://www.zhihu.com/people/YiMeng'
+    juejin = 'https://juejin.cn/user/2662372227160282'
     # 邮箱改为图标按钮入口（避免明文地址暴露），见 sidebar.html / footer.html 内的 Contact 图标
+
+  # SEO 配置
+  # 站点验证 meta：用户去对应平台注册后拿到 content 值填入
+  # - 百度站长平台：https://ziyuan.baidu.com → 站点管理 → 添加站点 → HTML 标签验证
+  # - Google Search Console：https://search.google.com/search-console → 添加资源 → HTML 标签
+  # - Bing Webmaster：https://www.bing.com/webmasters → 添加站点 → HTML 标签
+  [params.seo]
+    baidu_verify = ''
+    google_verify = ''
+    bing_verify = ''
+
+  # Open Graph + Twitter Card（社交分享增强信号）
+  [params.open_graph]
+    enable = true
+    [params.open_graph.options]
+      twitter_card = 'summary_large_image'
 
   # 顶部导航栏（name 用于 i18n 翻译）
   [[params.nav]]

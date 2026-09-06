@@ -40,6 +40,8 @@ display_date: "2025年11月11日"
 ### 联系我
 
 - GitHub：[YiMeng-Zpc](https://github.com/YiMeng-Zpc)
+- 知乎：[张鹏超](https://www.zhihu.com/people/YiMeng)
+- 掘金：[张鹏超](https://juejin.cn/user/2662372227160282)
 - Email：Yi.Meng-@outlook.com
 
 > 走过的路、写过的码、拍过的照片——都是回忆留下的足迹。

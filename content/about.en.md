@@ -42,4 +42,6 @@ This is my window to the world. Code, notes, travel logs, and essays will all sl
 - GitHub: [YiMeng-Zpc](https://github.com/YiMeng-Zpc)
 - Email: Yi.Meng-@outlook.com
 
+> Social profiles with the same name help search engines associate this site with a single Person entity.
+
 > The roads walked, the code written, the photos taken — footprints left by memories.

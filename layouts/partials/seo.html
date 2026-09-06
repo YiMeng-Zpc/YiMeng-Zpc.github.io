@@ -1,0 +1,43 @@
+{{- /*
+  SEO 注入 partial（被 layouts/_default/baseof.html 在 head 末尾调用）
+  - Schema.org Person JSON-LD：让搜索引擎把博客和「张鹏超」这个 Person 实体绑定
+  - canonical link：中英双语站防重复内容稀释
+  - baidu/google/bing 站点验证 meta（hugo.toml params.seo 配置）
+*/ -}}
+{{- /* 注意：Hugo .Language.Lang 返回小写 "zh-cn"，不是 "zh-CN"；直接用小写比较 */ -}}
+{{- $lang := .Language.Lang -}}
+{{- $isZh := eq $lang "zh-cn" -}}
+{{- $name := .Site.Params.author -}}
+{{- $jobTitle := cond $isZh "开发者 / 记录者" "Developer / Writer" -}}
+{{- $description := cond $isZh "记录代码、旅行、摄影与一切在路上的人" "Documenting code, travel, photography, and everything on the road" -}}
+{{- $knowsAbout := cond $isZh
+    (slice "博客" "代码" "编程" "旅行" "摄影" "滑雪")
+    (slice "Blog" "Programming" "Travel" "Photography" "Skiing") -}}
+{{- $sameAs := slice
+    "https://github.com/YiMeng-Zpc"
+    "https://www.zhihu.com/people/YiMeng"
+    "https://juejin.cn/user/2662372227160282" -}}
+{{- $person := dict
+    "@context" "https://schema.org"
+    "@type" "Person"
+    "name" $name
+    "alternateName" (slice "Zhang Pengchao" "ZhangPengchao" "Pengchao Zhang")
+    "url" .Site.BaseURL
+    "image" (printf "%savatar/default.jpg" .Site.BaseURL)
+    "jobTitle" $jobTitle
+    "description" $description
+    "knowsAbout" $knowsAbout
+    "address" (dict "@type" "PostalAddress" "addressLocality" "北京" "addressCountry" "CN")
+    "birthDate" "2000-04-03"
+    "sameAs" $sameAs -}}
+<script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+{{- /* canonical + hreflang 由 Hugo 自动输出（多语言站点 built-in），这里不再重复 */ -}}
+{{- with .Site.Params.seo.baidu_verify }}
+<meta name="baidu-site-verification" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.seo.google_verify }}
+<meta name="google-site-verification" content="{{ . }}" />
+{{- end }}
+{{- with .Site.Params.seo.bing_verify }}
+<meta name="msvalidate.01" content="{{ . }}" />
+{{- end }}

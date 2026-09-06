@@ -1,0 +1,20 @@
+{{- /*
+  百度链接提交 — 自动推送 JS
+  - 用户每次访问页面，浏览器自动把当前 URL 推送给百度
+  - 不需要百度站长平台 API token，仅作为「被动」补充推送
+  - 主要收录仍靠 sitemap 提交（已在 robots.txt 声明）
+  - 注意：此 JS 仅在百度站长平台已验证站点所有权后才真正生效
+*/ -}}
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>

@@ -9,6 +9,8 @@
       {{- .Site.Params.injector.head_begin | safeHTML -}}
     {{- end -}}
     {{- partial "head.html" . -}}
+    {{- /* 2026-09-06: SEO 注入 — Schema.org Person JSON-LD + canonical + 站点验证 meta */ -}}
+    {{- partial "seo.html" . -}}
     {{- if .Site.Params.injector.head_end -}}
       {{- .Site.Params.injector.head_end | safeHTML -}}
     {{- end -}}
@@ -90,6 +92,8 @@
       </meting-js>
     {{- end -}}
     {{- partial "afterFooter.html" . -}}
+    {{- /* 2026-09-06: 百度链接提交 — 自动推送 JS（让百度更快收录） */ -}}
+    {{- partial "baidu-push.html" . -}}
     {{- if .Site.Params.injector.body_end -}}
       {{- .Site.Params.injector.body_end | safeHTML -}}
     {{- end -}}
