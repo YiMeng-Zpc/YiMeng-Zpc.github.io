@@ -40,6 +40,14 @@
   --neon-muted:    var(--steel);
   --neon-link:     var(--ocean-bright);
   --neon-link-hov: var(--amber);
+
+  /* 2026-09-06: 覆盖主题的 cursor 变量，加 hotspot 坐标。
+     不加 hotspot 时浏览器默认 (0,0)，32x32 SVG 的指针尖端在 (3,2)，
+     与系统光标重叠渲染 → 用户看到「鼠标 + ×」叠加。
+     加 hotspot 后浏览器只渲染 SVG，系统光标被隐藏。 */
+  --cursor-default: url(/images/cursor/cyber-cursor-default.svg) 3 2, auto;
+  --cursor-pointer: url(/images/cursor/cyber-cursor-pointer.svg) 6 4, pointer;
+  --cursor-text:    url(/images/cursor/cyber-cursor-text.svg) 16 16, text;
 }
 
 /* 暗色模式（默认就是暗色） */
