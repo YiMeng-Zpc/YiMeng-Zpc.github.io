@@ -26,6 +26,8 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   overflow: hidden;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: var(--cursor-pointer, pointer);  /* 2026-09-06: hero-cell 有 hover 抬起效果，
+                                                但光标仍为默认——视觉与光标不一致；改为 pointer */
 }
 
 .hero-cell:hover {
