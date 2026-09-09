@@ -1,8 +1,12 @@
 /* ============================================
-   瓦力机器人滚动指示器
+   瓦力机器人滚动指示器 v2 — 3D 转身版
    - 右侧固定轨道，瓦力机器人随滚动位置移动
    - 向下滚动：机器人朝下移动，身后留下碾压痕迹
-   - 向上滚动：机器人迅速转身（180° 翻转），然后向上移动，重复碾压回去
+   - 反方向滚动：三阶段时序
+       1) 停止移动（freeze 120ms）
+       2) 3D 转身（rotateY 180° 翻面，露出无眼的黄色后壳 + 小跳 + 扬尘）
+       3) 转身后朝新方向移动
+   - 行进中机器人朝行进方向倾斜（3D lean），像真的在开
    ============================================ */
 (function () {
   'use strict';
@@ -25,25 +29,25 @@
     var trailContainer = document.getElementById('walle-trail');
     if (!robot || !trailContainer) return;
 
-    var scrollHeight = 0;
-    var clientHeight = 0;
     var maxScroll = 1;
     var trackHeight = 0;
-    var currentY = 0;       // 机器人当前 Y 位置（相对 track）
+    var currentY = 0;        // 机器人当前 Y 位置（相对 track）
     var targetY = 0;         // 目标 Y 位置
     var lastScrollTop = 0;   // 上一次的 scrollTop
     var direction = 1;       // 1=向下, -1=向上
-    var rafId = null;
+    var facing = 1;          // 机器人当前朝向：1=朝下(面向观众默认), -1=朝上(已转身)
+    var turning = false;     // 转身进行中：暂停移动
+    var turnTimer = null;
 
     // 轨迹点：记录机器人经过的位置，用于绘制碾压痕迹
     var trailPoints = [];
     var maxTrailPoints = 50;
 
     function recalc() {
-      scrollHeight = document.documentElement.scrollHeight;
-      clientHeight = document.documentElement.clientHeight;
+      var scrollHeight = document.documentElement.scrollHeight;
+      var clientHeight = document.documentElement.clientHeight;
       maxScroll = Math.max(1, scrollHeight - clientHeight);
-      trackHeight = track.clientHeight - 40; // 减去机器人高度（约40px）让它能到顶部
+      trackHeight = Math.max(1, track.clientHeight - 40);
     }
 
     function getScrollPercent() {
@@ -52,8 +56,7 @@
     }
 
     function updateTarget() {
-      var p = getScrollPercent();
-      targetY = p * trackHeight;
+      targetY = getScrollPercent() * trackHeight;
 
       var st = window.pageYOffset || document.documentElement.scrollTop;
       var delta = st - lastScrollTop;
@@ -61,60 +64,96 @@
 
       if (Math.abs(delta) > 2) {
         var newDir = delta > 0 ? 1 : -1;
-        if (newDir !== direction) {
-          // 方向变了 → 机器人转身
+        if (newDir !== direction && !turning) {
+          // 方向变了 → 三阶段转身
           direction = newDir;
-          robot.classList.add('walle-turn');
-          setTimeout(function () {
-            robot.classList.remove('walle-turn');
-          }, 350);
+          startTurn();
         }
       }
     }
 
-    function animate() {
-      // 平滑插值：机器人从 currentY 向 targetY 靠近
-      var diff = targetY - currentY;
-      if (Math.abs(diff) > 0.5) {
-        currentY += diff * 0.18; // 缓动系数
-      } else {
-        currentY = targetY;
-      }
+    /* ---------- 3D 转身（三阶段） ---------- */
+    function startTurn() {
+      turning = true;
 
-      robot.style.transform = 'translateY(' + currentY.toFixed(1) + 'px)';
+      // 阶段1：先停一下（惯性感知），同时刹车扬尘
+      robot.classList.add('walle-brake');
+      spawnDust();
+      clearTimeout(turnTimer);
+      turnTimer = setTimeout(function () {
+        // 阶段2：3D 翻面转身
+        robot.classList.remove('walle-brake');
+        robot.classList.add('walle-turn');
+        spawnDust();
+        // 阶段3：转身完成后解锁移动
+        setTimeout(function () {
+          robot.classList.remove('walle-turn');
+          turning = false;
+        }, 520);
+      }, 130);
+    }
+
+    function spawnDust() {
+      // 转身扬尘：2~3 个尘土点，用 trail canvas 上层的小 div
+      for (var i = 0; i < 3; i++) {
+        (function (idx) {
+          var d = document.createElement('div');
+          d.className = 'walle-dust';
+          d.style.setProperty('--dx', (Math.random() * 18 - 9) + 'px');
+          d.style.animationDelay = (idx * 40) + 'ms';
+          robot.appendChild(d);
+          setTimeout(function () {
+            if (d.parentNode) d.parentNode.removeChild(d);
+          }, 700 + idx * 40);
+        })(i);
+      }
+    }
+
+    /* ---------- 主动画循环 ---------- */
+    function animate() {
+      if (!turning) {
+        // 平滑插值：机器人从 currentY 向 targetY 靠近
+        var diff = targetY - currentY;
+        if (Math.abs(diff) > 0.5) {
+          currentY += diff * 0.16;
+        } else {
+          currentY = targetY;
+        }
+      }
+      // 转身中保持原位（不更新 currentY），但 transform 仍要刷新
+
+      // 行进倾斜：向行进方向倾斜 8°（3D 感），停下时回正
+      // 位移写入独立的 translate Property（CSS 属性 `translate`），与 hop/转身动画互不冲突
+      var moving = Math.abs(targetY - currentY) > 2 && !turning;
+      var lean = moving ? (direction === 1 ? 8 : -8) : 0;
+
+      robot.style.translate = '0px ' + currentY.toFixed(1) + 'px';
+      robot.style.transform = lean ? 'rotateZ(' + lean + 'deg)' : '';
 
       // 在路径上添加碾压痕迹
-      if (Math.abs(diff) > 1) {
+      if (moving && Math.abs(targetY - currentY) > 1) {
         addTrailPoint(currentY + 20); // 机器人底部位置
       }
 
-      // 更新轨迹渲染
       renderTrail();
-
-      rafId = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     }
 
     function addTrailPoint(y) {
-      var time = Date.now();
-      trailPoints.push({ y: y, time: time });
+      trailPoints.push({ y: y, time: Date.now() });
       if (trailPoints.length > maxTrailPoints) {
         trailPoints.shift();
       }
     }
 
     function renderTrail() {
-      // 用 DOM 元素绘制碾压痕迹（履带印）
-      // 简化方案：每隔一段距离生成一个小横条
       var now = Date.now();
-      // 清理过期痕迹（超过 3 秒的）
       trailPoints = trailPoints.filter(function (p) {
         return now - p.time < 3000;
       });
 
-      // 高效渲染：用 Canvas 代替多个 DOM 元素
       var canvas = trailContainer;
       if (canvas.tagName !== 'CANVAS') return;
-
       var ctx = canvas.getContext('2d');
       if (!ctx) return;
 
@@ -122,10 +161,9 @@
       var h = canvas.height;
       ctx.clearRect(0, 0, w, h);
 
-      // 绘制碾压痕迹（履带印）
       for (var i = 0; i < trailPoints.length; i++) {
         var p = trailPoints[i];
-        var age = (now - p.time) / 3000; // 0~1
+        var age = (now - p.time) / 3000;
         var alpha = (1 - age) * 0.35;
         var size = (1 - age) * 3 + 1;
 
@@ -155,7 +193,7 @@
     lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     updateTarget();
     currentY = targetY;
-    robot.style.transform = 'translateY(' + currentY + 'px)';
+    robot.style.translate = '0px ' + currentY.toFixed(1) + 'px';
 
     // 监听滚动（throttle 到 rAF）
     var scrollPending = false;
@@ -180,7 +218,6 @@
       }, 200);
     });
 
-    // 启动动画循环
     animate();
   }
 
