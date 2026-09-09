@@ -39,6 +39,7 @@
     // 轨迹点：记录机器人经过的位置，用于绘制碾压痕迹
     var trailPoints = [];
     var maxTrailPoints = 50;
+    var lastTrailY = -999;   // 上次记录轨迹的位置（避免每帧重复记录）
 
     function recalc() {
       var scrollHeight = document.documentElement.scrollHeight;
@@ -78,27 +79,25 @@
       robot.classList.toggle('walle-turned', direction === -1);
     }
 
-    /* ---------- 3D 转身（三阶段） ---------- */
+    /* ---------- 3D 转身（三阶段，时序压缩） ---------- */
     function startTurn() {
       turning = true;
 
-      // 阶段1：先停一下（惯性感知），同时刹车扬尘
+      // 阶段1：刹车（80ms，从 130 缩短减少卡顿感）
       robot.classList.add('walle-brake');
       spawnDust();
       clearTimeout(turnTimer);
       turnTimer = setTimeout(function () {
-        // 阶段2：3D 翻面 + 小跳 + 扬尘
-        // 注意：朝向切换已由 applyFacing 通过 .walle-facing-down 持久完成，
-        // 这里只触发一次性的小跳动画（walle-hopping）
+        // 阶段2：3D 翻面 + 小跳 + 扬尘（400ms，从 520 缩短）
         robot.classList.remove('walle-brake');
         robot.classList.add('walle-hopping');
         spawnDust();
-        // 阶段3：转身完成后解锁移动（朝向 class 保持，不撤销）
+        // 阶段3：转身完成后解锁方向判断（位置始终在跟手）
         setTimeout(function () {
           robot.classList.remove('walle-hopping');
           turning = false;
-        }, 520);
-      }, 130);
+        }, 400);
+      }, 80);
     }
 
     function spawnDust() {
@@ -119,28 +118,27 @@
 
     /* ---------- 主动画循环 ---------- */
     function animate() {
-      if (!turning) {
-        // 平滑插值：机器人从 currentY 向 targetY 靠近
-        var diff = targetY - currentY;
-        if (Math.abs(diff) > 0.5) {
-          currentY += diff * 0.16;
-        } else {
-          currentY = targetY;
-        }
+      // 位置始终跟手：即使转身中也不冻结位移，只是方向判断被锁
+      var diff = targetY - currentY;
+      if (Math.abs(diff) > 0.3) {
+        // 缓动系数 0.45：约 2 帧到位，跟手但不生硬
+        currentY += diff * 0.45;
+      } else {
+        currentY = targetY;
       }
-      // 转身中保持原位（不更新 currentY），但 transform 仍要刷新
 
       // 行进倾斜：向行进方向倾斜 8°（3D 感），停下时回正
       // 位移写入独立的 translate Property（CSS 属性 `translate`），与 hop/转身动画互不冲突
-      var moving = Math.abs(targetY - currentY) > 2 && !turning;
+      var moving = Math.abs(diff) > 2;
       var lean = moving ? (direction === 1 ? 8 : -8) : 0;
 
       robot.style.translate = '0px ' + currentY.toFixed(1) + 'px';
       robot.style.transform = lean ? 'rotateZ(' + lean + 'deg)' : '';
 
-      // 在路径上添加碾压痕迹
-      if (moving && Math.abs(targetY - currentY) > 1) {
-        addTrailPoint(currentY + 24); // 机器人中部位置（履带中心）
+      // 在路径上添加碾压痕迹（只在位置变化超过 3px 时记录，减少冗余）
+      if (moving && Math.abs(diff) > 1 && Math.abs(currentY - lastTrailY) > 3) {
+        lastTrailY = currentY;
+        addTrailPoint(currentY + 24);
       }
 
       renderTrail();

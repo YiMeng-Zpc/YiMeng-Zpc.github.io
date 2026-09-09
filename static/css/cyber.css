@@ -688,7 +688,7 @@ img[alt="about-avatar"]:hover {
   width: 36px;
   height: 48px;
   transform-style: preserve-3d;
-  transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+  transition: transform 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
   transform-origin: center center;
   /* 默认朝向：正面（眼睛朝观众）——往下滚的默认状态 */
   transform: rotateY(0deg);
@@ -721,7 +721,7 @@ img[alt="about-avatar"]:hover {
    注意：位移用独立的 translate 属性（JS 写入），hop 用 transform，
    两者独立叠加互不覆盖 */
 #walle-robot.walle-hopping {
-  animation: walle-hop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+  animation: walle-hop 0.35s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 @keyframes walle-hop {
   0%   { transform: translateY(0); }
