@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+  <defs>
+    <linearGradient id="walle-body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="0.5" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="walle-eye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 履带（底部） -->
+  <rect x="3" y="30" width="26" height="8" rx="4" fill="#374151" stroke="#1f2937" stroke-width="1"/>
+  <!-- 履带轮 -->
+  <circle cx="8" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
+  <circle cx="16" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
+  <circle cx="24" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
+  <!-- 履带纹理线 -->
+  <line x1="5" y1="31" x2="27" y2="31" stroke="#4b5563" stroke-width="0.5"/>
+  <line x1="5" y1="37" x2="27" y2="37" stroke="#4b5563" stroke-width="0.5"/>
+
+  <!-- 身体（方块） -->
+  <rect x="5" y="14" width="22" height="16" rx="2" fill="url(#walle-body)" stroke="#b45309" stroke-width="0.8"/>
+  <!-- 身体细节线 -->
+  <line x1="16" y1="14" x2="16" y2="30" stroke="#b45309" stroke-width="0.4" opacity="0.5"/>
+  <!-- 胸前面板 -->
+  <rect x="8" y="18" width="5" height="4" rx="0.5" fill="#1f2937" opacity="0.7"/>
+  <rect x="15" y="18" width="5" height="4" rx="0.5" fill="#1f2937" opacity="0.7"/>
+  <!-- 螺丝钉 -->
+  <circle cx="7" cy="16" r="0.8" fill="#92400e"/>
+  <circle cx="25" cy="16" r="0.8" fill="#92400e"/>
+  <circle cx="7" cy="28" r="0.8" fill="#92400e"/>
+  <circle cx="25" cy="28" r="0.8" fill="#92400e"/>
+
+  <!-- 脖子 -->
+  <rect x="13" y="10" width="6" height="5" fill="#92400e" stroke="#78350f" stroke-width="0.5"/>
+
+  <!-- 头（梯形） -->
+  <path d="M7,2 L25,2 L23,10 L9,10 Z" fill="url(#walle-body)" stroke="#b45309" stroke-width="0.8"/>
+
+  <!-- 眼睛（大圆形 binocular 风格） -->
+  <circle cx="12" cy="6" r="3.5" fill="#1f2937" stroke="#b45309" stroke-width="0.6"/>
+  <circle cx="20" cy="6" r="3.5" fill="#1f2937" stroke="#b45309" stroke-width="0.6"/>
+  <!-- 眼睛高光 -->
+  <circle cx="12" cy="6" r="2.2" fill="url(#walle-eye)"/>
+  <circle cx="20" cy="6" r="2.2" fill="url(#walle-eye)"/>
+  <!-- 瞳孔 -->
+  <circle cx="13" cy="6.5" r="1" fill="#0a0e1a"/>
+  <circle cx="21" cy="6.5" r="1" fill="#0a0e1a"/>
+  <circle cx="13.3" cy="6" r="0.4" fill="#fff"/>
+  <circle cx="21.3" cy="6" r="0.4" fill="#fff"/>
+</svg>

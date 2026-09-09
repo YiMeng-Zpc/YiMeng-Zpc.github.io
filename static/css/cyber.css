@@ -381,6 +381,26 @@ a:hover {
   text-shadow: 0 0 8px rgba(245, 158, 11, 0.55);
 }
 
+/* 2026-09-09: 修复导航栏光标异常
+   问题：移到导航栏时光标变样——#header-nav 容器本身未设 cursor，
+   .main-nav-link / .main-nav-icon 是 span/div，虽在 <a> 内部但
+   某些浏览器不会继承父级 cursor，导致显示系统默认箭头而非自定义 pointer。
+   方案：对 #header-nav 内所有交互元素显式声明 cursor。 */
+#header-nav,
+#header-nav * {
+  cursor: var(--cursor-default);
+}
+#header-nav a,
+#header-nav .main-nav-link-wrap,
+#header-nav .main-nav-link,
+#header-nav .main-nav-icon,
+#header-nav .nav-icon,
+#header-nav .select-selected,
+#header-nav .select-items li,
+#header-nav .triangle-badge {
+  cursor: var(--cursor-pointer) !important;
+}
+
 /* 导航按钮 */
 .main-nav-link-wrap,
 .sidebar-menu-link-wrap {
@@ -599,4 +619,88 @@ img[alt="about-avatar"]:hover {
   body::before, .star, #header-title h1, #subtitle-wrap #subtitle {
     animation: none !important;
   }
+  #walle-track { display: none !important; }
+}
+
+/* ============================================
+   瓦力机器人滚动指示器
+   - 右侧固定轨道（3px 宽，蓝橙渐变线）
+   - 瓦力机器人 SVG 跟随滚动位置移动
+   - 向下滚动：机器人朝下，留下碾压痕迹
+   - 向上滚动：机器人转身（scaleY 翻转），向上移动
+   ============================================ */
+
+#walle-track {
+  position: fixed;
+  right: 6px;
+  top: 0;
+  width: 48px;
+  height: 100vh;
+  z-index: 998;
+  pointer-events: none;
+}
+
+/* 轨道线（右侧细线，替代浏览器滚动条视觉） */
+#walle-track::before {
+  content: '';
+  position: absolute;
+  right: 22px;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: linear-gradient(180deg,
+    rgba(14, 165, 233, 0.15) 0%,
+    rgba(56, 189, 248, 0.30) 30%,
+    rgba(245, 158, 11, 0.30) 70%,
+    rgba(245, 158, 11, 0.15) 100%);
+  border-radius: 2px;
+}
+
+/* 碾压痕迹 Canvas（占满整个 track 宽，坐标与 track 一致） */
+#walle-trail {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 48px;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* 瓦力机器人容器（中心对齐轨道线：track 中心 x=24px） */
+#walle-robot {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  width: 32px;
+  height: 40px;
+  will-change: transform;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+/* 机器人朝下（默认） */
+#walle-robot .walle-svg {
+  width: 32px;
+  height: 40px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center center;
+}
+
+/* 方向切换时：机器人转身（180° 翻转） */
+#walle-robot.walle-turn .walle-svg {
+  transform: scaleY(-1);
+}
+
+/* 机器人移动时的轻微抖动效果（模拟行走） */
+#walle-robot:not(.walle-turn) {
+  animation: walle-walk 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes walle-walk {
+  0%   { filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4)); }
+  100% { filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.5)); }
+}
+
+/* 移动端隐藏 */
+@media (max-width: 768px) {
+  #walle-track { display: none !important; }
 }

@@ -94,6 +94,14 @@
     {{- partial "afterFooter.html" . -}}
     {{- /* 2026-09-06: 百度链接提交 — 自动推送 JS（让百度更快收录） */ -}}
     {{- partial "baidu-push.html" . -}}
+    {{- /* 2026-09-09: 瓦力机器人滚动指示器 — 右侧轨道 + 碾压痕迹 */ -}}
+    <div id="walle-track" aria-hidden="true">
+      <canvas id="walle-trail"></canvas>
+      <div id="walle-robot">
+        <img class="walle-svg" src="{{ "images/walle.svg" | relURL }}" alt="" width="32" height="40" />
+      </div>
+    </div>
+    <script src="{{ "js/walle-scroll.js" | relURL }}" defer></script>
     {{- if .Site.Params.injector.body_end -}}
       {{- .Site.Params.injector.body_end | safeHTML -}}
     {{- end -}}

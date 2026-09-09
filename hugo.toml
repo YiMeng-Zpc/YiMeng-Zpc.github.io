@@ -205,9 +205,11 @@ disableGenerator = true
 [params.injector]
   body_begin = '<a class="skip-link" href="#content">跳到主内容</a>'
 
-# Mouse-firework 缩小范围：保留主题默认开关，但在 nav / header / footer / 卡片等
-# 关键交互区不触发烟花，避免破坏导航/卡片点击的视觉反馈
+# Mouse-firework：缩小爆炸范围和颗粒大小
+# particles: 自定义粒子（圆形），radius [5,10] 比默认 [16,32] 更小，
+# emitRadius [30,80] 比默认 [50,180] 爆炸范围更小，number 14 比默认约 30 更少
+# TOML 内联表支持嵌套内联表 + 数组，jsonify 后由 firework() 直接消费
 [params.firework]
   enable = true
   disable_on_mobile = false
-  options = { excludeelements = ['a', 'button', '#header', '#main-nav', '#sub-nav', '#i18n-nav', '#header-nav', '#footer', '.sidebar', '.skip-link', 'aside'] }
+  options = { excludeelements = ['a', 'button', '#header', '#main-nav', '#sub-nav', '#i18n-nav', '#header-nav', '#footer', '.sidebar', '.skip-link', 'aside'], particles = [{ shape = 'circle', move = 'emit', easing = 'easeOutExpo', colors = ['rgba(56,189,248,.85)', 'rgba(245,158,11,.85)', 'rgba(167,139,250,.85)'], number = 14, duration = [700, 1100], shapeOptions = { radius = [5, 10] }, moveOptions = { emitRadius = [30, 80] } }] }
