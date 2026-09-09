@@ -34,8 +34,7 @@
     var currentY = 0;        // 机器人当前 Y 位置（相对 track）
     var targetY = 0;         // 目标 Y 位置
     var lastScrollTop = 0;   // 上一次的 scrollTop
-    var direction = 1;       // 1=向下, -1=向上
-    var facing = 1;          // 机器人当前朝向：1=朝下(面向观众默认), -1=朝上(已转身)
+    var direction = 0;       // 初始未定；之后 1=向下, -1=向上
     var turning = false;     // 转身进行中：暂停移动
     var turnTimer = null;
 
@@ -67,9 +66,18 @@
         if (newDir !== direction && !turning) {
           // 方向变了 → 三阶段转身
           direction = newDir;
+          applyFacing();
           startTurn();
         }
       }
+    }
+
+    /* 持久化朝向：
+       - direction = 1（向下滚）→ 背面朝外（walle-facing-down）
+       - direction = -1（向上滚）→ 正面朝外（移除 walle-facing-down）
+       翻转后 class 保留，机器人保持新朝向，不再自动转回 */
+    function applyFacing() {
+      robot.classList.toggle('walle-facing-down', direction === 1);
     }
 
     /* ---------- 3D 转身（三阶段） ---------- */
@@ -81,13 +89,15 @@
       spawnDust();
       clearTimeout(turnTimer);
       turnTimer = setTimeout(function () {
-        // 阶段2：3D 翻面转身
+        // 阶段2：3D 翻面 + 小跳 + 扬尘
+        // 注意：朝向切换已由 applyFacing 通过 .walle-facing-down 持久完成，
+        // 这里只触发一次性的小跳动画（walle-hopping）
         robot.classList.remove('walle-brake');
-        robot.classList.add('walle-turn');
+        robot.classList.add('walle-hopping');
         spawnDust();
-        // 阶段3：转身完成后解锁移动
+        // 阶段3：转身完成后解锁移动（朝向 class 保持，不撤销）
         setTimeout(function () {
-          robot.classList.remove('walle-turn');
+          robot.classList.remove('walle-hopping');
           turning = false;
         }, 520);
       }, 130);

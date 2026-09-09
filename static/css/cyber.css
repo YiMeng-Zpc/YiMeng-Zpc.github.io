@@ -455,13 +455,14 @@ a:hover {
   font-weight: 700;
 }
 
-/* 滚动条 — 蓝橙渐变 */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--sky-mid); }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--ocean), var(--amber));
-  border-radius: 4px;
+/* 原生滚动条隐藏 —— 瓦力机器人已接管位置指示，浏览器滚动条不再需要 */
+html {
+  scrollbar-width: none;            /* Firefox 隐藏滚动条 */
+  -ms-overflow-style: none;         /* 旧 Edge/IE 隐藏滚动条 */
 }
+::-webkit-scrollbar { width: 0; height: 0; }
+::-webkit-scrollbar-track { display: none; }
+::-webkit-scrollbar-thumb { display: none; }
 
 /* ============================================
    首页文章卡片网格
@@ -623,11 +624,12 @@ img[alt="about-avatar"]:hover {
 }
 
 /* ============================================
-   瓦力机器人滚动指示器
-   - 右侧固定轨道（3px 宽，蓝橙渐变线）
-   - 瓦力机器人 SVG 跟随滚动位置移动
-   - 向下滚动：机器人朝下，留下碾压痕迹
-   - 向上滚动：机器人转身（scaleY 翻转），向上移动
+   瓦力机器人滚动指示器 v3 — 转向持久化
+   - 右侧固定轨道，瓦力机器人随滚动位置移动
+   - 往上翻（向上滚）：正面朝外，正着走
+   - 往下翻（向下滚）：背面朝外，反着走
+   - 翻转状态由 JS 持久写入 .walle-flip 的 transform，
+     转身动画播完后保持新朝向，不再自动转回
    ============================================ */
 
 #walle-track {
@@ -688,6 +690,8 @@ img[alt="about-avatar"]:hover {
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
   transform-origin: center center;
+  /* 默认朝向：正面（眼睛朝观众）——往上滚的默认状态 */
+  transform: rotateY(0deg);
 }
 
 /* 正面（眼睛朝观众）/ 背面（黄色后壳 + 天线条） */
@@ -705,16 +709,18 @@ img[alt="about-avatar"]:hover {
   transform: rotateY(180deg);
 }
 
-/* 转身：翻面舞台绕 Y 轴转 180°，背面转到前面 */
-#walle-robot.walle-turn .walle-flip {
+/* 朝下走（向下滚）：背面朝外，反着走 → 舞台转 180°
+   注意：这是持久状态，翻转完成后保持，不自动转回；
+   由 JS 在方向变化时切换 transform，transition 负责动画 */
+#walle-robot.walle-facing-down .walle-flip {
   transform: rotateY(180deg);
 }
 
 /* 转身瞬间小跳（机器人转身时轻轻跳一下，更生动）
    注意：位移用独立的 translate 属性（JS 写入），hop 用 transform，
    两者独立叠加互不覆盖 */
-#walle-robot.walle-turn {
-  animation: walle-hop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+#walle-robot.walle-hopping {
+  animation: walle-hop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 @keyframes walle-hop {
   0%   { transform: translateY(0); }
