@@ -1,54 +1,102 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40">
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="48" viewBox="0 0 36 48">
   <defs>
-    <linearGradient id="walle-body" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fbbf24"/>
-      <stop offset="0.5" stop-color="#f59e0b"/>
-      <stop offset="1" stop-color="#d97706"/>
+    <!-- 身体渐变（加高光，更立体） -->
+    <linearGradient id="wBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#fde68a"/>
+      <stop offset="0.35" stop-color="#fbbf24"/>
+      <stop offset="0.7"  stop-color="#f59e0b"/>
+      <stop offset="1"   stop-color="#b45309"/>
     </linearGradient>
-    <linearGradient id="walle-eye" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#e0f2fe"/>
-      <stop offset="1" stop-color="#38bdf8"/>
+    <!-- 侧面高光（模拟圆柱体反光） -->
+    <linearGradient id="wBodyShine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.12" stop-color="#fff" stop-opacity="0.35"/>
+      <stop offset="0.3"  stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#000" stop-opacity="0"/>
+      <stop offset="0.88" stop-color="#000" stop-opacity="0.18"/>
+      <stop offset="1"    stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <!-- 眼睛 -->
+    <radialGradient id="wEye" cx="0.4" cy="0.35">
+      <stop offset="0"   stop-color="#f0f9ff"/>
+      <stop offset="0.5" stop-color="#7dd3fc"/>
+      <stop offset="1"   stop-color="#0369a1"/>
+    </radialGradient>
+    <!-- 履带 -->
+    <linearGradient id="wTread" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#4b5563"/>
+      <stop offset="0.5" stop-color="#1f2937"/>
+      <stop offset="1"   stop-color="#374151"/>
     </linearGradient>
   </defs>
 
-  <!-- 履带（底部） -->
-  <rect x="3" y="30" width="26" height="8" rx="4" fill="#374151" stroke="#1f2937" stroke-width="1"/>
-  <!-- 履带轮 -->
-  <circle cx="8" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
-  <circle cx="16" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
-  <circle cx="24" cy="34" r="3" fill="#6b7280" stroke="#374151" stroke-width="0.5"/>
-  <!-- 履带纹理线 -->
-  <line x1="5" y1="31" x2="27" y2="31" stroke="#4b5563" stroke-width="0.5"/>
-  <line x1="5" y1="37" x2="27" y2="37" stroke="#4b5563" stroke-width="0.5"/>
+  <!-- ============ 地面投影（椭圆） ============ -->
+  <ellipse cx="18" cy="46" rx="13" ry="2.2" fill="#000" opacity="0.25"/>
 
-  <!-- 身体（方块） -->
-  <rect x="5" y="14" width="22" height="16" rx="2" fill="url(#walle-body)" stroke="#b45309" stroke-width="0.8"/>
-  <!-- 身体细节线 -->
-  <line x1="16" y1="14" x2="16" y2="30" stroke="#b45309" stroke-width="0.4" opacity="0.5"/>
-  <!-- 胸前面板 -->
-  <rect x="8" y="18" width="5" height="4" rx="0.5" fill="#1f2937" opacity="0.7"/>
-  <rect x="15" y="18" width="5" height="4" rx="0.5" fill="#1f2937" opacity="0.7"/>
-  <!-- 螺丝钉 -->
-  <circle cx="7" cy="16" r="0.8" fill="#92400e"/>
-  <circle cx="25" cy="16" r="0.8" fill="#92400e"/>
-  <circle cx="7" cy="28" r="0.8" fill="#92400e"/>
-  <circle cx="25" cy="28" r="0.8" fill="#92400e"/>
+  <!-- ============ 履带（底部） ============ -->
+  <!-- 履带主体 -->
+  <rect x="2" y="36" width="32" height="10" rx="5" fill="url(#wTread)" stroke="#111827" stroke-width="0.8"/>
+  <!-- 履带轮（3 个大轮 + 齿） -->
+  <circle cx="8"  cy="41" r="3.5" fill="#6b7280" stroke="#1f2937" stroke-width="0.6"/>
+  <circle cx="8"  cy="41" r="1.8" fill="#374151" stroke="#6b7280" stroke-width="0.3"/>
+  <circle cx="8"  cy="41" r="0.6" fill="#9ca3af"/>
+  <circle cx="18" cy="41" r="3.5" fill="#6b7280" stroke="#1f2937" stroke-width="0.6"/>
+  <circle cx="18" cy="41" r="1.8" fill="#374151" stroke="#6b7280" stroke-width="0.3"/>
+  <circle cx="18" cy="41" r="0.6" fill="#9ca3af"/>
+  <circle cx="28" cy="41" r="3.5" fill="#6b7280" stroke="#1f2937" stroke-width="0.6"/>
+  <circle cx="28" cy="41" r="1.8" fill="#374151" stroke="#6b7280" stroke-width="0.3"/>
+  <circle cx="28" cy="41" r="0.6" fill="#9ca3af"/>
+  <!-- 履带纹理线（上下边） -->
+  <line x1="4" y1="37" x2="32" y2="37" stroke="#52525b" stroke-width="0.4"/>
+  <line x1="4" y1="45" x2="32" y2="45" stroke="#52525b" stroke-width="0.4"/>
 
-  <!-- 脖子 -->
-  <rect x="13" y="10" width="6" height="5" fill="#92400e" stroke="#78350f" stroke-width="0.5"/>
+  <!-- ============ 身体（方块，更立体） ============ -->
+  <rect x="4" y="16" width="28" height="20" rx="2.5" fill="url(#wBody)" stroke="#92400e" stroke-width="0.9"/>
+  <!-- 侧面高光叠层 -->
+  <rect x="4" y="16" width="28" height="20" rx="2.5" fill="url(#wBodyShine)"/>
+  <!-- 身体中线 -->
+  <line x1="18" y1="16" x2="18" y2="36" stroke="#92400e" stroke-width="0.4" opacity="0.4"/>
+  <!-- 胸前面板（两个小屏幕） -->
+  <rect x="7"  y="20" width="6.5" height="5" rx="1" fill="#111827" stroke="#92400e" stroke-width="0.3"/>
+  <rect x="7.5" y="20.8" width="5.5" height="3.5" rx="0.5" fill="#0c4a6e" opacity="0.8"/>
+  <rect x="8"   y="21.2" width="1.5" height="2.5" rx="0.3" fill="#38bdf8" opacity="0.5"/>
+  <rect x="15" y="20" width="6.5" height="5" rx="1" fill="#111827" stroke="#92400e" stroke-width="0.3"/>
+  <rect x="15.5" y="20.8" width="5.5" height="3.5" rx="0.5" fill="#7c2d12" opacity="0.6"/>
+  <rect x="16"  y="21.2" width="1.5" height="2.5" rx="0.3" fill="#fbbf24" opacity="0.5"/>
+  <!-- 胸前警示灯 -->
+  <circle cx="25" cy="23" r="1.2" fill="#dc2626" stroke="#7f1d1d" stroke-width="0.3"/>
+  <circle cx="25" cy="23" r="0.6" fill="#fca5a5" opacity="0.8"/>
+  <!-- 螺丝钉（4 角） -->
+  <circle cx="6"  cy="18" r="0.9" fill="#92400e" stroke="#78350f" stroke-width="0.3"/>
+  <circle cx="6"  cy="18" r="0.3" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="30" cy="18" r="0.9" fill="#92400e" stroke="#78350f" stroke-width="0.3"/>
+  <circle cx="30" cy="18" r="0.3" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="6"  cy="34" r="0.9" fill="#92400e" stroke="#78350f" stroke-width="0.3"/>
+  <circle cx="30" cy="34" r="0.9" fill="#92400e" stroke="#78350f" stroke-width="0.3"/>
 
-  <!-- 头（梯形） -->
-  <path d="M7,2 L25,2 L23,10 L9,10 Z" fill="url(#walle-body)" stroke="#b45309" stroke-width="0.8"/>
+  <!-- ============ 脖子 ============ -->
+  <rect x="14" y="11" width="8" height="6" fill="#92400e" stroke="#78350f" stroke-width="0.5"/>
+  <line x1="16" y1="11" x2="16" y2="17" stroke="#78350f" stroke-width="0.3" opacity="0.5"/>
+  <line x1="20" y1="11" x2="20" y2="17" stroke="#78350f" stroke-width="0.3" opacity="0.5"/>
 
-  <!-- 眼睛（大圆形 binocular 风格） -->
-  <circle cx="12" cy="6" r="3.5" fill="#1f2937" stroke="#b45309" stroke-width="0.6"/>
-  <circle cx="20" cy="6" r="3.5" fill="#1f2937" stroke="#b45309" stroke-width="0.6"/>
-  <!-- 眼睛高光 -->
-  <circle cx="12" cy="6" r="2.2" fill="url(#walle-eye)"/>
-  <circle cx="20" cy="6" r="2.2" fill="url(#walle-eye)"/>
-  <!-- 瞳孔 -->
-  <circle cx="13" cy="6.5" r="1" fill="#0a0e1a"/>
-  <circle cx="21" cy="6.5" r="1" fill="#0a0e1a"/>
-  <circle cx="13.3" cy="6" r="0.4" fill="#fff"/>
-  <circle cx="21.3" cy="6" r="0.4" fill="#fff"/>
+  <!-- ============ 头（梯形） ============ -->
+  <path d="M6,2 L30,2 L27,11 L9,11 Z" fill="url(#wBody)" stroke="#92400e" stroke-width="0.9"/>
+  <path d="M6,2 L30,2 L27,11 L9,11 Z" fill="url(#wBodyShine)"/>
+
+  <!-- ============ 眼睛（双筒望远镜风格，更大更亮） ============ -->
+  <!-- 眼框外圈 -->
+  <circle cx="13" cy="6.5" r="4" fill="#1f2937" stroke="#92400e" stroke-width="0.7"/>
+  <circle cx="23" cy="6.5" r="4" fill="#1f2937" stroke="#92400e" stroke-width="0.7"/>
+  <!-- 眼球 -->
+  <circle cx="13" cy="6.5" r="2.6" fill="url(#wEye)"/>
+  <circle cx="23" cy="6.5" r="2.6" fill="url(#wEye)"/>
+  <!-- 瞳孔（朝下，在看路） -->
+  <ellipse cx="13" cy="7.5" rx="1.1" ry="1.3" fill="#0a0e1a"/>
+  <ellipse cx="23" cy="7.5" rx="1.1" ry="1.3" fill="#0a0e1a"/>
+  <!-- 瞳孔高光 -->
+  <circle cx="13.5" cy="6.8" r="0.5" fill="#fff"/>
+  <circle cx="23.5" cy="6.8" r="0.5" fill="#fff"/>
+  <!-- 眼睛玻璃罩反光（弧形） -->
+  <path d="M10.8,5 Q13,3.5 15.2,5" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.4" stroke-linecap="round"/>
+  <path d="M20.8,5 Q23,3.5 25.2,5" fill="none" stroke="#fff" stroke-width="0.5" opacity="0.4" stroke-linecap="round"/>
 </svg>

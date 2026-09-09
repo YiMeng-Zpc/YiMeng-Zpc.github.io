@@ -1,11 +1,9 @@
 /* ============================================
-   瓦力机器人滚动指示器 v2 — 3D 转身版
+   瓦力机器人滚动指示器 v4 — 方向修正 + 真实感
    - 右侧固定轨道，瓦力机器人随滚动位置移动
-   - 向下滚动：机器人朝下移动，身后留下碾压痕迹
-   - 反方向滚动：三阶段时序
-       1) 停止移动（freeze 120ms）
-       2) 3D 转身（rotateY 180° 翻面，露出无眼的黄色后壳 + 小跳 + 扬尘）
-       3) 转身后朝新方向移动
+   - 向下滚动：正面朝外，正着走，留下碾压痕迹
+   - 向上滚动：刹车 → 3D 转身（背面朝外）→ 倒着走回去
+   - 三阶段转身：停 130ms → 翻面+小跳+扬尘 520ms → 继续
    - 行进中机器人朝行进方向倾斜（3D lean），像真的在开
    ============================================ */
 (function () {
@@ -46,7 +44,7 @@
       var scrollHeight = document.documentElement.scrollHeight;
       var clientHeight = document.documentElement.clientHeight;
       maxScroll = Math.max(1, scrollHeight - clientHeight);
-      trackHeight = Math.max(1, track.clientHeight - 40);
+      trackHeight = Math.max(1, track.clientHeight - 48);
     }
 
     function getScrollPercent() {
@@ -72,12 +70,12 @@
       }
     }
 
-    /* 持久化朝向：
-       - direction = 1（向下滚）→ 背面朝外（walle-facing-down）
-       - direction = -1（向上滚）→ 正面朝外（移除 walle-facing-down）
-       翻转后 class 保留，机器人保持新朝向，不再自动转回 */
+    /* 持久化朝向（方向修正 v2）：
+       - 往下滚（direction = 1，翻页前进）→ 正面朝外，正着走 → 移除 walle-turned
+       - 往上滚（direction = -1，往回翻）→ 转身背面朝外，倒着走回去 → 加 walle-turned
+       翻转后 class 保留，机器人保持新朝向，直到下次方向变化才切换 */
     function applyFacing() {
-      robot.classList.toggle('walle-facing-down', direction === 1);
+      robot.classList.toggle('walle-turned', direction === -1);
     }
 
     /* ---------- 3D 转身（三阶段） ---------- */
@@ -142,7 +140,7 @@
 
       // 在路径上添加碾压痕迹
       if (moving && Math.abs(targetY - currentY) > 1) {
-        addTrailPoint(currentY + 20); // 机器人底部位置
+        addTrailPoint(currentY + 24); // 机器人中部位置（履带中心）
       }
 
       renderTrail();

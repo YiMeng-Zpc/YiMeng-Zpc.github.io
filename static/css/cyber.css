@@ -624,10 +624,10 @@ img[alt="about-avatar"]:hover {
 }
 
 /* ============================================
-   瓦力机器人滚动指示器 v3 — 转向持久化
+   瓦力机器人滚动指示器 v4 — 方向修正 + 真实感
    - 右侧固定轨道，瓦力机器人随滚动位置移动
-   - 往上翻（向上滚）：正面朝外，正着走
-   - 往下翻（向下滚）：背面朝外，反着走
+   - 向下滚（阅读前进）：正面朝外，正着走
+   - 向上滚（返回）：转身背面朝外，倒着走
    - 翻转状态由 JS 持久写入 .walle-flip 的 transform，
      转身动画播完后保持新朝向，不再自动转回
    ============================================ */
@@ -672,25 +672,25 @@ img[alt="about-avatar"]:hover {
    始终承载 JS 写入的 translateY 位移 + 行进倾斜 rotateZ */
 #walle-robot {
   position: absolute;
-  right: 8px;
+  right: 6px;
   top: 0;
-  width: 32px;
-  height: 40px;
+  width: 36px;
+  height: 48px;
   will-change: transform;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45));
   /* 3D 透视：让 rotateY 翻面有真实纵深 */
-  perspective: 80px;
+  perspective: 90px;
 }
 
 /* 翻转舞台：包含正/反两个面，翻面动画只作用在这一层 */
 #walle-robot .walle-flip {
   position: relative;
-  width: 32px;
-  height: 40px;
+  width: 36px;
+  height: 48px;
   transform-style: preserve-3d;
   transition: transform 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
   transform-origin: center center;
-  /* 默认朝向：正面（眼睛朝观众）——往上滚的默认状态 */
+  /* 默认朝向：正面（眼睛朝观众）——往下滚的默认状态 */
   transform: rotateY(0deg);
 }
 
@@ -699,8 +699,8 @@ img[alt="about-avatar"]:hover {
   position: absolute;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 40px;
+  width: 36px;
+  height: 48px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -709,10 +709,11 @@ img[alt="about-avatar"]:hover {
   transform: rotateY(180deg);
 }
 
-/* 朝下走（向下滚）：背面朝外，反着走 → 舞台转 180°
+/* 往上滚（回看）：转身背面朝外，倒着走回去 → 舞台转 180°
+   往下滚（阅读前进）：正面朝外，正着走 → 舞台保持 0°
    注意：这是持久状态，翻转完成后保持，不自动转回；
    由 JS 在方向变化时切换 transform，transition 负责动画 */
-#walle-robot.walle-facing-down .walle-flip {
+#walle-robot.walle-turned .walle-flip {
   transform: rotateY(180deg);
 }
 
