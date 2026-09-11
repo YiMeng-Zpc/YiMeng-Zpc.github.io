@@ -6,6 +6,36 @@
    - 主页只输出 WebSite schema，不输出 Article schema
    ============================================ */}}
 
+<meta charset="utf-8" />
+{{- partial "head/init.html" . -}}
+
+<!-- title / 页面标题（覆盖主题 head.html 时必须自行补回，否则全站丢失 title） -->
+{{- $title := .Title -}}
+{{- if .IsHome -}}
+  {{- $title = site.Title -}}
+{{- else if eq .Type "archives" -}}
+  {{- $title = printf "%s | %s" (i18n "archive_a") .Site.Params.author -}}
+{{- else if eq .Type "tags" -}}
+  {{- if eq .Title "Tags" -}}
+    {{- $title = printf "%s | %s" (i18n "tag") .Site.Params.author -}}
+  {{- else -}}
+    {{- $title = printf "%s | %s" .Title .Site.Params.author -}}
+  {{- end -}}
+{{- else if eq .Type "categories" -}}
+  {{- if eq .Title "Categories" -}}
+    {{- $title = printf "%s | %s" (i18n "category") .Site.Params.author -}}
+  {{- else -}}
+    {{- $title = printf "%s | %s" .Title .Site.Params.author -}}
+  {{- end -}}
+{{- else if .Title -}}
+  {{- $title = printf "%s | %s" .Title .Site.Params.author -}}
+{{- else -}}
+  {{- $title = printf "%s | %s" .Title .Site.Params.author -}}
+{{- end -}}
+<title>
+  {{ $title | safeHTML }}
+</title>
+
 <!-- viewport / 移动适配（H1） -->
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
@@ -36,6 +66,26 @@
   {{- end }}
 {{- end }}
 <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}" />
+
+<!-- analytics + siteConfig（覆盖主题 head.html 时必须补回）
+     siteConfig 是主题 JS 的全局配置源：缺失会导致 pjax_main.js 在读取
+     window.siteConfig.icon_font 时抛 TypeError，进而中断后续全部事件绑定
+     （移动端三条杠菜单、TOC、lazyload 等均会失效） -->
+{{- partialCached "head/analytics.html" . -}}
+{{- partialCached "head/config.html" . -}}
+
+{{- if .Site.Params.custom_font.enable -}}
+  {{- partialCached "helpers/vendorFont.html" . -}}
+{{- end -}}
+
+{{- if .Site.Params.font.enable -}}
+  {{- partialCached "helpers/vendorGoogleFont.html" . -}}
+{{- end -}}
+
+<!-- rss -->
+{{- with .OutputFormats.Get "rss" -}}
+  {{- printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML -}}
+{{- end -}}
 
 <!-- icon font -->
 {{- $js := hugo.Data.vendor.js -}}
