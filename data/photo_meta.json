@@ -3,594 +3,792 @@
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "armenia-yerevan/02.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "armenia-yerevan/03.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/04.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "azerbaijan-baku/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "azerbaijan-baku/07.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "azerbaijan-baku/08.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "georgia-tbilisi/01.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "georgia-tbilisi/02.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "georgia-tbilisi/03.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "georgia-tbilisi/04.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "georgia-tbilisi/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "georgia-tbilisi/06.webp": {
   "cls": "wide",
   "h": 1024,
   "r": 1.9531,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "georgia-tbilisi/07.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "georgia-tbilisi/08.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "hemu-snow/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/02.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/04.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/06.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "hemu-snow/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "hemu-snow/08.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "japan-travel/01.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/02.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/03.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "japan-travel/05.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/06.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/07.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "japan-travel/08.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "kazakhstan-aktau/01.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/02.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/06.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-aktau/08.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/03.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "kazakhstan-almaty/06.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "kazakhstan-almaty/07.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "kazakhstan-almaty/08.webp": {
   "cls": "tall",
   "h": 2000,
   "r": 0.6665,
+  "sm": true,
+  "t": true,
   "w": 1333
  },
  "turkey-istanbul/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "turkey-istanbul/08.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-ili/08.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-sayram/08.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/03.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/05.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-urumqi/08.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/01.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/02.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/03.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/04.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/05.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/06.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/07.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-wind-city/08.webp": {
   "cls": "banner",
   "h": 851,
   "r": 2.3502,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/01.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/02.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/03.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/04.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/05.webp": {
   "cls": "banner",
   "h": 837,
   "r": 2.3895,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/06.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/07.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  },
  "xinjiang-yining/08.webp": {
   "cls": "wide",
   "h": 1333,
   "r": 1.5004,
+  "sm": true,
+  "t": true,
   "w": 2000
  }
 }

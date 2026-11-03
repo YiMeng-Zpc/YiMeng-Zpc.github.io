@@ -10,7 +10,7 @@
 
 输出结构：
   {
-    "<slug>/<NN>.webp": { "w": 2000, "h": 837, "r": 2.39, "cls": "banner" },
+    "<slug>/<NN>.webp": { "w": 2000, "h": 837, "r": 2.39, "cls": "banner", "sm": true },
     ...
   }
 
@@ -19,6 +19,9 @@ cls 分类规则（模板据此决定跨列数与排版方式）：
   wide    r >= 1.25  标准横向
   square  r >= 0.95  接近方形
   tall    r <  0.95  竖版
+
+sm 标记：该主图是否存在 -sm.webp（800px）变体。图片迁到 R2 后不再存在于仓库，
+   模板不能靠 fileExists 判断，改用这个标记。
 """
 
 import json
@@ -28,6 +31,8 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 IMG_ROOT = os.path.join(ROOT, "static", "images", "uploads", "posts")
 OUT = os.path.join(ROOT, "data", "photo_meta.json")
+
+VARIANT_SUFFIXES = ("-sm.webp", "-t.webp")
 
 
 def classify(ratio: float) -> str:
@@ -57,7 +62,10 @@ def main() -> int:
         if not os.path.isdir(slug_dir):
             continue
         for name in sorted(os.listdir(slug_dir)):
-            if not name.endswith(".webp") or name.endswith("-sm.webp"):
+            if not name.endswith(".webp"):
+                continue
+            # 缩略图变体不单独建条目（-sm / -t）
+            if any(name.endswith(sfx) for sfx in VARIANT_SUFFIXES):
                 continue
             path = os.path.join(slug_dir, name)
             try:
@@ -72,6 +80,8 @@ def main() -> int:
                 "h": h,
                 "r": ratio,
                 "cls": classify(ratio),
+                "sm": os.path.isfile(os.path.join(slug_dir, name[:-5] + "-sm.webp")),
+                "t": os.path.isfile(os.path.join(slug_dir, name[:-5] + "-t.webp")),
             }
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

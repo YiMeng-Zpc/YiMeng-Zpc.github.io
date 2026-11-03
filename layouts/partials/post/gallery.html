@@ -21,7 +21,9 @@
   因此这里用原生 lazy loading，不依赖任何 JS 库。
 */ -}}
 {{- if and .Params.photos (len .Params.photos) -}}
+  {{- /* 仓库内图片（jsDelivr）与 R2 图片分属两份元数据，后者不含在仓库里 */ -}}
   {{- $meta := site.Data.photo_meta | default dict -}}
+  {{- $metaR2 := site.Data.photo_meta_r2 | default dict -}}
   {{- $items := slice -}}
   {{- range .Params.photos -}}
     {{- $src := . | relURL -}}
@@ -35,6 +37,9 @@
       {{- end -}}
     {{- end -}}
     {{- $info := index $meta $key -}}
+    {{- if not $info -}}
+      {{- $info = index $metaR2 $key -}}
+    {{- end -}}
     {{- $w := 0 -}}
     {{- $h := 0 -}}
     {{- $cls := "wide" -}}
@@ -49,6 +54,13 @@
       {{- $rel = printf "static/%s" (index (split $sm "/static/") 1) -}}
     {{- end -}}
     {{- $hasSm := and $rel (fileExists $rel) -}}
+    {{- /* 图片迁到 R2 后仓库里不再有文件，fileExists 会失效，
+           改以 data/photo_meta.json 里的 sm 标记为准 */ -}}
+    {{- with $info -}}
+      {{- if isset . "sm" -}}
+        {{- $hasSm = .sm -}}
+      {{- end -}}
+    {{- end -}}
     {{- $items = $items | append (dict "src" $src "sm" $sm "w" $w "h" $h "cls" $cls "hasSm" $hasSm) -}}
   {{- end -}}
   <div class="article-gallery" data-gallery>
