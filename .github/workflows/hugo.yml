@@ -9,6 +9,7 @@ on:
       - "layouts/**"
       - "static/**"
       - "themes/**"
+      - "assets/**"
       - "hugo.toml"
       - "data/**"
       - ".github/workflows/hugo.yml"
