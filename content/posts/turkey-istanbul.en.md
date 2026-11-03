@@ -27,14 +27,22 @@ The Old City (Sultanahmet) is a UNESCO World Heritage district of Byzantine and 
 
 The Blue Mosque gets its name from over 20,000 blue Iznik tiles inside. Hagia Sophia is more of a "living museum" — built as a church, converted to a mosque, then a museum, then a mosque again. The walls carry both Christian mosaics and Islamic calligraphy.
 
+ The Istanbul these pictures show is the one seen from the water.
+
 ## The Bosphorus
 
 The Bosphorus is the narrow strait connecting the Black Sea to the Sea of Marmara, only 700 meters across at its narrowest. Europe on one bank, Asia on the other.
 
 The best way to experience it is to take a local ferry (vapur) from Eminönü on the European side to Üsküdar or Kadıköy in Asia. Twenty-minute ride, seagulls following the boat, salty sea breeze, the whole Istanbul skyline slowly unfolding.
 
+Several were taken from exactly that boat: a white wake trailing behind the stern, the deep blue water torn in two; a small white boat cutting diagonally across the surface; and further out, the far shore of the city reduced to a low grey line, with domes and minarets just breaking the horizon.
+
 ## The Galata Bridge
 
 The Galata Bridge spans the Golden Horn, connecting the Old City to the newer Beyoğlu district. The lower level is for fishermen and seafood restaurants; the upper level is the pedestrian walkway. Every evening the fishermen pull in their nets, the bridge fills with people watching the sea, and seagulls wheel between the lights and the dusk.
+
+At the edge of the city are the small fishing harbors: white motorboats packed into a narrow channel, Turkish boat names painted along their flanks; a sailing boat flying the Turkish flag wedged in among them, its mast higher than anything around it; and green floating barriers drifting on the surface to clear the algae. In the busiest shot the quay is jammed with speedboats and ferries packed side by side, the buildings stepping back behind them.
+
+Further out, people live on the hillsides that flank the bay: clusters of small white houses squeezed onto a green slope, red-tiled roofs, a row of palms along the beach; and on the crest of the hill, a slender communications mast. Seen from the water at a distance, the hill looks like a small animal lying down.
 
 Istanbul is the kind of city you want to revisit. Coming from the snow-capped Caucasus, it was the perfect closing note for a Central Asia + West Asia trip.

@@ -27,7 +27,7 @@ The city was once Kazakhstan's capital (moved to Astana in 1997) but remains the
 
 Almaty is one of the better-planned Soviet cities. Wide tree-lined avenues, tidy squares, plus the domes of Central Asian mosques give it a "Central Asian Kyiv" feel.
 
-In the center, Independence Square has the Zher Ana monument to the Kazakh motherland. Drive east to Kok-Tobe hill for a city overlook. Drive 30 minutes south and you're at the snow line.
+The mosque is glazed in white, with four cylindrical minarets rising against a deep blue sky, a gold ball on each tip and a pointed-arch doorway framed in blue-and-white tile. In the center, Independence Square has the Zher Ana monument to the Kazakh motherland. Drive east to Kok-Tobe hill for a city overlook. Drive 30 minutes south and you're at the snow line. What you find instead are the everyday parts of the city.
 
 ## The Tien Shan
 
@@ -35,10 +35,19 @@ The most recommended trip is Big Almaty Lake, around 2500 meters up. The water g
 
 At the mountain's foot you'll also find Shymbulak (a ski resort) and hot springs. In winter this is one of Central Asia's best skiing destinations.
 
+This trip kept the frame entirely downtown; the snow mountains, the lake and the ski resorts never made it into a single shot. The only clue to the Tien Shan is the deep blue sky of a high-altitude city; in Almaty the sky is never quite believable.
+
 ## In Almaty
 
-Worth experiencing:
-- Green Bazaar — Central Asia's best dried fruits and honey
+Three things in this city are worth a paragraph each:
+
+**Green Bazaar** — Central Asia's best dried fruits and honey. Inside the tall market hall the stalls run shoulder to shoulder: watermelons, peaches, grapes and apples stacked into walls of color, cheese and sausage queued behind glass counters, dried chili, almonds and raisins hanging in rows, and signs mixing Cyrillic with Kazakh — ЖӘНІСТЕР for fruit, МЕД for honey.
+
+**The Ascension Cathedral** — onion domes in color, gilt finials catching the light, a yellow-and-green banded façade, and a square in front of it so packed with pigeons that the ground looks carpeted in grey-black.
+
+**Inside the cathedral** — tiers of golden iconostasis climbing to the second storey, a chandelier hanging in the center, vast religious murals on the walls, and an eagle with spread wings embroidered on the carpet. One of the most famous Orthodox churches in Central Asia.
+
+Worth experiencing beyond the photos:
 - The Central State Museum — covers Kazakh history from nomadic empire to modern state
 - Tien Shan hiking — even without summiting, the views at the base are spectacular
 

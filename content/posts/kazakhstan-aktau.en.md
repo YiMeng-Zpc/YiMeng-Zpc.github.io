@@ -27,13 +27,18 @@ Originally built as a small Soviet city for uranium mining, it was named "Shevch
 
 The classic route to Aktau is by ferry from Baku, Azerbaijan across the Caspian. The overnight ferry takes 18-24 hours and gives a chance to see the Caspian turn deep blue at sunrise.
 
-Aktau itself doesn't have many sights. The city hugs the coast with Soviet-era block buildings and a new seaside promenade. The Caspian is a real sea (despite being the world's largest lake), with rough waves and a color close to ocean blue.
+Aktau itself doesn't have many sights. The city hugs the coast with Soviet-era block buildings and a new seaside promenade. The Caspian is a real sea (despite being the world's largest lake), and its color runs close to ocean blue — that shift from turquoise to deep navy you can see along the water. That said, the water was flat that day; the waves only nudged the reef rocks, none of them fierce.
 
 ## In Aktau
 
-Worth seeing in town:
+Most of the frames here are the sea itself:
+- A wooden jetty running out into the Caspian, ending at a little hut, with the water working in and out between the pilings
+- A reef shore: limestone blocks rounded off by the water, with green algae packed into the gaps; the boulder tilted into the shallows is the most photogenic of them
+- A cliff of clearly banded yellow-white rock, undercut into caves by the waves, with the shrubs at its foot still green
+
+Worth seeing nearby:
 - The Regional Museum, with exhibits on western Kazakhstan's history
-- The coastline at sunset, especially on windy days
-- Sherkala, a lonely rock mountain 2 hours east of Aktau
+- Sherkala, a lonely rock mountain 2 hours east of Aktau; the pale cliff in these frames is a closer stretch just outside the city
+- The coastline at sunset, especially on windy days — it was daylight the whole time, and not one of the frames caught a sunset
 
 Most people stay one night in Aktau before continuing by road or air to Almaty. But if you want to see the "real Caspian" of Central Asia, this city is the best entry point.

@@ -18,13 +18,13 @@ We landed at Zvartnots airport in the evening, and the whole city was bathed in 
 
 ## The Ark Beneath the Mountain
 
-Stand on Republic Square and look southeast on a clear morning, and you can almost always see the snow cap of **Mount Ararat** (5,137 m). The mountain is now in Turkey, but Armenians claim it as their spiritual icon — legend says Noah's Ark came to rest there after the Great Flood, and the double peaks of the summit are still engraved on the country's coat of arms. We spent several days in the city, and the first thing I did every morning was look up to confirm it was still there.
+Stand at the top of the Cascade and look southeast on a clear morning, and you can almost always see the snow cap of **Mount Ararat** (5,137 m). The mountain is now in Turkey, but Armenians claim it as their spiritual icon — legend says Noah's Ark came to rest there after the Great Flood, and the double peaks of the summit are still engraved on the country's coat of arms. We spent several days in the city, and the first thing I did every morning was look up to confirm it was still there.
 
 ## The Red Cascade and Soviet Memory
 
 The **Cascade Complex** is Yerevan's most un-Soviet-looking building — begun in 1971, intended as a giant stairway from city center to the hilltop where a monument was to be built. Construction halted after the Soviet collapse, and the unfinished concrete frame has since been turned into an open-air complex of contemporary sculptures and outdoor cafés. The outside is bare limestone; climb to the peak and the whole city opens below you.
 
-Downtown, the **Armenian Genocide Memorial** (Tsitsernakaberd) reminds visitors of this nation's heaviest historical wound — the 1915 genocide that took around 1.5 million Armenian lives. It remains the deepest collective memory of this country.
+Downtown, the **Armenian Genocide Memorial** (Tsitsernakaberd) reminds visitors of this nation's heaviest historical wound — the 1915 genocide that took around 1.5 million Armenian lives. It remains the deepest collective memory of this country. Twelve inward-leaning basalt slabs enclose an open circle, and at its center a flame has never gone out since the memorial was built; by the time I arrived, the steps were lined with the white flowers and red carnations visitors had left behind.
 
 ## Old Town and New
 
@@ -32,6 +32,6 @@ Yerevan's old town **Kond** is the oldest quarter, stone houses cascading up a h
 
 The new parts of the city are very young — the large shopping centers, metro stations, and glass-curtain office buildings around Independence Square were built after 1991 independence. The city moves slowly but steadily, as if it knows where it came from and where it's going.
 
-> The day I left I shot a panoramic of Yerevan at dusk. The mountain was the same mountain, the city was still that pink, except for a single beam of light breaking through a gap in the clouds.
+> The day I left I shot a panorama of Yerevan from the top of the Cascade. The cloud deck sat low, the mountain was the same mountain, the city was still that pink — except for a single beam of light breaking through a gap in the clouds and landing on the row of newer buildings halfway down the hill.
 
 This was my first stop in the Caucasus — Georgia and Azerbaijan were next. But that "warm stones" feeling I got from Yerevan, I never found it in any other city again.

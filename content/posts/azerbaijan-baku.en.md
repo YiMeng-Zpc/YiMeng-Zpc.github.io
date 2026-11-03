@@ -25,14 +25,16 @@ It sits on a peninsula jutting into the Caspian Sea on three sides — the capit
 
 ## The Old City
 
-The Old City (Icherisheher) is the historical core and a UNESCO World Heritage Site. It holds the 12th-century Palace of the Shirvanshahs, the iconic Maiden Tower, and winding stone-paved lanes.
+The Old City (Icherisheher) is the historical core and a UNESCO World Heritage Site. It holds the 12th-century Palace of the Shirvanshahs, the iconic Maiden Tower, and winding stone-paved lanes — the texture of the Old City's lanes is what these images preserve.
 
-The palace's sandstone walls glow warm ochre in sunlight, contrasting sharply with the glass towers of the modern city around it.
+The walls here run from ochre to pale yellow stone, with carved wooden balconies leaning out over the lane — and a glass-clad modern tower standing at the end of the same street. Two centuries of architecture colliding across a single alley.
+
+Next to the Old City lies an excavated archaeological site: stone arcades enclose an open courtyard where carved stone lions and fragments lie in the gravel, with an ochre neoclassical façade rising directly behind it. A few steps further on, a broad avenue is lined with domed pale-stone buildings, where green buses and white taxis work the traffic.
 
 ## Flame Towers
 
-The Flame Towers are Baku's most recognizable landmark — three flame-shaped skyscrapers with LED screens that shift through different patterns. At sunset they typically show orange-red flames, making the entire skyline appear to be burning.
+The Flame Towers are Baku's most recognizable landmark — three sail-shaped glass skyscrapers whose curved facades rise straight from the waterfront up to their tips. The day I was there it was overcast and the LED screens were dark, so the towers were simply grey-blue glass with a thin line of cloud-light along their edges.
 
-Most of these photos were taken around the Shirvanshahs Palace and Flame Towers area; the warm evening light makes the whole city look like it's on fire.
+The Old City and the waterfront, all in the cool light of an overcast sky: behind the sail-shaped towers sits a block of cream-coloured European-style apartment buildings, and across the bay a dense wall of housing with the port's cranes and a cargo ship riding in the Caspian. The giant blue-green glass arch in the foreground is the new landmark on Baku's skyline. The towers that actually appear to burn can only be seen once the lights come on at night.
 
-Snow still dusted the Caucasus mountains in late April. The overland route from Azerbaijan to Georgia crosses snowy mountain passes — worth stopping outside the capital too.
+The Caucasus slopes behind Baku are green, not white. There is no snow anywhere in that valley: a deep green pasture at the foot of the hills, wooden-roofed villages scattered across the slope, a grey-black stone wall running straight across the meadow, and a few fortress-like towers pushing half a spire out of the clouds in the distance. Along the overland route from Azerbaijan to Georgia, this green is the norm.
