@@ -5,9 +5,9 @@ draft: false
 tags: [亚美尼亚, 埃里温, 高加索, 旅行, 摄影, 教堂]
 categories: [旅行]
 photos:
-  - https://h.uguu.se/YZMSdMiZ.webp
-  - https://h.uguu.se/XkwbXizo.webp
-  - https://h.uguu.se/fOsHwQgr.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/03.webp
 summary: "亚美尼亚首都埃里温，远处是常年积雪的阿拉拉特山，近处是火山凝灰岩筑起的粉色城市。这个被遗忘的高加索古国，每一块石头都写着诺亚方舟的传说。"
 keywords: [亚美尼亚, 埃里温, 阿拉拉特山, 高加索, 共和广场, 阶梯]
 ---

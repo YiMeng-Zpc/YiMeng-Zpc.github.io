@@ -5,9 +5,9 @@ draft: false
 tags: [armenia, yerevan, caucasus, travel, photography, church]
 categories: [Travel]
 photos:
-  - https://h.uguu.se/YZMSdMiZ.webp
-  - https://h.uguu.se/XkwbXizo.webp
-  - https://h.uguu.se/fOsHwQgr.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/armenia-yerevan/03.webp
 summary: "Yerevan, the Armenian capital, sits beneath the eternal snow of Mount Ararat — built from volcanic tuff that turns every building into a shade of rose, pink, and violet at different hours of the day. This forgotten Caucasian kingdom has every stone telling a Noah's Ark legend."
 keywords: [armenia, yerevan, mount ararat, caucasus, republic square, cascade]
 ---

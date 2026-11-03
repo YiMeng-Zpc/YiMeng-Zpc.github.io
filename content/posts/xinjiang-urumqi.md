@@ -5,14 +5,14 @@ draft: false
 tags: [新疆, 乌鲁木齐, 亚心, 国际大巴扎, 旅行, 摄影, 天山]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/PVVqfEDX.webp
-  - https://h.uguu.se/LZMxDTsT.webp
-  - https://n.uguu.se/edyLkvFe.webp
-  - https://n.uguu.se/vWlTDFMe.webp
-  - https://n.uguu.se/rUjtrwxa.webp
-  - https://d.uguu.se/GYgmhive.webp
-  - https://h.uguu.se/QybxUjOp.webp
-  - https://h.uguu.se/nwexBVtW.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/08.webp
 summary: "乌鲁木齐是世界上距离海洋最远的城市，也是新疆的首都和亚洲大陆的地理中心。天山脚下的现代都市、国际大巴扎的烟火味、南山的牧场——反差强烈的边陲之城。"
 keywords: [新疆, 乌鲁木齐, 亚心, 国际大巴扎, 天山, 南山]
 ---

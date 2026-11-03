@@ -5,14 +5,14 @@ draft: false
 tags: [azerbaijan, baku, caucasus, caspian, travel, photography, land-of-fire]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/vebhKRpN.webp
-  - https://h.uguu.se/afZwHaUd.webp
-  - https://d.uguu.se/sVkAOFdH.webp
-  - https://d.uguu.se/MeiomGYj.webp
-  - https://n.uguu.se/rPiMsPdU.webp
-  - https://n.uguu.se/qGcCbLqh.webp
-  - https://h.uguu.se/obXANbQt.webp
-  - https://h.uguu.se/hoSjkPru.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/08.webp
 summary: "Baku, capital of Azerbaijan and the largest port on the Caspian's western shore. Flame Towers, Old City, Shirvanshahs Palace meet modern glass facades."
 keywords: [azerbaijan, baku, flame towers, old city, shirvanshahs palace, caspian, caucasus]
 ---

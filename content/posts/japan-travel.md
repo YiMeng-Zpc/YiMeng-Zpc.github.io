@@ -5,14 +5,14 @@ draft: false
 tags: [日本, 京都, 东京, 关西, 旅行, 摄影, 电车]
 categories: [旅行]
 photos:
-  - https://d.uguu.se/HXCTZRqX.webp
-  - https://n.uguu.se/humgMSjw.webp
-  - https://h.uguu.se/svuVXExG.webp
-  - https://d.uguu.se/RnCQZxoP.webp
-  - https://n.uguu.se/tLAMXlUh.webp
-  - https://d.uguu.se/mRYAucYe.webp
-  - https://d.uguu.se/ryHuJZEl.webp
-  - https://n.uguu.se/YQnfYSwo.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/08.webp
 summary: "日本是那种去过很多次还想再去的国家。古寺、神社、新干线、便利店、铁路便当、深夜食堂——每一处都精致，每一处都对细节有执念。"
 keywords: [日本, 京都, 东京, 关西, 新干线, 铁路便当, 深夜食堂]
 ---

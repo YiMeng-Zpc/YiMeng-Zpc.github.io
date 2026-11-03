@@ -5,14 +5,14 @@ draft: false
 tags: [kazakhstan, aktau, caspian, central-asia, travel, photography, kazakh]
 categories: [Travel]
 photos:
-  - https://d.uguu.se/HtcEYkPZ.webp
-  - https://h.uguu.se/WUpZzHKe.webp
-  - https://n.uguu.se/OofVFLNa.webp
-  - https://n.uguu.se/tRUzyamG.webp
-  - https://d.uguu.se/ehUFzEqo.webp
-  - https://n.uguu.se/QNhhmzbd.webp
-  - https://h.uguu.se/dXgOaZxc.webp
-  - https://h.uguu.se/xDjtHGtk.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/08.webp
 summary: "Aktau (formerly Shevchenko) is a port city on Kazakhstan's Caspian coast and a ferry hub for reaching other parts of Kazakhstan."
 keywords: [kazakhstan, aktau, caspian, central-asia, kazakh, port]
 ---

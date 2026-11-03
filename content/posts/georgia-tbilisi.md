@@ -5,14 +5,14 @@ draft: false
 tags: [格鲁吉亚, 第比利斯, 高加索, 旅行, 摄影, 老城, 硫磺浴]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/oCvKMtDn.webp
-  - https://h.uguu.se/cpCXHCMR.webp
-  - https://h.uguu.se/LwSCHzeF.webp
-  - https://n.uguu.se/WFbkzoBm.webp
-  - https://h.uguu.se/kSOwqolj.webp
-  - https://n.uguu.se/klvrxAHU.webp
-  - https://d.uguu.se/foURkCZS.webp
-  - https://d.uguu.se/vhdUmNol.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/08.webp
 summary: "库拉河两岸，第比利斯把 1500 年历史揉进了玻璃钢桥、硫磺蒸汽、彩色阳台和一座山顶的圣母像。它不像任何一座欧洲城市，也不像任何一座亚洲城市——它只像自己。"
 keywords: [格鲁吉亚, 第比利斯, 纳里卡拉, 自由广场, 和平桥, 硫磺浴, 库拉河, 老城]
 ---

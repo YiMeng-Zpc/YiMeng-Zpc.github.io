@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, urumqi, asian-heart, international-bazaar, travel, photography, tien-shan]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/PVVqfEDX.webp
-  - https://h.uguu.se/LZMxDTsT.webp
-  - https://n.uguu.se/edyLkvFe.webp
-  - https://n.uguu.se/vWlTDFMe.webp
-  - https://n.uguu.se/rUjtrwxa.webp
-  - https://d.uguu.se/GYgmhive.webp
-  - https://h.uguu.se/QybxUjOp.webp
-  - https://h.uguu.se/nwexBVtW.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-urumqi/08.webp
 summary: "Urumqi is the world's most landlocked major city, the capital of Xinjiang, and the geographic center of the Asian continent. A modern city at the foot of the Tien Shan, the bustle of the International Bazaar, and the pastures of Nanshan — a border city of striking contrasts."
 keywords: [xinjiang, urumqi, asian-heart, international-bazaar, tien-shan, nanshan]
 ---

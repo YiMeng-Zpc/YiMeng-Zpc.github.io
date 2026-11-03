@@ -5,14 +5,14 @@ draft: false
 tags: [georgia, tbilisi, caucasus, travel, photography, old-town, sulfur-baths]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/oCvKMtDn.webp
-  - https://h.uguu.se/cpCXHCMR.webp
-  - https://h.uguu.se/LwSCHzeF.webp
-  - https://n.uguu.se/WFbkzoBm.webp
-  - https://h.uguu.se/kSOwqolj.webp
-  - https://n.uguu.se/klvrxAHU.webp
-  - https://d.uguu.se/foURkCZS.webp
-  - https://d.uguu.se/vhdUmNol.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/08.webp
 summary: "On both banks of the Kura River, Tbilisi folds 1,500 years of history into a glass-and-steel bridge, sulfur steam, colorful wooden balconies, and a hilltop Mother Georgia. It looks like no European city and no Asian city — it only looks like itself."
 keywords: [georgia, tbilisi, narikala, freedom square, bridge of peace, sulfur baths, kura river, old town]
 ---

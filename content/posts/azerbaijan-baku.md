@@ -5,14 +5,14 @@ draft: false
 tags: [阿塞拜疆, 巴库, 高加索, 里海, 旅行, 摄影, 火之国]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/vebhKRpN.webp
-  - https://h.uguu.se/afZwHaUd.webp
-  - https://d.uguu.se/sVkAOFdH.webp
-  - https://d.uguu.se/MeiomGYj.webp
-  - https://n.uguu.se/rPiMsPdU.webp
-  - https://n.uguu.se/qGcCbLqh.webp
-  - https://h.uguu.se/obXANbQt.webp
-  - https://h.uguu.se/hoSjkPru.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/08.webp
 summary: "巴库是阿塞拜疆的首都，也是里海西岸最大的港口。火焰塔、老城、希尔万沙宫殿与现代玻璃幕墙交错。"
 keywords: [阿塞拜疆, 巴库, 火焰塔, 老城, 希尔万沙宫殿, 里海, 高加索]
 ---

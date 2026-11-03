@@ -5,14 +5,14 @@ draft: false
 tags: [turkey, istanbul, blue-mosque, hagia-sophia, bosphorus, travel, photography]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/bOaFOPto.webp
-  - https://d.uguu.se/LKTRykYm.webp
-  - https://h.uguu.se/EAnpJtuE.webp
-  - https://d.uguu.se/xfnqlytR.webp
-  - https://n.uguu.se/BhBMkqBM.webp
-  - https://d.uguu.se/kUVAZiJh.webp
-  - https://d.uguu.se/AxpViuVb.webp
-  - https://d.uguu.se/Lknganix.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/08.webp
 summary: "Istanbul spans Europe and Asia — the only major city on two continents. The Blue Mosque, Hagia Sophia, the Bosphorus, the Galata Bridge — every corner is a conversation between past and present."
 keywords: [turkey, istanbul, blue-mosque, hagia-sophia, bosphorus, galata-bridge]
 ---

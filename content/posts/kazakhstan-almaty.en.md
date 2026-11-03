@@ -5,14 +5,14 @@ draft: false
 tags: [kazakhstan, almaty, tien-shan, central-asia, travel, photography, apple-city]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/YjLvGbwL.webp
-  - https://n.uguu.se/VBjuJHck.webp
-  - https://h.uguu.se/WFuntSFr.webp
-  - https://d.uguu.se/gtVDLCYF.webp
-  - https://d.uguu.se/nlRGeZyB.webp
-  - https://n.uguu.se/bKDWqYnp.webp
-  - https://n.uguu.se/jOGNxfvL.webp
-  - https://n.uguu.se/JCbnexRx.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/08.webp
 summary: "Almaty was once Kazakhstan's capital and remains the largest city, with the Tien Shan mountains to the south. The name itself means 'Father of Apples'."
 keywords: [kazakhstan, almaty, tien-shan, apple-city, central-asia, alma-ata]
 ---

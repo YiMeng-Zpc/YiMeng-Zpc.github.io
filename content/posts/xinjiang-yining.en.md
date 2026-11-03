@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, yining, ili, border-town, travel, photography, uyghur]
 categories: [Travel]
 photos:
-  - https://h.uguu.se/idUdZUmg.webp
-  - https://n.uguu.se/fBdzexAs.webp
-  - https://n.uguu.se/KrQlPhsa.webp
-  - https://d.uguu.se/VeANpGDC.webp
-  - https://d.uguu.se/ftgttLSE.webp
-  - https://n.uguu.se/UsffhLre.webp
-  - https://d.uguu.se/HXkcOtFh.webp
-  - https://n.uguu.se/vEuEMKFP.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/08.webp
 summary: "Yining is the heart of the Ili River valley. Blue mosque domes, Uyghur handmade carpets, the slow pace under poplar shade — one of the Xinjiang cities that least feels like Xinjiang."
 keywords: [xinjiang, yining, ili, border-town, kazanchi, six-star-street]
 ---

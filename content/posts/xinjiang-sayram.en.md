@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, sayram-lake, tien-shan, alpine-lake, travel, photography, blue]
 categories: [Travel]
 photos:
-  - https://d.uguu.se/EnFiWvoh.webp
-  - https://n.uguu.se/kOmzlebp.webp
-  - https://d.uguu.se/odZokqSl.webp
-  - https://n.uguu.se/CBobmMqq.webp
-  - https://h.uguu.se/slrTlNAl.webp
-  - https://h.uguu.se/rrGLHuAQ.webp
-  - https://n.uguu.se/NygRQNnx.webp
-  - https://d.uguu.se/xmUtHuiD.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-sayram/08.webp
 summary: "Sayram Lake is at 2,000+ meters, the largest cold-water alpine lake in the Tien Shan. Wildflowers bloom lakeside from May to June, the water shifting from azure to sapphire blue."
 keywords: [xinjiang, sayram-lake, tien-shan, alpine-lake, cold-lake]
 ---

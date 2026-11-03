@@ -5,14 +5,14 @@ draft: false
 tags: [哈萨克斯坦, 阿克套, 里海, 中亚, 旅行, 摄影, 哈萨克]
 categories: [旅行]
 photos:
-  - https://d.uguu.se/HtcEYkPZ.webp
-  - https://h.uguu.se/WUpZzHKe.webp
-  - https://n.uguu.se/OofVFLNa.webp
-  - https://n.uguu.se/tRUzyamG.webp
-  - https://d.uguu.se/ehUFzEqo.webp
-  - https://n.uguu.se/QNhhmzbd.webp
-  - https://h.uguu.se/dXgOaZxc.webp
-  - https://h.uguu.se/xDjtHGtk.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/08.webp
 summary: "阿克套（Aktau）原名舍甫琴科，是哈萨克斯坦西部里海岸的港口城市，也是去往哈萨克其他地方的轮渡枢纽。"
 keywords: [哈萨克斯坦, 阿克套, 里海, 中亚, 哈萨克, 港口]
 ---

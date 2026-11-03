@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, ili, nalati, gongnaisi, grassland, snow-mountain, travel, photography]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/YFHjRwbd.webp
-  - https://d.uguu.se/KgrowXFV.webp
-  - https://n.uguu.se/SxFGRUOT.webp
-  - https://h.uguu.se/jBnxQmuv.webp
-  - https://d.uguu.se/UlaxvRTe.webp
-  - https://n.uguu.se/mkFoxvnM.webp
-  - https://h.uguu.se/bVQSriig.webp
-  - https://n.uguu.se/MKNAQWDr.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/08.webp
 summary: "Nalati and Gongnaisi in the Ili River valley are the best high-mountain grasslands in Xinjiang — wildflowers in June, green grass in July, golden in September, paired with snow spruce forests and distant Tien Shan snowline."
 keywords: [xinjiang, ili, nalati, gongnaisi, grassland, snow-spruce]
 ---

@@ -5,14 +5,14 @@ draft: false
 tags: [japan, kyoto, tokyo, kansai, travel, photography, trains]
 categories: [Travel]
 photos:
-  - https://d.uguu.se/HXCTZRqX.webp
-  - https://n.uguu.se/humgMSjw.webp
-  - https://h.uguu.se/svuVXExG.webp
-  - https://d.uguu.se/RnCQZxoP.webp
-  - https://n.uguu.se/tLAMXlUh.webp
-  - https://d.uguu.se/mRYAucYe.webp
-  - https://d.uguu.se/ryHuJZEl.webp
-  - https://n.uguu.se/YQnfYSwo.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/japan-travel/08.webp
 summary: "Japan is the kind of country you want to revisit no matter how many times you've been. Old temples, shrines, the Shinkansen, convenience stores, ekiben, late-night ramen — every detail matters."
 keywords: [japan, kyoto, tokyo, kansai, shinkansen, ekiben, late-night-ramen]
 ---

@@ -5,14 +5,14 @@ draft: false
 tags: [土耳其, 伊斯坦布尔, 蓝色清真寺, 圣索菲亚, 博斯普鲁斯, 旅行, 摄影]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/bOaFOPto.webp
-  - https://d.uguu.se/LKTRykYm.webp
-  - https://h.uguu.se/EAnpJtuE.webp
-  - https://d.uguu.se/xfnqlytR.webp
-  - https://n.uguu.se/BhBMkqBM.webp
-  - https://d.uguu.se/kUVAZiJh.webp
-  - https://d.uguu.se/AxpViuVb.webp
-  - https://d.uguu.se/Lknganix.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/turkey-istanbul/08.webp
 summary: "伊斯坦布尔横跨欧亚两洲，是世界上唯一一座地跨两洲的大城市。蓝色清真寺、圣索菲亚、博斯普鲁斯海峡、加拉塔桥——每一处都是历史与当代的对话。"
 keywords: [土耳其, 伊斯坦布尔, 蓝色清真寺, 圣索菲亚, 博斯普鲁斯, 加拉塔桥]
 ---

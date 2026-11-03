@@ -5,14 +5,14 @@ draft: false
 tags: [新疆, 禾木村, 喀纳斯, 雪, 旅行, 摄影, 图瓦人, 童话村]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/iyBgjliV.webp
-  - https://h.uguu.se/bSiuaaft.webp
-  - https://d.uguu.se/HLZtrwFH.webp
-  - https://d.uguu.se/RcomHAcK.webp
-  - https://n.uguu.se/ZyYrQFVH.webp
-  - https://h.uguu.se/mudTfmRP.webp
-  - https://d.uguu.se/CNwJvcnC.webp
-  - https://h.uguu.se/GLpjNubC.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/08.webp
 summary: "新疆布尔津县最北端，图瓦人的木屋在雪原里冒着炊烟。这是一场需要踩在半米厚的雪里才能抵达的童话村——而 4 月的深雪期，是它最不像人间的时候。"
 keywords: [新疆, 禾木村, 喀纳斯, 图瓦人, 深雪, 童话村, 白桦林, 炊烟]
 ---

@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, ghost-city, wuerhe, yardang, travel, photography, karamay]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/luPUSYUL.webp
-  - https://d.uguu.se/HriwESEP.webp
-  - https://d.uguu.se/ODYVRMMA.webp
-  - https://n.uguu.se/NlZKViuL.webp
-  - https://h.uguu.se/jOmfCpQe.webp
-  - https://d.uguu.se/tErvqjHA.webp
-  - https://d.uguu.se/XYRUlssA.webp
-  - https://h.uguu.se/KDvZkhcX.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/08.webp
 summary: "Wuerhe Ghost City is a classic yardang landform — millions of years of wind erosion carving castles, ships, and animal shapes out of rock, with Gobi sunsets for a backdrop."
 keywords: [xinjiang, ghost-city, wuerhe, yardang, karamay, gobi]
 ---

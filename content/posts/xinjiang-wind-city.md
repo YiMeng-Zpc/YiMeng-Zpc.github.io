@@ -5,14 +5,14 @@ draft: false
 tags: [新疆, 魔鬼城, 乌尔禾, 雅丹, 旅行, 摄影, 克拉玛依]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/luPUSYUL.webp
-  - https://d.uguu.se/HriwESEP.webp
-  - https://d.uguu.se/ODYVRMMA.webp
-  - https://n.uguu.se/NlZKViuL.webp
-  - https://h.uguu.se/jOmfCpQe.webp
-  - https://d.uguu.se/tErvqjHA.webp
-  - https://d.uguu.se/XYRUlssA.webp
-  - https://h.uguu.se/KDvZkhcX.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-wind-city/08.webp
 summary: "乌尔禾魔鬼城是典型的雅丹地貌——千百万年风蚀出的城堡、舰船、动物造型，搭配戈壁落日，荒凉而壮美。"
 keywords: [新疆, 魔鬼城, 乌尔禾, 雅丹, 克拉玛依, 戈壁]
 ---

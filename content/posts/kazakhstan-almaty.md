@@ -5,14 +5,14 @@ draft: false
 tags: [哈萨克斯坦, 阿拉木图, 天山, 中亚, 旅行, 摄影, 苹果城]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/YjLvGbwL.webp
-  - https://n.uguu.se/VBjuJHck.webp
-  - https://h.uguu.se/WFuntSFr.webp
-  - https://d.uguu.se/gtVDLCYF.webp
-  - https://d.uguu.se/nlRGeZyB.webp
-  - https://n.uguu.se/bKDWqYnp.webp
-  - https://n.uguu.se/jOGNxfvL.webp
-  - https://n.uguu.se/JCbnexRx.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/08.webp
 summary: "阿拉木图（Almaty）原是哈萨克斯坦首都，现在仍是最大城市，南面就是天山山脉，城市名原意就是「苹果之父」。"
 keywords: [哈萨克斯坦, 阿拉木图, 天山, 苹果城, 中亚, 阿拉木图苹果]
 ---

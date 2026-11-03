@@ -5,14 +5,14 @@ draft: false
 tags: [新疆, 伊宁, 伊犁, 边陲, 旅行, 摄影, 维吾尔]
 categories: [旅行]
 photos:
-  - https://h.uguu.se/idUdZUmg.webp
-  - https://n.uguu.se/fBdzexAs.webp
-  - https://n.uguu.se/KrQlPhsa.webp
-  - https://d.uguu.se/VeANpGDC.webp
-  - https://d.uguu.se/ftgttLSE.webp
-  - https://n.uguu.se/UsffhLre.webp
-  - https://d.uguu.se/HXkcOtFh.webp
-  - https://n.uguu.se/vEuEMKFP.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-yining/08.webp
 summary: "伊宁是伊犁河谷的中心城市，蓝色的清真寺穹顶、维吾尔族的手工地毯、白杨树荫下的慢节奏——新疆最不像新疆的城市之一。"
 keywords: [新疆, 伊宁, 伊犁, 边陲, 喀赞其, 六星街]
 ---

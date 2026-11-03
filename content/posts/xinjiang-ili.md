@@ -5,14 +5,14 @@ draft: false
 tags: [新疆, 伊犁, 那拉提, 巩乃斯, 草原, 雪山, 旅行, 摄影]
 categories: [旅行]
 photos:
-  - https://n.uguu.se/YFHjRwbd.webp
-  - https://d.uguu.se/KgrowXFV.webp
-  - https://n.uguu.se/SxFGRUOT.webp
-  - https://h.uguu.se/jBnxQmuv.webp
-  - https://d.uguu.se/UlaxvRTe.webp
-  - https://n.uguu.se/mkFoxvnM.webp
-  - https://h.uguu.se/bVQSriig.webp
-  - https://n.uguu.se/MKNAQWDr.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/xinjiang-ili/08.webp
 summary: "伊犁河谷的那拉提和巩乃斯是新疆最好的高山草原——6 月野花、7 月绿草、9 月金黄，配上雪岭云杉和远处的天山雪线。"
 keywords: [新疆, 伊犁, 那拉提, 巩乃斯, 草原, 雪岭云杉]
 ---

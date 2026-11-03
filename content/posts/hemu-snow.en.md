@@ -5,14 +5,14 @@ draft: false
 tags: [xinjiang, hemu-village, kanas, snow, travel, photography, tuva, fairy-tale-village]
 categories: [Travel]
 photos:
-  - https://n.uguu.se/iyBgjliV.webp
-  - https://h.uguu.se/bSiuaaft.webp
-  - https://d.uguu.se/HLZtrwFH.webp
-  - https://d.uguu.se/RcomHAcK.webp
-  - https://n.uguu.se/ZyYrQFVH.webp
-  - https://h.uguu.se/mudTfmRP.webp
-  - https://d.uguu.se/CNwJvcnC.webp
-  - https://h.uguu.se/GLpjNubC.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/01.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/02.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/03.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/04.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/05.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/06.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/07.webp
+  - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/hemu-snow/08.webp
 summary: "At the northernmost tip of Burqin County, Xinjiang, the Tuvans' wooden cabins send up cooking smoke into the snow plain. This is a fairy-tale village you can only reach by trudging through half a meter of snow — and in April's deep-snow season, it's the least human time of all."
 keywords: [xinjiang, hemu village, kanas, tuva, deep snow, fairy-tale village, birch forest, cooking smoke]
 ---
