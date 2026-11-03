@@ -629,6 +629,15 @@ html {
   .home-posts-grid .post-card-body {
     gap: 0;
   }
+  /* 窄屏下栅格下限收紧，避免 320px 固定列挤压卡片内容 */
+  .home-posts-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px 0;
+  }
+  .home-posts-grid .post-card {
+    padding: 18px;
+  }
 }
 
 
