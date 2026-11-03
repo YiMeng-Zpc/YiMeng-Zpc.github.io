@@ -27,3 +27,6 @@ resources/_gen/
 # OS
 .DS_Store
 Thumbs.db
+
+# WorkBuddy 临时文件（拼图/脚本/调试产物）
+.workbuddy/tmp/
