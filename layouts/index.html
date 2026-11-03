@@ -13,31 +13,63 @@
     {{- $paginator = .Paginate (where .Site.RegularPages "Section" "in" $mainSections) -}}
   {{- end -}}
 
-  {{- /* 炫酷网格：文章卡片 */ -}}
+  {{- /* 炫酷网格：文章卡片
+       2026-11-03: 三项改动
+         1) 整卡可点击（此前只能点标题链接）→ 卡片内容包在 <a> 里，
+            但 <a> 不能嵌套 <a>，所以 tags 用 span，滚动图区用 div。
+         2) 摘要左侧新增「循环滚动图」竖列 → 取该文 photos 前若干张做滚动展示。
+         3) 滚动图用文章自身的 CDN 图，缩略优先走 -sm.webp。 */ -}}
+  {{- $meta := site.Data.photo_meta | default dict -}}
   {{- if gt (len $paginator.Pages) 0 -}}
   <section class="home-posts-grid" data-aos="fade-up">
     {{- range $k, $v := $paginator.Pages.ByDate.Reverse -}}
+      {{- $photos := .Params.photos | default slice -}}
       <article class="post-card">
-        <h3><a href="{{ .Permalink | relURL }}">{{ .Title }}</a></h3>
-        <div class="meta">
-          <i class="fa-regular fa-calendar"></i>
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-          {{- with .Params.categories }}
-            <span style="margin-left:8px;"><i class="fa-solid fa-folder-open"></i> {{ index . 0 }}</span>
-          {{- end }}
-        </div>
-        <p class="summary">
-          {{- with .Description -}}
-            {{ . }}
-          {{- else -}}
-            {{ .Summary | plainify | truncate 120 }}
-          {{- end -}}
-        </p>
-        {{- with .Params.tags }}
-        <div class="tags">
-          {{- range . }}<span>#{{ . }}</span>{{- end }}
-        </div>
-        {{- end }}
+        <a class="post-card-link" href="{{ .Permalink | relURL }}" aria-label="{{ .Title }}">
+          <h3>{{ .Title }}</h3>
+          <div class="meta">
+            <i class="fa-regular fa-calendar"></i>
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+            {{- with .Params.categories }}
+              <span style="margin-left:8px;"><i class="fa-solid fa-folder-open"></i> {{ index . 0 }}</span>
+            {{- end }}
+          </div>
+          {{- /* 摘要 + 左侧滚动图 */ -}}
+          <div class="post-card-body">
+            {{- if gt (len $photos) 0 -}}
+              {{- $scroll := first 6 $photos -}}
+              <div class="post-card-scroll" aria-hidden="true">
+                <div class="post-card-scroll-track">
+                  {{- range $scroll -}}
+                    {{- $u := . | relURL -}}
+                    {{- $tmu := replace $u ".webp" "-t.webp" -}}
+                    <img src="{{ $tmu }}" alt="" loading="lazy" decoding="async" />
+                  {{- end -}}
+                  {{- /* 复制一份用于无缝循环 */ -}}
+                  {{- range $scroll -}}
+                    {{- $u := . | relURL -}}
+                    {{- $tmu := replace $u ".webp" "-t.webp" -}}
+                    <img src="{{ $tmu }}" alt="" loading="lazy" decoding="async" />
+                  {{- end -}}
+                </div>
+              </div>
+            {{- end -}}
+            <div class="post-card-text">
+              <p class="summary">
+                {{- with .Description -}}
+                  {{ . }}
+                {{- else -}}
+                  {{ .Summary | plainify | truncate 120 }}
+                {{- end -}}
+              </p>
+              {{- with .Params.tags }}
+              <div class="tags">
+                {{- range . }}<span>#{{ . }}</span>{{- end }}
+              </div>
+              {{- end }}
+            </div>
+          </div>
+        </a>
       </article>
     {{- end -}}
   </section>

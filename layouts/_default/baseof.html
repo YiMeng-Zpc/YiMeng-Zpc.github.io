@@ -106,6 +106,8 @@
     </div>
     <script src="{{ "js/walle-scroll.js" | relURL }}" defer></script>
     <script src="{{ "js/img-fallback.js" | relURL }}" defer></script>
+    {{- /* 2026-11-03: 图库 masonry 精排 —— 按图片真实比例定位，消除横竖版混排空白 */ -}}
+    <script src="{{ "js/gallery-masonry.js" | relURL }}" defer></script>
     {{- if .Site.Params.injector.body_end -}}
       {{- .Site.Params.injector.body_end | safeHTML -}}
     {{- end -}}

@@ -470,7 +470,7 @@ html {
 
 .home-posts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
   padding: 24px 0;
 }
@@ -494,6 +494,7 @@ html {
   background: linear-gradient(135deg, rgba(14, 165, 233, 0.10), rgba(245, 158, 11, 0.10));
   opacity: 0;
   transition: opacity 0.4s ease;
+  pointer-events: none;
 }
 
 .home-posts-grid .post-card:hover {
@@ -508,12 +509,23 @@ html {
   opacity: 1;
 }
 
+/* 整卡可点击：标题以外的区域（摘要/标签/滚动图）点击也能跳转文章 */
+.home-posts-grid .post-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.home-posts-grid .post-card-link:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
 .home-posts-grid .post-card h3 {
   margin: 0 0 10px;
   font-size: 1.25rem;
-}
-
-.home-posts-grid .post-card h3 a {
   color: var(--snow) !important;
   text-decoration: none;
 }
@@ -524,11 +536,24 @@ html {
   margin-bottom: 12px;
 }
 
+/* 摘要 + 左侧滚动图的横向布局 */
+.home-posts-grid .post-card-body {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.home-posts-grid .post-card-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .home-posts-grid .post-card .summary {
   color: var(--snow);
   opacity: 0.88;
   font-size: 0.95rem;
   line-height: 1.6;
+  margin: 0;
 }
 
 .home-posts-grid .post-card .tags {
@@ -545,6 +570,65 @@ html {
   background: rgba(14, 165, 233, 0.15);
   color: var(--ocean-bright);
   border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* ---- 左侧循环滚动图展示区 ----
+   竖向 marquee：图片列表复制两份，用 translateY(-50%) 实现无缝循环。
+   鼠标悬停暂停，移动端隐藏（节省流量）。 */
+.home-posts-grid .post-card-scroll {
+  flex: 0 0 84px;
+  width: 84px;
+  max-height: 172px;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  background: var(--color-wrap);
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+.home-posts-grid .post-card-scroll-track {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 4px 0;
+  animation: post-card-scroll-up 26s linear infinite;
+  will-change: transform;
+}
+
+.home-posts-grid .post-card-scroll-track img {
+  display: block;
+  width: 100%;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+
+.home-posts-grid .post-card:hover .post-card-scroll-track {
+  animation-play-state: paused;
+}
+
+@keyframes post-card-scroll-up {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-posts-grid .post-card-scroll-track {
+    animation: none;
+  }
+}
+
+/* 移动端：隐藏滚动图区，节省流量，卡片改为单列文字布局 */
+@media (max-width: 768px) {
+  .home-posts-grid .post-card-scroll {
+    display: none;
+  }
+  .home-posts-grid .post-card-body {
+    gap: 0;
+  }
 }
 
 
@@ -755,17 +839,42 @@ img[alt="about-avatar"]:hover {
   #walle-track { display: none !important; }
 }
 /* ============================================
-   文章相册：修复主题「只有第一张可见」缺陷
+   文章相册：修复主题「只有第一张可见」缺陷 + 按图片比例排版
    主题 .article-gallery-img 默认 display:none，仅 :first-child 显示，
    且依赖 .loaded 类才 absolute 定位 —— 但主题从不添加该类，
    导致第 2~N 张图永远不可见（"配图没有添加"的根因）。
-   这里改为网格布局，图片全部可见，且配合懒加载按需加载。
+
+   排版策略（按图片真实宽高比分档，data-w/data-h 来自模板）：
+     .gal-banner  超宽横幅 (r>=2.0)    独占整行，完整宽度展示
+     .gal-wide    标准横向 (r>=1.25)   常规格，两张并排
+     .gal-square  接近方形 (0.95~1.25) 常规格
+     .gal-tall    竖版    (r<0.95)     竖格，多张并排时等高不裁切
+
+   关键：img 用 object-fit:contain + 真实 aspect-ratio，
+   保证横版竖版都完整可见，绝不裁掉画面主体。
    ============================================ */
 .article-gallery-photos {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   overflow: visible;
+  align-items: start;
+}
+
+/* ---- banner：超宽图独占整行 ---- */
+.article-gallery-img.gal-banner {
+  grid-column: 1 / -1;
+}
+
+/* ---- wide / square：占 2 格 ---- */
+.article-gallery-img.gal-wide,
+.article-gallery-img.gal-square {
+  grid-column: span 2;
+}
+
+/* ---- tall：竖版占 1 格 ---- */
+.article-gallery-img.gal-tall {
+  grid-column: span 1;
 }
 
 .article-gallery-img {
@@ -784,12 +893,15 @@ img[alt="about-avatar"]:hover {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
+/* 图片按自身比例完整显示，不做 cover 裁切。
+   width/height 属性由模板输出（真实像素），配合下面的 aspect-ratio
+   让浏览器在图片加载前就能预留正确空间，避免布局跳动。 */
 .article-gallery-img img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  aspect-ratio: 3 / 2;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
   margin: 0;
 }
 
@@ -804,9 +916,58 @@ img[alt="about-avatar"]:hover {
   opacity: 1;
 }
 
+/* ---- 响应式：窄屏递减列数 ---- */
+@media (max-width: 1100px) {
+  .article-gallery-photos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .article-gallery-img.gal-wide,
+  .article-gallery-img.gal-square {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .article-gallery-photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .article-gallery-img.gal-wide,
+  .article-gallery-img.gal-square {
+    grid-column: span 2;
+  }
+  .article-gallery-img.gal-tall {
+    grid-column: span 1;
+  }
+}
+
 @media (max-width: 640px) {
   .article-gallery-photos {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 6px;
   }
+  /* 移动端竖版图两列并排，横版图整行 */
+  .article-gallery-img.gal-banner,
+  .article-gallery-img.gal-wide,
+  .article-gallery-img.gal-square {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ============================================
+   masonry 精排（JS 增强层）
+   JS 计算每张图实际高度并绝对定位，容器按最高列撑开。
+   未启用 JS 时上面的 Grid 规则仍保证全部图片可见。
+
+   注意：必须用 !important 压过上面的 position:static !important，
+   否则 JS 设置的绝对定位会失效，图片将全部堆在第一列。
+   ============================================ */
+.article-gallery-photos .article-gallery-img.gal-masonry {
+  position: absolute !important;
+  grid-column: auto;
+  margin: 0;
+  max-width: none;
+}
+
+.article-gallery-photos .article-gallery-img.gal-fallback {
+  position: static !important;
 }
