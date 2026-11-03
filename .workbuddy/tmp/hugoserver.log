@@ -1,0 +1,23 @@
+Watching for changes in D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/archetypes, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/assets/{css,js}, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/content/posts, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/data, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/i18n, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/layouts/{_default,archives,partials}, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/package.json, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/static/{avatar,css,images,img,js}, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/themes/hugo-theme-reimu/archetypes, D:/AI工作空间/YiMeng/YiMeng-Zpc.github.io/themes/hugo-theme-reimu/assets/{css,js}, ... and 5 more
+Watching for config changes in D:\AI工作空间\YiMeng\YiMeng-Zpc.github.io\hugo.toml, D:\AI工作空间\YiMeng\YiMeng-Zpc.github.io\themes\hugo-theme-reimu\config.toml, D:\AI工作空间\YiMeng\YiMeng-Zpc.github.io\themes\hugo-theme-reimu\config\_default
+Start building sites … 
+hugo v0.165.0-76a5e1880ab46688155b02e99bab9be2a6134492+extended windows/amd64 BuildDate=2026-08-12T14:26:28Z VendorInfo=gohugoio
+
+WARN  found no layout file for "html" for kind "section": You should create a template file which matches Hugo Layouts Lookup Rules for this combination.
+
+                  │ ZH - CN │ EN  
+──────────────────┼─────────┼─────
+ Pages            │     137 │ 136 
+ Paginator pages  │       4 │   4 
+ Non-page files   │       0 │   0 
+ Static files     │     418 │ 418 
+ Processed images │       0 │   0 
+ Aliases          │      58 │  57 
+ Cleaned          │       0 │   0 
+
+Built in 1626 ms
+Environment: "development"
+Serving pages from disk
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at http://localhost:1314/ (bind address 127.0.0.1) 
+Press Ctrl+C to stop

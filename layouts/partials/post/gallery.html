@@ -1,0 +1,56 @@
+{{- /*
+  覆盖主题 partials/post/gallery.html
+
+  修复两个问题：
+  1) 主题原版从不给 .article-gallery-img 加 .loaded 类，而该类默认 display:none
+     → 每篇文章只有第 1 张图可见，其余 7 张永远隐藏（"配图没有添加"的根因）
+     本模板在 onload 里补上 .loaded，配合 cyber.css 的网格布局让全部图片可见。
+  2) 主题原版直接加载 2000px 大图，且无 srcset → 首屏并发拉取全部大图，页面极慢
+     本模板输出 srcset(800w/2000w) + 原生 loading="lazy"/decoding="async"，
+     浏览器按视口和 DPR 只下载需要的尺寸，且滚到才加载。
+
+  注意：本项目已移除 lazysizes（见 layouts/partials/afterFooter.html 的 L4 备注），
+  因此这里用原生 lazy loading，不依赖任何 JS 库。
+
+  photos 字段存绝对 URL（jsDelivr / Pages），relURL 不会改写它们，
+  缩略图地址靠字符串替换得到，文件是否存在用仓库内相对路径校验。
+*/ -}}
+{{- if and .Params.photos (len .Params.photos) -}}
+  <div class="article-gallery">
+    <div class="article-gallery-photos">
+      {{- range .Params.photos -}}
+        {{- $src := . | relURL -}}
+        {{- $sm := replace $src ".webp" "-sm.webp" -}}
+        {{- /* 取 URL 中 /static/ 之后的仓库相对路径，用于 fileExists 校验 */ -}}
+        {{- $rel := "" -}}
+        {{- if in $sm "/static/" -}}
+          {{- $rel = printf "static/%s" (index (split $sm "/static/") 1) -}}
+        {{- end -}}
+        {{- $hasSm := and $rel (fileExists $rel) -}}
+        <a class="article-gallery-img article-gallery-item" href="{{ $src }}" target="_blank">
+          {{- if $hasSm }}
+          <img
+            src="{{ $sm }}"
+            srcset="{{ $sm }} 800w, {{ $src }} 2000w"
+            sizes="(max-width: 640px) 50vw, (max-width: 1100px) 33vw, 260px"
+            itemprop="image"
+            alt="gallery"
+            loading="lazy"
+            decoding="async"
+            onload="this.parentNode.classList.add('loaded');this.parentNode.dataset.pswpWidth = this.naturalWidth;this.parentNode.dataset.pswpHeight = this.naturalHeight;"
+          >
+          {{- else }}
+          <img
+            src="{{ $src }}"
+            itemprop="image"
+            alt="gallery"
+            loading="lazy"
+            decoding="async"
+            onload="this.parentNode.classList.add('loaded');this.parentNode.dataset.pswpWidth = this.naturalWidth;this.parentNode.dataset.pswpHeight = this.naturalHeight;"
+          >
+          {{- end }}
+        </a>
+      {{- end -}}
+    </div>
+  </div>
+{{- end -}}
