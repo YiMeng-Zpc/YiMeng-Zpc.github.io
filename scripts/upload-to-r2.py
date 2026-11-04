@@ -27,6 +27,9 @@
   # 把仓库里已有的 99 张迁到 R2（并改写文章 front matter 里的 URL）
   python scripts/upload-to-r2.py --migrate
 
+  # 上传 stage-r2-photos.py 预压缩好的图片（推荐，凭据到位后一条命令搞定）
+  python scripts/upload-to-r2.py --from-staging
+
   # 只看会传哪些
   python scripts/upload-to-r2.py --nas --slug x --files-list tmp/p.txt --dry-run
 """
@@ -54,6 +57,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 NAS_ROOT = "//192.168.8.1/YiMeng云盘/图片"
 REPO_IMG_ROOT = os.path.join(ROOT, "static", "images", "uploads", "posts")
 META_R2 = os.path.join(ROOT, "data", "photo_meta_r2.json")
+STAGING = os.path.join(ROOT, ".workbuddy", "tmp", "staging")
 BLACKLIST = os.environ.get(
     "NAS_BLACKLIST",
     os.path.join(os.path.dirname(ROOT), ".workbuddy", "tmp", "sensitive-files.txt"),
@@ -286,17 +290,53 @@ def do_migrate(args, cfg, client, meta, blacklist) -> int:
     return 0
 
 
+def do_staging(args, cfg, client, meta) -> int:
+    """上传 stage-r2-photos.py 预压缩好的图片，并落地元数据。"""
+    plan_path = os.path.join(STAGING, "_plan.json")
+    meta_src = os.path.join(STAGING, "photo_meta_r2.json")
+    if not (os.path.isfile(plan_path) and os.path.isfile(meta_src)):
+        print(f"[ERR] 暂存产物不存在，请先执行 scripts/stage-r2-photos.py\n"
+              f"       期望: {plan_path}", file=sys.stderr)
+        return 1
+
+    with open(plan_path, encoding="utf-8") as fh:
+        plan = json.load(fh)
+    with open(meta_src, encoding="utf-8") as fh:
+        staged_meta = json.load(fh)
+
+    base = cfg["R2_PUBLIC_BASE"].rstrip("/")
+    bucket = cfg["R2_BUCKET"]
+    for item in plan["items"]:
+        if not os.path.isfile(item["local"]):
+            print(f"[MISS] 暂存文件不存在: {item['local']}")
+            raise SystemExit("[ERR] 暂存文件缺失，已中止")
+        if not args.dry_run:
+            with open(item["local"], "rb") as fh:
+                upload(client, bucket, item["key"], fh.read())
+        print(f"[OK] {item['key']}")
+
+    for key, info in staged_meta.items():
+        info["url"] = f"{base}/posts/{key}"
+        meta[key] = info
+
+    print(f"[INFO] 上传 {len(plan['items'])} 个文件，元数据 {len(staged_meta)} 条")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--nas", action="store_true", help="从 NAS 上传新图")
     ap.add_argument("--migrate", action="store_true", help="迁移仓库里已有的图片到 R2")
+    ap.add_argument("--from-staging", action="store_true",
+                    help="上传 stage-r2-photos.py 预压缩好的图片（推荐）")
     ap.add_argument("--slug", help="文章 slug")
     ap.add_argument("--files-list", help="人工甄别后的显式清单")
     ap.add_argument("--dry-run", action="store_true", help="不实际上传")
     args = ap.parse_args()
 
-    if args.nas == args.migrate:
-        print("[ERR] --nas 与 --migrate 二选一")
+    modes = sum(bool(x) for x in (args.nas, args.migrate, args.from_staging))
+    if modes != 1:
+        print("[ERR] --nas / --migrate / --from-staging 三选一")
         return 1
     if args.nas and not (args.slug and args.files_list):
         print("[ERR] --nas 需要同时提供 --slug 与 --files-list")
@@ -309,6 +349,9 @@ def main() -> int:
 
     if args.nas:
         do_nas(args, cfg, client, meta, blacklist)
+    elif args.from_staging:
+        if do_staging(args, cfg, client, meta) != 0:
+            return 1
     else:
         do_migrate(args, cfg, client, meta, blacklist)
 
