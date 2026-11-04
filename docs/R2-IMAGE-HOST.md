@@ -25,6 +25,12 @@ jsDelivr 对**单个仓库**有 50MB 硬上限（实测报 `Package size exceede
 
 ## 配置步骤（约 5 分钟）
 
+账号不用新注册：Keystatic 后台 `keystatic-admin.yi-meng.workers.dev` 就在这个 Cloudflare 账号下，
+直接登录 [dash.cloudflare.com](https://dash.cloudflare.com) 即可。
+
+> **最省事的做法**：如果你不想自己敲命令，只需把下面 5 个值发给我，
+> 我会写好 `.env`、执行自检、上传 438 个对象、收尾并提交推送，全程不用你操作终端。
+
 ### 1. 创建桶
 
 Cloudflare 控制台 → 左侧 **R2** → **Create bucket**
@@ -71,15 +77,31 @@ Cloudflare 控制台右侧边栏 → **Account ID**（一串 32 位十六进制�
 
 ## 填入项目
 
-在仓库根目录建 `.env`（**已被 .gitignore 忽略，不会进版本库**）：
+在仓库根目录建 `.env`（**已被 .gitignore 忽略，不会进版本库**）。仓库里已备好模板
+`.env.example`，复制一份改名再填即可：
 
 ```bash
-R2_ACCOUNT_ID=你的账户ID
-R2_ACCESS_KEY_ID=上面的Access Key ID
-R2_SECRET_ACCESS_KEY=上面的Secret Access Key
+cp .env.example .env
+```
+
+Windows 资源管理器里也行：复制 `.env.example` → 粘贴 → 改名为 `.env` → 用记事本打开填 5 个值。
+
+```bash
+R2_ACCOUNT_ID=32位十六进制账户ID
+R2_ACCESS_KEY_ID=Access Key ID
+R2_SECRET_ACCESS_KEY=Secret Access Key
 R2_BUCKET=blog-photos
 R2_PUBLIC_BASE=https://pub-xxxxxxxx.r2.dev
 ```
+
+填完先自检，**不用真的连 R2**，会告诉你哪一项没填、格式对不对、待上传产物和黑名单是否齐：
+
+```bash
+python scripts/check-r2-config.py           # 本地静态检查
+python scripts/check-r2-config.py --live    # 额外探测公开域名是否可达
+```
+
+看到 `==== 检查通过，可以上线 ====` 就说明配置没问题。
 
 ## 使用
 
@@ -149,8 +171,13 @@ python scripts/upload-to-r2.py --migrate
 2. 只读取 NAS 与仓库，不修改、不删除 NAS 上任何文件。
 3. 凭据只从环境变量 / `.env` 读取，不写入任何被追踪的文件。
 4. **仍需人工处理**：黑名单里的 13 个文件目前还留在 NAS `图片` 目录里，
-   脚本只能保证它们不会被上传，不能替你把它们挪走。请手动迁移到非公开目录，
-   重点是钞票序列号特写与展台上的证件照打印件。
+   脚本只能保证它们不会被上传，不能替你把它们挪走。
+   迁移目标建议用 NAS 上已存在的私有区：
+   `\\192.168.8.1\YiMeng云盘\加密图片\张鹏超-证件\`
+   （该目录已有，同级的 `加密图片` 不在 `图片` 共享范围内）。
+   最要紧的两张：`河野华\钞票.jpg`（纸币序列号清晰）、
+   `2026年北京摄影器材展\ZPC05945.jpg`（展台证件照打印件）。
+   完整 13 条路径在 `D:\AI工作空间\YiMeng\.workbuddy\tmp\sensitive-files.txt`。
 
 ## 排障
 
@@ -160,3 +187,23 @@ python scripts/upload-to-r2.py --migrate
 | `SignatureDoesNotMatch` | Secret Access Key 抄错 | 重新创建 Token（Secret 只显示一次） |
 | 403 Forbidden | 桶没开公共访问 | R2 → Settings → Public access |
 | `EndpointConnectionError` | 代理干扰 | `env -u http_proxy -u https_proxy ...` |
+| `Package size exceeded ... 50 MB` | 误把新图塞回仓库而非 R2 | 只走 `--from-staging`，不要往 `static/images/uploads/` 加主图 |
+
+## 附录：待迁移的 13 个敏感文件
+
+清单采取**保守拦截**——宁可多拦，不漏一张。没有标准身份证/护照/银行卡，
+但有现金序列号、证件照打印件和清晰私人人像。
+
+| 所在目录（相对 `\\192.168.8.1\YiMeng云盘\图片\`） | 文件 | 处理建议 |
+|---|---|---|
+| `河野华\` | `钞票.jpg` | **必须迁移**：纸币序列号清晰可读 |
+| `2026年北京摄影器材展\` | `ZPC05945.jpg` | **必须迁移**：展台上的证件照打印件 |
+| `河野华\` | `河野华1.jpg`、`河野华2.jpg`、`河野华3.jpg` | 清晰私人人像，建议迁移 |
+| `日本旅行\人像\` | `微信图片_20250514233327.jpg`、`微信图片_20250514233335.jpg`、`微信图片_20250514233338.jpg` | 清晰私人人像，建议迁移 |
+| `2025年9月20日\图片\` | `ZPC03539.JPG` | 需人工复核 |
+| `新疆\新疆禾木村、沙漠无人区、喀纳斯\` | `ZPC05015.jpg`、`ZPC05019.jpg` | 需人工复核 |
+| `日本旅行\图片\` | `ZPC01596.JPG`、`ZPC01597.JPG` | 需人工复核 |
+
+复核后如果确认某张可以公开，把对应行从 `sensitive-files.txt` 删掉，
+下次选图就会把它当普通照片处理。删之前请确认该行是**精确路径**，别整段清空——
+黑名单文件缺失时上传脚本会直接中止（fail-closed）。
