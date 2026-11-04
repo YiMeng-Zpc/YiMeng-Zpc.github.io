@@ -7,9 +7,8 @@
 等 .env 配好后，用 `python scripts/upload-to-r2.py --from-staging` 一键上传。
 
 映射规则：
-  gear.txt            -> beijing-still-life-2026，编号从 01 起
-  sep2025.txt         -> taikang-temple-and-museum，编号从 01 起
-  add-<slug>.txt      -> 已有文章 <slug>，编号从「现有 photos 数 + 1」起
+  NEW_ARTICLES 里的清单 -> 新文章，编号从 01 起
+  add-<slug>.txt        -> 已有文章 <slug>，编号从「现有 photos 数 + 1」起
 
 产物（全部在 .workbuddy/tmp/staging/，已被 .gitignore 忽略）：
   <slug>/NN.webp / NN-sm.webp / NN-t.webp
@@ -43,6 +42,10 @@ BLACKLIST = os.environ.get(
 NEW_ARTICLES = {
     "gear.txt": ("beijing-still-life-2026", 1),
     "sep2025.txt": ("taikang-temple-and-museum", 1),
+    "jingshan-city.txt": ("beijing-jingshan-clouds-and-city", 1),
+    "shougang-sunset.txt": ("beijing-shougang-bridge-sunset", 1),
+    "shichahai-lotus.txt": ("beijing-shichahai-lotus", 1),
+    "waterbirds.txt": ("beijing-waterbirds", 1),
 }
 
 VARIANTS = (("", 2000, 80), ("-sm", 800, 80), ("-t", 240, 70))

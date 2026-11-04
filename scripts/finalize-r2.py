@@ -32,7 +32,14 @@ POSTS = os.path.join(ROOT, "content", "posts")
 META_R2 = os.path.join(ROOT, "data", "photo_meta_r2.json")
 
 # 新文章 slug（上线时去掉 draft）
-NEW_POSTS = ("beijing-still-life-2026", "taikang-temple-and-museum")
+NEW_POSTS = (
+    "beijing-still-life-2026",
+    "taikang-temple-and-museum",
+    "beijing-jingshan-clouds-and-city",
+    "beijing-shougang-bridge-sunset",
+    "beijing-shichahai-lotus",
+    "beijing-waterbirds",
+)
 
 
 def public_base() -> str:

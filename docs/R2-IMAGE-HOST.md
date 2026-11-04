@@ -83,6 +83,38 @@ R2_PUBLIC_BASE=https://pub-xxxxxxxx.r2.dev
 
 ## 使用
 
+### 推荐：凭据到位前先预压缩（当前状态）
+
+`scripts/stage-r2-photos.py` 已经把选好的图全部预压缩到
+`.workbuddy/tmp/staging/`（已被 `.gitignore` 忽略，不进版本库），并生成 `_plan.json`
+上传计划与 `photo_meta_r2.json` 元数据草稿。
+
+当前暂存规模：
+
+| 项目 | 数值 |
+|---|---|
+| 主图 | 146 张 |
+| 三档 WebP 文件 | 438 个 |
+| 暂存体积 | 42.70 MB |
+| 涉及文章 | 6 篇新文章 + 6 篇已有文章补图 |
+| 黑名单拦截 | 0 次（选图清单已全部避开敏感文件） |
+
+6 篇新文章（`beijing-still-life-2026`、`taikang-temple-and-museum`、
+`beijing-jingshan-clouds-and-city`、`beijing-shougang-bridge-sunset`、
+`beijing-shichahai-lotus`、`beijing-waterbirds`）目前是 `draft: true`，
+front matter 里的图片地址是占位符 `https://__R2_BASE__`，因此线上不会出现 404。
+
+### 凭据到位后的一键上线
+
+```bash
+python scripts/upload-to-r2.py --from-staging          # 上传 438 个对象 + 落地元数据
+python scripts/finalize-r2.py --check                 # 干跑，确认会改哪些文件
+python scripts/finalize-r2.py                        # 替换占位符 / 追加补图 / 去掉 draft
+git add -A && git commit && git push
+```
+
+`finalize-r2.py` 是幂等的，重复执行不会重复追加图片。
+
 ### 上传新图（从 NAS）
 
 先做人工甄别，把选中的文件写成清单（每行一个，支持三种写法）：
@@ -116,6 +148,9 @@ python scripts/upload-to-r2.py --migrate
    黑名单路径：`../.workbuddy/tmp/sensitive-files.txt`，也可用 `NAS_BLACKLIST` 环境变量覆盖。
 2. 只读取 NAS 与仓库，不修改、不删除 NAS 上任何文件。
 3. 凭据只从环境变量 / `.env` 读取，不写入任何被追踪的文件。
+4. **仍需人工处理**：黑名单里的 13 个文件目前还留在 NAS `图片` 目录里，
+   脚本只能保证它们不会被上传，不能替你把它们挪走。请手动迁移到非公开目录，
+   重点是钞票序列号特写与展台上的证件照打印件。
 
 ## 排障
 
