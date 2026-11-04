@@ -31,11 +31,17 @@ jsDelivr 对**单个仓库**有 50MB 硬上限（实测报 `Package size exceede
 > **最省事的做法**：如果你不想自己敲命令，只需把下面 5 个值发给我，
 > 我会写好 `.env`、执行自检、上传 438 个对象、收尾并提交推送，全程不用你操作终端。
 
+> **可能的卡点**：第一次进入 R2 时，控制台可能要求先绑定付款方式（Visa/Mastercard
+> 等外币卡，通常只做 1 美元预授权后撤销，免费额度内不扣费）。各方资料对「是否必须绑卡」
+> 说法不一，以你控制台实际弹窗为准。若这一步走不通，告诉我，我们改走别的图床方案。
+
 ### 1. 创建桶
 
 Cloudflare 控制台 → 左侧 **R2** → **Create bucket**
 
 - Bucket name：`blog-photos`（建议用这个，后续脚本默认值一致）
+  **桶名是全局唯一的**，若提示已被占用，换成 `yimeng-blog-photos` 之类，
+  并同步把 `.env` 里的 `R2_BUCKET` 改成同一个名字
 - Location：`Automatic`（会自动选离用户更近的边缘）
 - Storage class：默认 **Standard**
 
@@ -188,6 +194,9 @@ python scripts/upload-to-r2.py --migrate
 | 403 Forbidden | 桶没开公共访问 | R2 → Settings → Public access |
 | `EndpointConnectionError` | 代理干扰 | `env -u http_proxy -u https_proxy ...` |
 | `Package size exceeded ... 50 MB` | 误把新图塞回仓库而非 R2 | 只走 `--from-staging`，不要往 `static/images/uploads/` 加主图 |
+| 创建桶提示已被占用 | R2 桶名全局唯一 | 换个名字，同步改 `.env` 的 `R2_BUCKET` |
+| 首次进 R2 被拦 | 账号未绑定付款方式 | 按控制台提示补绑，或换图床方案 |
+| 国内访问 `r2.dev` 偏慢 | 公共子域名在国内链路不稳定 | 在 R2 Custom Domains 绑定 `img.zhangpengchao.com`（主域名已在 Cloudflare），并改 `R2_PUBLIC_BASE` |
 
 ## 附录：待迁移的 13 个敏感文件
 
