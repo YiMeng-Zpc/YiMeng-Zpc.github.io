@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>仪表盘 · 固定入口</title>
+<style>
+  :root{
+    --bg:#070a0f; --card:rgba(18,24,36,.72); --line:rgba(140,170,255,.14);
+    --text:#e8edf7; --dim:#8d9ab4; --ok:#3ddc97; --warn:#ffb84d; --err:#ff6b81;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    display:flex; align-items:center; justify-content:center; padding:24px;
+    overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  }
+  .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .bg::before{
+    content:"";position:absolute;inset:-30%;
+    background:
+      radial-gradient(38% 34% at 18% 22%,rgba(34,211,238,.16),transparent 70%),
+      radial-gradient(34% 30% at 82% 26%,rgba(167,139,250,.16),transparent 70%),
+      radial-gradient(40% 36% at 62% 84%,rgba(244,114,182,.13),transparent 70%);
+    filter:blur(20px); animation:drift 18s linear infinite alternate;
+  }
+  .bg::after{
+    content:"";position:absolute;inset:0;opacity:.35;
+    background-image:linear-gradient(rgba(140,170,255,.045) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(140,170,255,.045) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent 100%);
+    -webkit-mask-image:radial-gradient(70% 60% at 50% 45%,#000,transparent 100%);
+  }
+  @keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.08)}}
+  @keyframes flow{to{background-position:300% 0}}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,151,.45)}50%{box-shadow:0 0 0 7px rgba(61,220,151,0)}}
+
+  .wrap{position:relative;z-index:1;width:100%;max-width:520px}
+  .card{
+    position:relative; background:var(--card); border:1px solid var(--line);
+    border-radius:20px; padding:34px 32px 28px; overflow:hidden;
+    backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.02) inset;
+    animation:rise .65s cubic-bezier(.2,.8,.2,1) both;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 34px rgba(80,170,255,.14)}
+  .card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;
+    background:radial-gradient(340px circle at var(--mx,50%) var(--my,0%),rgba(120,190,255,.11),transparent 65%);
+  }
+  .card:hover::before{opacity:1}
+  .card::after{
+    content:"";position:absolute;left:0;right:0;top:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(34,211,238,.7),rgba(167,139,250,.7),rgba(244,114,182,.7),transparent);
+  }
+
+  .eyebrow{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);
+    display:flex;align-items:center;gap:9px;animation:rise .6s .06s both;
+  }
+  .eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--ok);animation:pulse 2.2s ease-in-out infinite}
+  h1{
+    margin:14px 0 8px;font-size:31px;line-height:1.25;font-weight:700;letter-spacing:-.5px;
+    background:linear-gradient(90deg,#22d3ee,#7dd3fc,#a78bfa,#f472b6,#fbbf24,#22d3ee);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:flow 7s linear infinite, rise .6s .12s both;
+  }
+  .sub{color:var(--dim);font-size:13.5px;margin:0 0 26px;animation:rise .6s .18s both}
+
+  .box{
+    background:rgba(8,12,20,.66);border:1px solid var(--line);border-radius:13px;
+    padding:16px 18px;margin-bottom:14px;animation:rise .6s .24s both;
+  }
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:5px 0}
+  .row + .row{border-top:1px dashed rgba(140,170,255,.1);margin-top:6px;padding-top:11px}
+  .k{color:var(--dim);font-size:12.5px;white-space:nowrap}
+  .v{font-size:13px;text-align:right;word-break:break-all}
+  .mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}
+  .state{display:inline-flex;align-items:center;gap:7px;font-weight:600}
+  .state i{width:7px;height:7px;border-radius:50%;background:var(--warn);box-shadow:0 0 10px currentColor}
+  .state.ok i{background:var(--ok)}.state.ok{color:var(--ok)}
+  .state.err i{background:var(--err)}.state.err{color:var(--err)}
+
+  .bar{height:3px;border-radius:3px;background:rgba(140,170,255,.12);overflow:hidden;margin:16px 0 0}
+  .bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#22d3ee,#a78bfa,#f472b6);
+    transition:width .25s linear}
+
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;animation:rise .6s .3s both}
+  button{
+    font:inherit;font-size:13px;font-weight:600;cursor:pointer;border-radius:10px;
+    padding:11px 18px;border:1px solid var(--line);color:var(--text);
+    background:rgba(255,255,255,.045);transition:transform .2s,box-shadow .2s,background .2s;
+  }
+  button:hover{transform:translateY(-2px);background:rgba(255,255,255,.09);box-shadow:0 8px 22px rgba(80,160,255,.18)}
+  button:active{transform:translateY(0)}
+  button:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+  .primary{
+    border-color:transparent;color:#06121b;
+    background:linear-gradient(100deg,#22d3ee,#7dd3fc,#a78bfa,#f472b6,#22d3ee);
+    background-size:300% 100%;animation:flow 7s linear infinite;
+  }
+  .primary:hover{box-shadow:0 10px 30px rgba(120,180,255,.35)}
+
+  .foot{color:var(--dim);font-size:11.5px;line-height:1.75;margin-top:22px;animation:rise .6s .36s both}
+  .foot b{color:#b9c7e2;font-weight:600}
+  .fallback{display:none;margin-top:16px;animation:rise .4s both}
+  .fallback input{
+    width:100%;font:inherit;font-size:12.5px;color:var(--text);background:rgba(8,12,20,.8);
+    border:1px solid var(--line);border-radius:9px;padding:10px 12px;outline:none;
+  }
+  .fallback input:focus{border-color:rgba(34,211,238,.6)}
+  @media(max-width:560px){
+    body{padding:16px}.card{padding:26px 20px 22px;border-radius:16px}
+    h1{font-size:25px}.v{font-size:12px}.row{gap:8px}
+  }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="wrap">
+  <main class="card" id="card">
+    <div class="eyebrow"><i></i> FIXED ENTRY · 永久入口</div>
+    <h1>我的网络仪表盘</h1>
+    <p class="sub">这个地址永远不变。本机在线时自动把你送到当前的面板地址。</p>
+
+    <div class="box">
+      <div class="row"><span class="k">连接状态</span><span class="v"><span class="state" id="st"><i></i><span>正在读取…</span></span></span></div>
+      <div class="row"><span class="k">当前面板地址</span><span class="v mono" id="url">—</span></div>
+      <div class="row"><span class="k">最后一次同步</span><span class="v mono" id="time">—</span></div>
+      <div class="bar"><i id="bar"></i></div>
+    </div>
+
+    <div class="btns">
+      <button class="primary" id="go" type="button" disabled>立即进入 →</button>
+      <button id="copy" type="button" disabled>复制地址</button>
+      <button id="cancel" type="button" disabled>取消自动跳转</button>
+    </div>
+
+    <div class="fallback" id="fallback">
+      <input id="manual" type="url" placeholder="读取失败？粘贴 trycloudflare.com 地址后回车" autocomplete="off" spellcheck="false">
+    </div>
+
+    <p class="foot">
+      面板不在本机在线（关机 / 断网）时这里会停在等待状态 —— 这属于正常现象。<br>
+      公网访问需要<b>面板登录密码</b>；此页面只做地址跳转，不保存任何凭据。<br>
+      <b>https://www.zhangpengchao.com/panel/</b> · 把这个存书签就够了
+    </p>
+  </main>
+</div>
+<script src="go.js"></script>
+</body>
+</html>
