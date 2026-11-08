@@ -12,6 +12,8 @@
   var BRANCH = 'main';
   var FILE = 'panel-endpoint.json';
   var AUTO_MS = 2600;
+  /* ?preview=1 只展示不跳转，用来检查页面长相 / 排查地址同步 */
+  var PREVIEW = /[?&]preview=1/.test(window.location.search);
 
   var $ = function (id) { return document.getElementById(id); };
   var elState = $('st'), elUrl = $('url'), elTime = $('time'), elBar = $('bar');
@@ -94,11 +96,11 @@
     target = r.url;
     setUrl(r.url);
     setTime(r.t);
-    setState('ok', '在线 · 已就绪');
+    setState('ok', PREVIEW ? '在线 · 预览模式' : '在线 · 已就绪');
     btnGo.disabled = false; btnCopy.disabled = false; btnCancel.disabled = false;
     var age = Date.now() - r.t;
     if (r.t && age > 1000 * 60 * 60 * 24) setState('', '地址可能已过期');
-    if (!cancelled) countdown();
+    if (!cancelled && !PREVIEW) countdown();
   }
   function fail(msg) {
     setState('err', msg);
