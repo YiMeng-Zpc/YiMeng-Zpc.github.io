@@ -137,7 +137,7 @@
       await sleep(speed);
     }
     if (res) {
-      await sleep(170);
+      await sleep(140);
       if (aborted) return;
       var r = document.createElement('span');
       r.className = 'boot-res';
@@ -188,9 +188,9 @@
     return '→ ' + os + ' · ' + br + ' · ' + screen.width + '×' + screen.height;
   }
 
-  /* ---------- 「进入」按钮：碎裂 + 拉远消失 ---------- */
+  /* ---------- 「进入」：配音 + 待机内容直接模糊消失 ---------- */
   function shatterEnter() {
-    /* 配音 */
+    /* 配音（下沉 whoosh） */
     try {
       var sfx = new Audio(SHATTER_URL);
       sfx.volume = 0.65;
@@ -199,40 +199,7 @@
     } catch (e) { }
 
     var standby = layer.querySelector('.boot-standby');
-    var btn = layer.querySelector('.boot-enter');
     if (!standby) return;
-
-    /* 按钮碎裂：取按钮矩形，撒出 26 片发光碎片 */
-    if (btn) {
-      var r = btn.getBoundingClientRect();
-      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-      var COLORS = ['#00e5ff', '#52ff9c', '#ffd166', '#eaf6ff', '#ff3df0'];
-      for (var i = 0; i < 26; i++) {
-        var sh = document.createElement('span');
-        sh.className = 'boot-shard';
-        var size = 3 + Math.random() * 5;
-        sh.style.cssText = 'left:' + (cx - size / 2 + (Math.random() - 0.5) * r.width * 0.8) + 'px;' +
-          'top:' + (cy - size / 2 + (Math.random() - 0.5) * r.height * 0.8) + 'px;' +
-          'width:' + size + 'px;height:' + size + 'px;background:' +
-          COLORS[(Math.random() * COLORS.length) | 0] + ';' +
-          'box-shadow:0 0 6px ' + COLORS[(Math.random() * COLORS.length) | 0] + ';';
-        document.body.appendChild(sh);
-        var ang = Math.random() * Math.PI * 2;
-        var dist = 90 + Math.random() * 300;
-        sh.animate([
-          { transform: 'translate(0,0) rotate(0deg) scale(1)', opacity: 1 },
-          {
-            transform: 'translate(' + Math.cos(ang) * dist + 'px,' +
-              (Math.sin(ang) * dist + 120) + 'px) rotate(' +
-              ((Math.random() - 0.5) * 720) + 'deg) scale(0.25)',
-            opacity: 0
-          }
-        ], { duration: 480 + Math.random() * 380, easing: 'cubic-bezier(0.16, 0.84, 0.44, 1)', fill: 'forwards' });
-        window.setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(sh), 950);
-      }
-    }
-
-    /* 整组待机内容拉远消失 */
     standby.classList.add('boot-away');
     window.setTimeout(function () { if (standby.parentNode) standby.parentNode.removeChild(standby); }, 700);
   }
@@ -365,7 +332,7 @@
 
     /* t≈0.9s 起打字；等待 IP 查询最多 1.2s（通常几百毫秒就返回） */
     await sleep(900);
-    var ipData = await Promise.race([diag.ipPromise, sleep(1200).then(function () { return null; })]);
+    var ipData = await Promise.race([diag.ipPromise, sleep(900).then(function () { return null; })]);
     if (aborted) return fireFlashThenReveal();
 
     var ipRes = ipData && ipData.ip
@@ -379,16 +346,16 @@
       : '→ 200 OK · SYNC…';
 
     var lines = [
-      ['$ ping zhangpengchao.com', 'boot-cmd', 20, rttRes],
-      ['$ curl -s ipwho.is', 'boot-cmd', 20, ipRes],
-      ['$ whoami --device', 'boot-cmd', 20, deviceInfo()],
-      ['$ date -u', 'boot-cmd', 20, utcRes]
+      ['$ ping zhangpengchao.com', 'boot-cmd', 18, rttRes],
+      ['$ curl -s ipwho.is', 'boot-cmd', 18, ipRes],
+      ['$ whoami --device', 'boot-cmd', 18, deviceInfo()],
+      ['$ date -u', 'boot-cmd', 18, utcRes]
     ];
     for (var i = 0; i < lines.length; i++) {
       term.insertBefore(cursor, null);
       await typeLine(term, lines[i][0], lines[i][1], lines[i][2], lines[i][3]);
       if (aborted) return fireFlashThenReveal();
-      await sleep(110);
+      await sleep(90);
     }
 
     /* 圆环 2.6s 0→100（总时长向 8.7s 音效靠拢，避免音效被掐断） */

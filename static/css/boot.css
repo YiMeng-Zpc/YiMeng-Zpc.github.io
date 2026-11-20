@@ -205,23 +205,13 @@ html.boot-lock, html.boot-lock body {
   text-shadow: 0 0 22px rgba(0, 229, 255, 0.55), 0 0 44px rgba(0, 229, 255, 0.25);
 }
 
-/* ---------- 待机内容拉远消失（点击进入后） ---------- */
+/* ---------- 待机内容模糊消失（点击进入后） ---------- */
 .boot-standby.boot-away {
-  animation: boot-away 0.62s cubic-bezier(0.5, 0, 0.75, 0.4) both;
+  animation: boot-away 0.55s ease both;
   pointer-events: none;
 }
 @keyframes boot-away {
-  40% { opacity: 0.9; filter: blur(1px); }
-  100% { opacity: 0; transform: scale(0.5); filter: blur(10px); }
-}
-
-/* 碎裂飞散的发光碎片（挂 body，独立于层） */
-.boot-shard {
-  position: fixed;
-  z-index: 100001;
-  pointer-events: none;
-  border-radius: 1px;
-  will-change: transform, opacity;
+  to { opacity: 0; filter: blur(14px); }
 }
 
 /* ---------- 白闪过曝转场 ---------- */
