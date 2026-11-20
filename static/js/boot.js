@@ -82,6 +82,57 @@
   var started = false, finished = false, aborted = false;
   var audio = null;
   var startedAt = 0;
+  var actx = null, noiseBuf = null, lastKey = 0;
+
+  /* ---------- 打字音效：Web Audio 合成机械键盘哒声 + 结果确认音 ---------- */
+  function initTypingSfx() {
+    if (actx) return;
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return;
+      actx = new AC();
+      var len = Math.floor(actx.sampleRate * 0.02);
+      noiseBuf = actx.createBuffer(1, len, actx.sampleRate);
+      var d = noiseBuf.getChannelData(0);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2);
+    } catch (e) { actx = null; }
+  }
+
+  function keyClick() {
+    if (!actx || !noiseBuf) return;
+    var now = performance.now();
+    if (now - lastKey < 55) return; /* 打字 18ms/字太快，节流到 ~18 次/秒防机枪音 */
+    lastKey = now;
+    try {
+      var src = actx.createBufferSource();
+      src.buffer = noiseBuf;
+      var bp = actx.createBiquadFilter();
+      bp.type = 'bandpass';
+      bp.frequency.value = 1600 + Math.random() * 2600;
+      bp.Q.value = 2.5;
+      var g = actx.createGain();
+      var t = actx.currentTime;
+      g.gain.setValueAtTime(0.09 + Math.random() * 0.05, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+      src.connect(bp); bp.connect(g); g.connect(actx.destination);
+      src.start(t);
+    } catch (e) { }
+  }
+
+  function resBlip() {
+    if (!actx) return;
+    try {
+      var o = actx.createOscillator(), g = actx.createGain();
+      var t = actx.currentTime;
+      o.type = 'sine';
+      o.frequency.setValueAtTime(920, t);
+      o.frequency.exponentialRampToValueAtTime(620, t + 0.07);
+      g.gain.setValueAtTime(0.06, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+      o.connect(g); g.connect(actx.destination);
+      o.start(t); o.stop(t + 0.1);
+    } catch (e) { }
+  }
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* 跳过：仅右下角按钮或 Esc 键，避免误触/双击打断序列 */
@@ -108,6 +159,7 @@
     finished = true;
     document.removeEventListener('keydown', onKey);
     stopFx();
+    if (actx) { try { actx.close(); } catch (e) { } actx = null; noiseBuf = null; }
     flash.classList.add('boot-firing');
     /* 白闪 42%~58% 为全白峰值（1.1s 动画 → 约 0.46s~0.64s），此刻切走 boot 层 */
     setTimeout(function () {
@@ -134,6 +186,7 @@
     for (var i = 0; i < text.length; i++) {
       if (aborted) return;
       line.textContent += text.charAt(i);
+      keyClick();
       await sleep(speed);
     }
     if (res) {
@@ -143,6 +196,7 @@
       r.className = 'boot-res';
       r.textContent = '  ' + res;
       line.appendChild(r);
+      resBlip();
     }
   }
 
@@ -399,6 +453,7 @@
         var pp = audio.play();
         if (pp && pp.catch) pp.catch(function () { /* 自动播放被拒则静默 */ });
       } catch (e) { }
+      initTypingSfx(); /* 用户手势内创建 AudioContext，打字音效可用 */
       layer.querySelector('.boot-skip').hidden = false;
       shatterEnter();
       var diag = gatherDiag();
