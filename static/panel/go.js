@@ -21,6 +21,46 @@
   var box = $('fallback'), input = $('manual');
   var target = '', timer = null, tick = null, cancelled = false, seq = 0;
 
+  /* ---------------- 启动序列 ----------------
+   * 打开这个固定入口时先播一段「面板打开」动画，播完再跳进面板。
+   * ★ 关键：跳转必须等序列播完 —— 否则地址一读到就跳走，
+   *   动画根本来不及看（这就是"什么都没看到就没了"的原因）。
+   * bootReady 置位后，countdown 才允许触发 go()。 */
+  var bootReady = false;
+  var bootDone = false;
+
+  function startBoot() {
+    if (typeof window.Boot === 'undefined') { bootReady = true; bootDone = true; return; }
+    var reduce = typeof window.matchMedia === 'function' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { bootReady = true; bootDone = true; return; }
+
+    window.Boot.start({
+      brand: '全栈监控面板',
+      subBrand: 'LOCAL MONITOR · HARNESS',
+      title: 'WELCOME TO',
+      tag: 'SECURE CONSOLE',
+      corner: 'PUBLIC ACCESS · <b>PROTECTED</b>',
+      steps: [
+        '正在建立安全通道',
+        '正在核验访问凭据',
+        '正在读取当前面板地址',
+      ],
+      subs: [
+        'ACCESS PERMISSION REQUIRED',
+        'IDENTITY VERIFICATION',
+        'READ COMPLETE · VERIFIED',
+      ],
+      onDone: function () {
+        bootReady = true;
+        bootDone = true;
+        document.body.classList.add('boot-done');
+        /* 序列刚结束，如果地址早就读到了，立刻开始跳转倒计时 */
+        if (target && !cancelled && !PREVIEW) countdown();
+      },
+    });
+  }
+
   function setState(kind, text) {
     elState.className = 'state' + (kind ? ' ' + kind : '');
     elState.querySelector('span').textContent = text;
@@ -100,7 +140,8 @@
     btnGo.disabled = false; btnCopy.disabled = false; btnCancel.disabled = false;
     var age = Date.now() - r.t;
     if (r.t && age > 1000 * 60 * 60 * 24) setState('', '地址可能已过期');
-    if (!cancelled && !PREVIEW) countdown();
+    /* 启动序列播完才开始跳转倒计时 —— 序列没播完就跳 = 什么都看不到 */
+    if (!cancelled && !PREVIEW && bootReady) countdown();
   }
   function fail(msg) {
     setState('err', msg);
@@ -119,6 +160,8 @@
   }
   function go() {
     if (!target) return;
+    /* 启动序列还在播就先跳过它，别让用户点了按钮干等 */
+    if (!bootDone && window.Boot) window.Boot.close();
     clearInterval(tick); clearTimeout(timer);
     window.location.replace(target);
   }
@@ -158,6 +201,8 @@
     card.style.setProperty('--my', (e.clientY - r.top) + 'px');
   });
 
+  /* 开播启动序列（与读地址并行） */
+  startBoot();
   load();
   /* 页面开着不关时，每 60 秒重新取一次，隧道换地址也能跟上。
      用户点过「取消自动跳转」就只更新显示，不再强制跳转。 */
