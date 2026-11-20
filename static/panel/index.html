@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>仪表盘 · 固定入口</title>
+<link rel="stylesheet" href="boot.css">
 <style>
   :root{
     --bg:#070a0f; --card:rgba(18,24,36,.72); --line:rgba(140,170,255,.14);
@@ -116,6 +117,13 @@
     border:1px solid var(--line);border-radius:9px;padding:10px 12px;outline:none;
   }
   .fallback input:focus{border-color:rgba(34,211,238,.6)}
+
+  /* ================= 启动序列期间的页面衔接 =================
+     序列播放时，卡片不要在遮罩底下自己跑完入场动画 ——
+     遮罩一撤看到的应该是"刚登场"的静止画面。 */
+  body.booting .wrap{opacity:0}
+  body.boot-done .wrap{animation:rise .65s cubic-bezier(.2,.8,.2,1) both}
+
   @media(max-width:560px){
     body{padding:16px}.card{padding:26px 20px 22px;border-radius:16px}
     h1{font-size:25px}.v{font-size:12px}.row{gap:8px}
@@ -154,6 +162,7 @@
     </p>
   </main>
 </div>
+<script src="boot.js"></script>
 <script src="go.js"></script>
 </body>
 </html>
