@@ -1,29 +1,29 @@
 ---
 title: "水边的鸟：玉渊潭和什刹海"
 date: 2026-11-04T12:20:00+08:00
-draft: true
+draft: false
 tags: [北京, 玉渊潭, 什刹海, 水鸟, 鸳鸯, 天鹅, 城市摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/beijing-waterbirds/01.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/02.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/03.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/04.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/05.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/06.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/07.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/08.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/09.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/10.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/11.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/12.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/13.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/14.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/15.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/16.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/17.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/18.webp
-  - https://__R2_BASE__/posts/beijing-waterbirds/19.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/17.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/18.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-waterbirds/19.webp
 summary: "两次去水边，一次是三月末的玉渊潭，一次是五月的什刹海。岸上的鸽子、浅滩的深色鸭子、橙帆状翅的鸳鸯、把脖子弯成问号的白天鹅——大部分照片都是同一个姿势的连拍，只差水纹的形状。"
 keywords: [北京, 玉渊潭, 什刹海, 水鸟, 鸳鸯, 白天鹅, 倒影, 城市摄影]
 ---

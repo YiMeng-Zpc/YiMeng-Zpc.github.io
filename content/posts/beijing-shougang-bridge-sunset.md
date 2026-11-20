@@ -1,20 +1,20 @@
 ---
 title: "首钢大桥的日落：雾里的一座白拱"
 date: 2026-11-04T11:40:00+08:00
-draft: true
+draft: false
 tags: [北京, 首钢大桥, 日落, 晚霞, 桥梁, 城市摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/01.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/02.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/03.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/04.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/05.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/06.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/07.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/08.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/09.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/10.webp
 summary: "从街这头往西看，白色的钢拱立在路两边，背后是层叠到发淡的远山。那天的日落不清透，空气里有一层雾，太阳是个模糊的亮点，橙粉的霞被拉成一条条。桥一直在那儿，车灯从桥下不停地流过去。"
 keywords: [北京, 首钢大桥, 日落, 晚霞, 远山, 长焦, 城市摄影]
 ---

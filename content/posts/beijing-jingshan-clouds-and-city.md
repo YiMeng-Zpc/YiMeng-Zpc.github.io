@@ -1,26 +1,26 @@
 ---
 title: "景山之上：云、晚霞和一整座城"
 date: 2026-11-04T11:20:00+08:00
-draft: true
+draft: false
 tags: [北京, 景山, 云, 晚霞, 城市, 夜景, 城市摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/01.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/02.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/03.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/04.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/05.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/06.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/07.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/08.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/09.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/10.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/11.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/12.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/13.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/14.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/15.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/16.webp
 summary: "上景山那天，镜头大半时间对着天。先是蓝天里的大朵积云压在北边那排居民楼上，后来云从白变成粉、再变成紫红，城市只剩一道剪影。天黑透以后，是亮起来的高楼、一片金色琉璃顶、屋檐翘角边的月亮，和亮着灯的白塔。"
 keywords: [北京, 景山公园, 积云, 晚霞, 蓝调时刻, 城市天际线, 月亮]
 ---

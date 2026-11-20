@@ -13,6 +13,12 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/14.webp
 summary: "巴库是阿塞拜疆的首都，也是里海西岸最大的港口。火焰塔、老城、希尔万沙宫殿与现代玻璃幕墙交错。"
 keywords: [阿塞拜疆, 巴库, 火焰塔, 老城, 希尔万沙宫殿, 里海, 高加索]
 ---

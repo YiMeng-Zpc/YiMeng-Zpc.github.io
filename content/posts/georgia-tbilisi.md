@@ -13,6 +13,13 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/15.webp
 summary: "库拉河两岸，第比利斯把 1500 年历史揉进了玻璃钢桥、硫磺蒸汽、彩色阳台和一座山顶的圣母像。它不像任何一座欧洲城市，也不像任何一座亚洲城市——它只像自己。"
 keywords: [格鲁吉亚, 第比利斯, 纳里卡拉, 自由广场, 和平桥, 硫磺浴, 库拉河, 老城]
 ---

@@ -13,6 +13,12 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/azerbaijan-baku/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/azerbaijan-baku/14.webp
 summary: "Baku, capital of Azerbaijan and the largest port on the Caspian's western shore. Flame Towers, Old City, Shirvanshahs Palace meet modern glass facades."
 keywords: [azerbaijan, baku, flame towers, old city, shirvanshahs palace, caspian, caucasus]
 ---

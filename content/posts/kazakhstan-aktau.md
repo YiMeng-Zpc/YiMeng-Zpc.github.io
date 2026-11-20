@@ -13,6 +13,12 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-aktau/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-aktau/14.webp
 summary: "阿克套（Aktau）原名舍甫琴科，是哈萨克斯坦西部里海岸的港口城市，也是去往哈萨克其他地方的轮渡枢纽。"
 keywords: [哈萨克斯坦, 阿克套, 里海, 中亚, 哈萨克, 港口]
 ---

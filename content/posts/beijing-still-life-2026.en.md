@@ -1,26 +1,26 @@
 ---
 title: "Light on Things: The Still-Life Section at the 2026 Beijing Camera Expo"
 date: 2026-11-04T09:30:00+08:00
-draft: true
+draft: false
 tags: [beijing, photo-expo, still-life, objects, photography, city-photography]
 categories: [Travel]
 photos:
-  - https://__R2_BASE__/posts/beijing-still-life-2026/01.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/02.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/03.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/04.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/05.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/06.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/07.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/08.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/09.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/10.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/11.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/12.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/13.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/14.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/15.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/16.webp
 summary: "The quietest corner of the camera expo is the still-life section. None of the sixteen photographs contains a person: brick phones, a thread-bound book, a ball of wool, a small loom, a chased silver jug, pine cones in a wicker basket. They are lit from the side against dark grounds, and they glow on their own."
 keywords: [beijing, photo-expo, still-life, object-photography, side-light, lighting]
 ---

@@ -13,6 +13,12 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/kazakhstan-almaty/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/kazakhstan-almaty/14.webp
 summary: "阿拉木图（Almaty）原是哈萨克斯坦首都，现在仍是最大城市，南面就是天山山脉，城市名原意就是「苹果之父」。"
 keywords: [哈萨克斯坦, 阿拉木图, 天山, 苹果城, 中亚, 阿拉木图苹果]
 ---

@@ -1,38 +1,38 @@
 ---
 title: "太康：红墙、脊兽与一间珍品馆"
 date: 2026-11-04T10:15:00+08:00
-draft: true
+draft: false
 tags: [河南, 太康, 古建筑, 寺庙, 博物馆, 文物, 旅行, 摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/01.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/02.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/03.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/04.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/05.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/06.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/07.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/08.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/09.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/10.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/11.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/12.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/13.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/14.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/15.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/16.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/17.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/18.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/19.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/20.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/21.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/22.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/23.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/24.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/25.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/26.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/27.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/28.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/17.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/18.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/19.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/20.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/21.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/22.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/23.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/24.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/25.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/26.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/27.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/28.webp
 summary: "太康这天是两段路。上午在山里的寺院：红墙、海棠形花窗、白梅、琉璃脊兽、石壁上刻的红「佛」字。下午进城进艺术珍品馆：一支彩陶罐、一枚玉玦、两尊石造像，和几幅装裱好的旧画。"
 keywords: [河南, 太康, 寺院, 红墙, 琉璃瓦, 珍品馆, 彩陶, 书画]
 ---

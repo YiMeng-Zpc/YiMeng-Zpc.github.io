@@ -1,26 +1,26 @@
 ---
 title: "From Jingshan Hill: Clouds, Sunset and the Whole City"
 date: 2026-11-04T11:20:00+08:00
-draft: true
+draft: false
 tags: [beijing, jingshan, clouds, sunset, city, night-view, city-photography]
 categories: [Travel]
 photos:
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/01.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/02.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/03.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/04.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/05.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/06.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/07.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/08.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/09.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/10.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/11.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/12.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/13.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/14.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/15.webp
-  - https://__R2_BASE__/posts/beijing-jingshan-clouds-and-city/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-jingshan-clouds-and-city/16.webp
 summary: "I went up Jingshan Hill for the rooftops and spent most of the time pointing the camera at the sky. Big cumulus clouds sat on the apartment blocks to the north, then turned pink, then violet-red, and the city collapsed into a silhouette. After dark came the lit towers, a field of golden glazed roof, a moon beside an upturned eave, and the white dagoba glowing."
 keywords: [beijing, jingshan-hill, cumulus, sunset-glow, blue-hour, skyline, moon]
 ---

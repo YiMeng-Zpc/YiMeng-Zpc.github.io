@@ -1,30 +1,30 @@
 ---
 title: "什刹海的荷：墨绿的水面"
 date: 2026-11-04T12:00:00+08:00
-draft: true
+draft: false
 tags: [北京, 什刹海, 荷花, 荷叶, 特写, 水珠, 城市摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/01.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/02.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/03.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/04.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/05.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/06.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/07.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/08.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/09.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/10.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/11.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/12.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/13.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/14.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/15.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/16.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/17.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/18.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/19.webp
-  - https://__R2_BASE__/posts/beijing-shichahai-lotus/20.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/17.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/18.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/19.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shichahai-lotus/20.webp
 summary: "这一组里几乎没有什刹海的全貌。水面深得发黑，荷叶墨绿地浮着，粉荷从叶缝里伸出来，叶心托着一汪水珠；还有一只黑色的水鸟踩在浮叶上，把叶子压得往下沉。直到最后一张才抬起头：游船、对岸的楼、灰白的天。"
 keywords: [北京, 什刹海, 荷花, 荷叶, 水珠, 微距, 城市摄影]
 ---

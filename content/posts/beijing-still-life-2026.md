@@ -1,26 +1,26 @@
 ---
 title: "静物的光：2026 北京摄影器材展"
 date: 2026-11-04T09:30:00+08:00
-draft: true
+draft: false
 tags: [北京, 摄影展, 静物, 器物, 摄影, 城市摄影]
 categories: [旅行]
 photos:
-  - https://__R2_BASE__/posts/beijing-still-life-2026/01.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/02.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/03.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/04.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/05.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/06.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/07.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/08.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/09.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/10.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/11.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/12.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/13.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/14.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/15.webp
-  - https://__R2_BASE__/posts/beijing-still-life-2026/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-still-life-2026/16.webp
 summary: "器材展上最安静的一块是静物单元。十六张照片里没有一张是人：大哥大、线装旧书、一团毛线、木织机、錾花银壶、藤篮里的松果。它们被侧光照着，背景一律沉下去，器物自己发亮。"
 keywords: [北京, 摄影展, 静物, 器物摄影, 侧光, 布光]
 ---

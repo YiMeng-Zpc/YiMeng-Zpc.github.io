@@ -13,6 +13,13 @@ photos:
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/06.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/07.webp
   - https://cdn.jsdelivr.net/gh/YiMeng-Zpc/YiMeng-Zpc.github.io@main/static/images/uploads/posts/georgia-tbilisi/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/georgia-tbilisi/15.webp
 summary: "On both banks of the Kura River, Tbilisi folds 1,500 years of history into a glass-and-steel bridge, sulfur steam, colorful wooden balconies, and a hilltop Mother Georgia. It looks like no European city and no Asian city — it only looks like itself."
 keywords: [georgia, tbilisi, narikala, freedom square, bridge of peace, sulfur baths, kura river, old town]
 ---

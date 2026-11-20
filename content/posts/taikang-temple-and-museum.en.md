@@ -1,38 +1,38 @@
 ---
 title: "Taikang: Red Walls, Ridge Beasts, and a Treasury of Art"
 date: 2026-11-04T10:15:00+08:00
-draft: true
+draft: false
 tags: [henan, taikang, temple, architecture, museum, antiquities, travel, photography]
 categories: [Travel]
 photos:
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/01.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/02.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/03.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/04.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/05.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/06.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/07.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/08.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/09.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/10.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/11.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/12.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/13.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/14.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/15.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/16.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/17.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/18.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/19.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/20.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/21.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/22.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/23.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/24.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/25.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/26.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/27.webp
-  - https://__R2_BASE__/posts/taikang-temple-and-museum/28.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/11.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/12.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/13.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/14.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/15.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/16.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/17.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/18.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/19.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/20.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/21.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/22.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/23.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/24.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/25.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/26.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/27.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/taikang-temple-and-museum/28.webp
 summary: "Taikang gave me two halves of a day. The morning was a hillside temple: red walls, a begonia-shaped window, a white plum branch, glazed ridge beasts, and a red 'Buddha' carved into the rock. The afternoon was an art treasury in town: a painted pot, a jade pendant, two stone figures, and a few framed old paintings."
 keywords: [henan, taikang, temple, red-wall, glazed-tile, art-treasury, painted-pot, calligraphy]
 ---

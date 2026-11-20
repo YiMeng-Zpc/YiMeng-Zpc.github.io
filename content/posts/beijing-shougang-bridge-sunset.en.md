@@ -1,20 +1,20 @@
 ---
 title: "Sunset at the Shougang Bridge: A White Arch in the Haze"
 date: 2026-11-04T11:40:00+08:00
-draft: true
+draft: false
 tags: [beijing, shougang-bridge, sunset, afterglow, bridge, city-photography]
 categories: [Travel]
 photos:
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/01.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/02.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/03.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/04.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/05.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/06.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/07.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/08.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/09.webp
-  - https://__R2_BASE__/posts/beijing-shougang-bridge-sunset/10.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/01.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/02.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/03.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/04.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/05.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/06.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/07.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/08.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/09.webp
+  - https://pub-d54e827d04694b8ab3d6d1f93696636f.r2.dev/posts/beijing-shougang-bridge-sunset/10.webp
 summary: "Looking west from this end of the road, the white steel arch stands with its feet on either side of the traffic, and layered hills fade away behind it. The sunset was not clear: a haze softened everything, the sun was a blurred bright spot, and the orange-pink afterglow stretched into long threads. The bridge stayed put while the tail lights kept streaming underneath."
 keywords: [beijing, shougang-bridge, sunset, afterglow, distant-hills, telephoto, city-photography]
 ---
