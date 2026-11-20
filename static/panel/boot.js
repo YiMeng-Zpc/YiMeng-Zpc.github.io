@@ -40,13 +40,18 @@
   /* ======================================================================
    * 音效（WebAudio 实时合成，不带任何外部音频文件）
    * ----------------------------------------------------------------------
-   * 浏览器自动播放策略：没有用户手势时 AudioContext 是 suspended，
-   * 所以默认**静音**，页面上给一个「♪ 音效」按钮让用户自己开。
+   * 浏览器自动播放策略：没有用户手势时 AudioContext 是 suspended。
+   * ★ 2026-11-20 用户要求「默认开声音」—— 做法：
+   *   ① 启动时立刻 new AudioContext() 并尝试 resume()（有时能直接过）
+   *   ② 同时监听**首次任意交互**（pointerdown / keydown / touchstart），
+   *      一旦发生就 resume() 并把所有音效打开 —— 实际效果就是"默认有声"
+   *   ③ 用户若在设置里关过（localStorage），则尊重用户选择，不再自动开
    * ==================================================================== */
   function SoundKit() {
     var ctx = null;
     var master = null;
     var enabled = false;
+    var unlocked = false;
 
     function ensure() {
       if (ctx) return ctx;
@@ -126,24 +131,75 @@
         tone(880, 0.1, 'triangle', 0.24);
         tone(1320, 0.16, 'sine', 0.18, 0.06);
       },
+      /* ---------- 开关 ---------- */
       enable: function () {
         var c = ensure();
         if (!c) return false;
         if (c.state === 'suspended') c.resume();
         enabled = true;
+        unlocked = true;
+        try { localStorage.setItem('panel.boot.snd', '1'); } catch (_) { }
         return true;
       },
-      disable: function () { enabled = false; },
+      disable: function () {
+        enabled = false;
+        try { localStorage.setItem('panel.boot.snd', '0'); } catch (_) { }
+      },
       isEnabled: function () { return enabled; },
+
+      /* ★ 默认开声音：立刻尝试解锁 + 挂首次交互兜底。
+       * 返回 'on' 表示现在就响，'pending' 表示要等用户碰一下，'off' 表示用户关过。 */
+      autoEnable: function () {
+        /* 用户明确关过 → 尊重，不再自动开 */
+        var pref = null;
+        try { pref = localStorage.getItem('panel.boot.snd'); } catch (_) { }
+        if (pref === '0') return 'off';
+
+        var c = ensure();
+        if (!c) return 'off';
+        enabled = true;
+        try { localStorage.setItem('panel.boot.snd', '1'); } catch (_) { }
+
+        /* 已经有手势过（state 可能是 running）→ 直接可响 */
+        if (c.state === 'running') { unlocked = true; return 'on'; }
+        try { c.resume(); } catch (_) { }
+
+        /* 兜底：用户第一次碰屏幕/按键时自动解锁 → 实际效果就是"默认有声"。
+           解锁瞬间立刻补一声轻响，让用户确认"确实有声音"。 */
+        if (!unlocked) {
+          var once = function () {
+            try { c.resume(); } catch (_) { }
+            unlocked = true;
+            if (typeof onSoundChange === 'function') onSoundChange(true);
+            /* 首次交互后立刻试播一声（此时 resume 才会真正生效） */
+            setTimeout(function () {
+              if (c.state === 'running') {
+                tone(880, 0.09, 'sine', 0.22);
+              }
+            }, 60);
+          };
+          ['pointerdown', 'keydown', 'touchstart', 'mousedown'].forEach(function (ev) {
+            global.addEventListener(ev, once, { once: true, passive: true });
+          });
+          /* 2 秒后再试一次 resume（有些浏览器允许延迟解锁） */
+          setTimeout(function () {
+            if (c.state === 'running') { unlocked = true; }
+          }, 2000);
+          return 'pending';
+        }
+        return 'on';
+      },
     };
   }
 
   /* ======================================================================
    * 背景：疏朗的长弧线
    * ----------------------------------------------------------------------
-   * 视频里的背景不是密网格，而是**少数几条粗细不一的发光弧**，
-   * 加上一些缓慢漂移的小光点。这里用贝塞尔弧 + 三层描边做辉光。
-   * 数量刻意压得很低（5~7 条），避免杂乱。
+   * 视频里的背景不是密网格，而是**少数几条粗细不一的发光弧**。
+   * ★ 2026-11-20 用户两次反馈"线条太杂乱"，根因与对策：
+   *   ① 数量从 7 降到 3~5
+   *   ② 圆心推到画布之外 → 弧线只从边缘掠过，不会在中央交汇
+   *   ③ **中央禁区避让**：弧线与光点进入文字区就断开（safeZone/inSafe）
    * ==================================================================== */
   function ArcField(canvas) {
     var ctx = canvas.getContext('2d');
@@ -163,60 +219,100 @@
       seed();
     }
 
+    /* ---------- 布局参数 ---------- */
+    /* 中央禁区：文字所在区域。弧线进入这个椭圆就断开，
+       这样背景永远不会横穿文案（用户反馈"线条还是凌乱"的根因）。 */
+    function safeZone() {
+      return {
+        cx: W * 0.5,
+        cy: H * 0.56,
+        rx: Math.min(W, H) * 0.40,
+        ry: Math.min(W, H) * 0.24,
+      };
+    }
+    function inSafe(x, y, z) {
+      var dx = (x - z.cx) / z.rx;
+      var dy = (y - z.cy) / z.ry;
+      return dx * dx + dy * dy < 1;
+    }
+
     function seed() {
       arcs.length = 0;
       dots.length = 0;
-      var n = Math.max(4, Math.min(7, Math.round(W / 260)));
+      /* 数量再压一点：3~5 条，多了必乱 */
+      var n = Math.max(3, Math.min(5, Math.round(W / 340)));
       for (var i = 0; i < n; i++) {
+        /* ★ 圆心推到画布外侧（甚至画布之外）→ 弧线只会从边缘掠过，
+           不会在画面中央交汇打架 */
+        var side = i % 4;
+        var cx, cy;
+        if (side === 0) { cx = -W * 0.18; cy = H * (0.1 + Math.random() * 0.8); }
+        else if (side === 1) { cx = W * 1.18; cy = H * (0.1 + Math.random() * 0.8); }
+        else if (side === 2) { cx = W * (0.1 + Math.random() * 0.8); cy = -H * 0.22; }
+        else { cx = W * (0.1 + Math.random() * 0.8); cy = H * 1.22; }
         arcs.push({
-          cx: W * (0.12 + Math.random() * 0.76),
-          cy: H * (0.1 + Math.random() * 0.8),
-          r: Math.min(W, H) * (0.18 + Math.random() * 0.55),
+          cx: cx, cy: cy,
+          r: Math.min(W, H) * (0.35 + Math.random() * 0.5),
           a0: Math.random() * Math.PI * 2,
-          span: 0.5 + Math.random() * 1.5,      // 弧的张开角度（弧长）
-          w: 0.7 + Math.random() * 1.9,          // 线宽
-          sp: (Math.random() < 0.5 ? -1 : 1) * (0.06 + Math.random() * 0.14),
+          span: 0.42 + Math.random() * 0.95,     // 弧的张开角度
+          w: 0.7 + Math.random() * 1.6,          // 线宽
+          sp: (Math.random() < 0.5 ? -1 : 1) * (0.05 + Math.random() * 0.11),
           ph: Math.random() * Math.PI * 2,
-          hue: Math.random() < 0.32 ? 1 : 0,    // 1=偏紫，0=偏蓝
-          al: 0.18 + Math.random() * 0.3,
+          hue: Math.random() < 0.28 ? 1 : 0,    // 1=偏紫，0=偏蓝
+          al: 0.13 + Math.random() * 0.2,       // 整体压暗，不抢主体
         });
       }
-      var dn = Math.max(14, Math.min(30, Math.round(W / 52)));
+      var dn = Math.max(12, Math.min(22, Math.round(W / 68)));
       for (var j = 0; j < dn; j++) {
         dots.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          r: 0.5 + Math.random() * 1.1,
-          vx: (Math.random() - 0.5) * 0.13,
-          vy: (Math.random() - 0.5) * 0.13,
+          r: 0.5 + Math.random() * 0.9,
+          vx: (Math.random() - 0.5) * 0.1,
+          vy: (Math.random() - 0.5) * 0.1,
           ph: Math.random() * Math.PI * 2,
         });
       }
     }
 
-    function strokeArc(a, width, alpha, color) {
+    /* 画一段弧，但跳过中央禁区的部分 —— 弧线在文字区自然断开 */
+    function strokeArc(a, width, alpha, color, zone) {
       var a0 = a.a0 + t * a.sp + a.ph;
       var a1 = a0 + a.span;
-      ctx.beginPath();
-      ctx.arc(a.cx, a.cy, a.r, a0, a1);
+      var STEPS = 48;
       ctx.strokeStyle = color(alpha);
       ctx.lineWidth = width;
+      ctx.beginPath();
+      var drawing = false;
+      for (var i = 0; i <= STEPS; i++) {
+        var ang = a0 + (a1 - a0) * (i / STEPS);
+        var x = a.cx + Math.cos(ang) * a.r;
+        var y = a.cy + Math.sin(ang) * a.r;
+        if (inSafe(x, y, zone)) {
+          drawing = false;
+          continue;
+        }
+        if (!drawing) { ctx.beginPath(); ctx.moveTo(x, y); drawing = true; }
+        else ctx.lineTo(x, y);
+      }
       ctx.stroke();
     }
 
     function step() {
       t += 0.006;
       ctx.clearRect(0, 0, W, H);
+      var zone = safeZone();
 
-      /* 光点缓慢漂移 */
+      /* 光点缓慢漂移（避开中央文字区） */
       for (var i = 0; i < dots.length; i++) {
         var d = dots[i];
         d.x += d.vx; d.y += d.vy;
         if (d.x < -10) d.x = W + 10; else if (d.x > W + 10) d.x = -10;
         if (d.y < -10) d.y = H + 10; else if (d.y > H + 10) d.y = -10;
+        if (inSafe(d.x, d.y, zone)) continue;
         var g = 0.5 + 0.5 * Math.sin(t * 2.6 + d.ph);
         ctx.beginPath();
-        ctx.fillStyle = 'rgba(180, 220, 255, ' + (0.14 + g * 0.3).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(180, 220, 255, ' + (0.12 + g * 0.24).toFixed(3) + ')';
         ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -229,9 +325,9 @@
         var col = a.hue
           ? function (al) { return 'rgba(178, 158, 255, ' + al.toFixed(3) + ')'; }
           : function (al) { return 'rgba(126, 196, 255, ' + al.toFixed(3) + ')'; };
-        strokeArc(a, a.w * 5.5, base * 0.14, col);
-        strokeArc(a, a.w * 2.2, base * 0.34, col);
-        strokeArc(a, a.w * 0.8, base, col);
+        strokeArc(a, a.w * 5.5, base * 0.13, col, zone);
+        strokeArc(a, a.w * 2.2, base * 0.32, col, zone);
+        strokeArc(a, a.w * 0.8, base, col, zone);
       }
     }
 
@@ -260,6 +356,8 @@
    * ==================================================================== */
   var active = null;
   var sound = null;
+  /* 音效状态变化的回调（供按钮状态同步） */
+  var onSoundChange = null;
 
   function ensureSound() {
     if (!sound) sound = SoundKit();
@@ -350,13 +448,13 @@
     cornerBox.innerHTML = corner;
     wrap.appendChild(cornerBox);
 
-    /* 音效开关（浏览器自动播放策略：必须用户手势才能出声）
-     * ★ 默认**静音**，页面上给一个「♪ 音效」按钮让用户自己开。
-     *   尝试自动播放会被浏览器拦（AudioContext 变 suspended），
-     *   硬来反而可能报错，所以老老实实让用户点一下。 */
+    /* 音效开关：★ 默认开声音（用户 2026-11-20 要求）
+     * 浏览器自动播放策略会在无手势时挂起 AudioContext，
+     * 所以 autoEnable() 会：① 立刻建 AudioContext 并 resume ② 挂首次交互兜底
+     * ③ 用户手动关过（localStorage）则尊重，不再自动开。 */
     var sndBtn = el('button', 'boot-snd', '♪ 音效');
     sndBtn.type = 'button';
-    sndBtn.title = '点击开启音效（浏览器要求用户手势才能播放）';
+    sndBtn.title = '音效开关';
     wrap.appendChild(sndBtn);
 
     var skip = el('button', 'boot-skip', '跳过 SKIP');
@@ -373,21 +471,25 @@
     var token = randToken(16);
     var soundOn = false;
 
+    /* ★ 默认开：立刻尝试解锁 */
+    var snd = ensureSound();
+    var autoState = snd.autoEnable();
+    function paintSnd() {
+      soundOn = snd.isEnabled();
+      sndBtn.classList.toggle('on', soundOn);
+      sndBtn.textContent = soundOn ? '♪ 音效 开' : '♪ 音效';
+    }
+    paintSnd();
+    /* 首次交互解锁成功后刷新按钮状态 */
+    onSoundChange = function () { paintSnd(); };
+
     sndBtn.addEventListener('click', function () {
       var s = ensureSound();
-      if (soundOn) {
-        s.disable(); soundOn = false;
-        sndBtn.classList.remove('on');
-        sndBtn.textContent = '♪ 音效';
+      if (snd.isEnabled()) {
+        s.disable(); paintSnd();
       } else {
-        if (s.enable()) {
-          soundOn = true;
-          sndBtn.classList.add('on');
-          sndBtn.textContent = '♪ 音效 开';
-          s.ok();
-        } else {
-          sndBtn.textContent = '♪ 不可用';
-        }
+        s.enable(); paintSnd();
+        s.ok();
       }
     });
 
@@ -479,5 +581,6 @@
     close: function () { if (active) active.close(); },
     isRunning: function () { return !!active; },
     sound: ensureSound,
+    onSoundChange: function (fn) { onSoundChange = fn; },
   };
 })(window);
