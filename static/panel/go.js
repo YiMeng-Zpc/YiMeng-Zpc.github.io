@@ -17,7 +17,7 @@
 
   var $ = function (id) { return document.getElementById(id); };
   var elState = $('st'), elUrl = $('url'), elTime = $('time'), elBar = $('bar');
-  var btnGo = $('go'), btnCopy = $('copy'), btnCancel = $('cancel');
+  var btnCopy = $('copy'), btnCancel = $('cancel');
   var box = $('fallback'), input = $('manual');
   var target = '', timer = null, tick = null, cancelled = false, seq = 0;
 
@@ -137,7 +137,7 @@
     setUrl(r.url);
     setTime(r.t);
     setState('ok', PREVIEW ? '在线 · 预览模式' : '在线 · 已就绪');
-    btnGo.disabled = false; btnCopy.disabled = false; btnCancel.disabled = false;
+    btnCopy.disabled = false; btnCancel.disabled = false;
     var age = Date.now() - r.t;
     if (r.t && age > 1000 * 60 * 60 * 24) setState('', '地址可能已过期');
     /* 启动序列播完才开始跳转倒计时 —— 序列没播完就跳 = 什么都看不到 */
@@ -179,7 +179,6 @@
     setTimeout(function () { btnCopy.textContent = '复制地址'; }, 2000);
   }
 
-  btnGo.addEventListener('click', go);
   btnCopy.addEventListener('click', function () { if (target) copy(target); });
   btnCancel.addEventListener('click', function () {
     cancelled = true; clearInterval(tick); clearTimeout(timer);
