@@ -43,7 +43,15 @@ Cloudflare 控制台 → 左侧 **R2** → **Create bucket**
   **桶名是全局唯一的**，若提示已被占用，换成 `yimeng-blog-photos` 之类，
   并同步把 `.env` 里的 `R2_BUCKET` 改成同一个名字
 - Location：`Automatic`（会自动选离用户更近的边缘）
-- Storage class：默认 **Standard**
+- Storage class：选 **标准（Standard）**，不要选「不频繁访问」。原因：
+  1. 官方用例里 Standard 明确包含「网站与应用数据」和「图片、视频等媒体内容」，
+     IA 面向的是长期归档、灾备、长尾 UGC；
+  2. **免费额度只适用于 Standard**（10 GB 存储 / 100 万 A 类 / 1000 万 B 类操作），
+     选 IA 一分钱免费额度都不享受；
+  3. IA 有 **$0.01/GB 数据检索费**、A/B 类操作单价翻倍，以及 **30 天最短存储期**
+     （提前删除或迁移仍按 30 天计费）。本项目全量图约 42.7 MB，
+     在免费额度内选 Standard 的实际费用是 0，选 IA 反而产生检索费。
+  该选项建桶后仍可在 Dashboard 改，已上传对象也能用 CopyObject 切换，不是不可逆决定。
 
 ### 2. 开启公开访问
 
