@@ -74,14 +74,19 @@
   text-align: center;
 }
 
-/* ---------- 巨大发光圆弧 ---------- */
+/* ---------- 巨大发光圆弧 ----------
+ * 绝对定位居中：文字落在环内（视频里就是这个关系），
+ * 而不是把环当成 flex 的一行排在文字上方。 */
 .boot-ring {
-  position: relative;
-  width: min(46vmin, 380px);
-  height: min(46vmin, 380px);
-  margin-bottom: 6px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(52vmin, 430px);
+  height: min(52vmin, 430px);
   display: grid;
   place-items: center;
+  pointer-events: none;
 }
 /* 外圈：长弧段，缓慢自转（视频里这圈转了 5-6 秒） */
 .boot-ring::before,
@@ -134,6 +139,8 @@
   letter-spacing: .22em;
   color: #eaf3ff;
   min-height: 1.5em;
+  /* 落在圆环中心（圆环已绝对定位居中，文字往上收一点） */
+  margin-top: -4vmin;
   text-shadow: 0 0 26px rgba(120, 180, 255, .4);
 }
 .boot-line::after {
