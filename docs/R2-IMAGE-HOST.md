@@ -71,11 +71,19 @@ https://pub-xxxxxxxxxxxxxxxx.r2.dev
 
 ### 3. 创建 API Token
 
-R2 右上角 → **Manage R2 API Tokens** → **Create Account API token**（或 Create User API token）
+> ⚠️ **入口别走错**：必须从 R2 页面创建。若你看到「从头开始 / 编辑区域 DNS /
+> 读写 Cloudflare Stream 和 Images / Workers AI」这一串**策略模板**，说明你进的是
+> Cloudflare **通用** API Token 页面（头像菜单或「创建其他令牌」），那里**没有**
+> R2 的 `Object Read & Write`，选「编辑 Cloudflare Workers」也不对。
+>
+> 正确路径：**左侧菜单 → R2（R2 object storage）→ 概览页 Account Details 区块
+> → API Tokens 旁边的 Manage → Create Account API token**。
+> 只有从这个入口进去，权限下拉里才会出现 `Object Read & Write`。
 
-- Permissions：**Object Read & Write**
+- Permissions：**Object Read & Write**（不是 Admin，也不需要 Stream/Images 权限）
 - Specify bucket(s)：只勾 `blog-photos`（最小权限）
 - TTL：可设 1 年 / 不过期
+- 「包含所有账户 / Include All accounts」：能工作，但建议选当前这个账户，遵循最小权限
 
 创建后立刻显示三个值（**Secret 只显示一次，务必当场保存**）：
 
