@@ -108,6 +108,8 @@
     <script src="{{ "js/img-fallback.js" | relURL }}" defer></script>
     {{- /* 2026-11-03: 图库 masonry 精排 —— 按图片真实比例定位，消除横竖版混排空白 */ -}}
     <script src="{{ "js/gallery-masonry.js" | relURL }}" defer></script>
+    {{- /* 2026-11-20: UX 增强层（光谱标题/卡片倾斜/涟漪/氛围光/转场），事件委托兼容 pjax */ -}}
+    <script src="{{ "js/ux-enhance.js" | relURL }}" defer></script>
     {{- if .Site.Params.injector.body_end -}}
       {{- .Site.Params.injector.body_end | safeHTML -}}
     {{- end -}}

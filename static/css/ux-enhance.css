@@ -1,0 +1,244 @@
+/* ============================================
+   ✦ 忆梦博客 · UX 增强层 ✦
+   独立文件，便于回滚。包含：
+   1. 流动光谱渐变标题（linear 无限循环，非往返）
+   2. 卡片 3D 倾斜 + 鼠标跟随聚光灯 + 悬停显观
+   3. 指针响应氛围光
+   4. 点击涟漪
+   5. 提示气泡
+   6. 图片骨架屏
+   7. 页面转场（pjax）
+   8. 卡片依次入场 stagger
+   性能：仅 transform/opacity 动画；rAF 节流；
+        触屏/reduced-motion 自动降级。
+   ============================================ */
+
+/* ---------- 1. 流动光谱渐变标题 ---------- */
+@keyframes ux-spectrum-flow {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.ux-spectrum {
+  background-image: linear-gradient(90deg,
+    #ff4d6d 0%, #ff9e4d 14%, #ffe14d 28%, #4dff9e 43%,
+    #4dd2ff 57%, #a64dff 72%, #ff4dd2 86%, #ff4d6d 100%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(77, 210, 255, 0.32));
+  animation: ux-spectrum-flow 7s linear infinite;
+}
+/* 覆盖 cyber.css 里带 !important 的卡片标题色（需更高特异性） */
+.home-posts-grid .post-card h3.ux-spectrum,
+#main h1.ux-spectrum,
+#main h2.ux-spectrum,
+.article-title.ux-spectrum,
+.post-title.ux-spectrum,
+header h1.ux-spectrum {
+  color: transparent !important;
+  -webkit-text-fill-color: transparent;
+}
+/* 文章正文标题：cyber.css 里 `.post-content h1/.article-entry h1` 用
+   `background: none !important` 关掉了渐变，这里用更高特异性恢复流动光谱。 */
+.article-entry h1.ux-spectrum,
+.post-content h1.ux-spectrum,
+#main .article-inner h1.ux-spectrum {
+  background-image: linear-gradient(90deg,
+    #ff4d6d 0%, #ff9e4d 14%, #ffe14d 28%, #4dff9e 43%,
+    #4dd2ff 57%, #a64dff 72%, #ff4dd2 86%, #ff4d6d 100%) !important;
+  background-size: 220% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: ux-spectrum-flow 7s linear infinite !important;
+}
+
+/* 站点主标题：cyber.css 用 `oceanAmberGradient 4s ease infinite !important`
+   （0%→50%→100% 往返，大半时间近乎无色的灰），这里用同等特异性 + !important
+   覆盖成 linear 单向流动的光谱渐变——全程在色，无往返停顿。 */
+#header-title h1,
+#header-title h1.ux-spectrum {
+  background-image: linear-gradient(90deg,
+    #ff4d6d 0%, #ff9e4d 14%, #ffe14d 28%, #4dff9e 43%,
+    #4dd2ff 57%, #a64dff 72%, #ff4dd2 86%, #ff4d6d 100%) !important;
+  background-size: 220% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  animation: ux-spectrum-flow 9s linear infinite !important;
+}
+
+/* ---------- 2. 卡片 3D 倾斜 + 鼠标聚光 ---------- */
+.home-posts-grid .post-card {
+  --ux-tx: 0deg;
+  --ux-ty: 0deg;
+  --ux-lift: 0px;
+  --ux-sc: 1;
+  --ux-enter: 0px;
+  --ux-mx: 50%;
+  --ux-my: 50%;
+  position: relative;
+  transform: perspective(1000px)
+             rotateX(var(--ux-tx)) rotateY(var(--ux-ty))
+             translateY(calc(var(--ux-lift) + var(--ux-enter)))
+             scale(var(--ux-sc));
+  transition: transform 0.45s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  will-change: transform;
+}
+.home-posts-grid .post-card:hover {
+  --ux-lift: -6px;
+  --ux-sc: 1.02;
+  transition: transform 0.09s linear, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+/* 鼠标跟随高光（::before 已被 cyber.css 占用，这里用 ::after） */
+.home-posts-grid .post-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  background: radial-gradient(340px circle at var(--ux-mx) var(--ux-my),
+    rgba(56, 189, 248, 0.20), rgba(245, 158, 11, 0.10) 42%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.home-posts-grid .post-card:hover::after { opacity: 1; }
+
+/* 悬停显观：阅读全文 */
+.ux-readmore {
+  display: block;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, var(--ocean-bright, #38bdf8), var(--amber, #f59e0b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.post-card:hover .ux-readmore { opacity: 1; transform: translateY(0); }
+
+/* ---------- 8. 卡片依次入场 stagger ----------
+   稳健策略：卡片默认可见（opacity:1），绝不在 CSS 里预先隐藏。
+   JS 观察到进入视口时加 .in-view，用一次性 animation 播放入场。
+   即使 IntersectionObserver 未触发/JS 出错，内容也始终可见。 */
+@keyframes ux-card-in {
+  from { opacity: 0; transform: translateY(22px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+body.ux-ready .home-posts-grid .post-card.in-view {
+  animation: ux-card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- 3. 指针响应氛围光 ---------- */
+#ux-aurora {
+  position: fixed;
+  width: 560px;
+  height: 560px;
+  left: 0;
+  top: 0;
+  margin-left: -280px;
+  margin-top: -280px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(56, 189, 248, 0.14) 0%,
+    rgba(167, 139, 250, 0.08) 42%,
+    transparent 70%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  will-change: transform;
+}
+
+/* ---------- 4. 点击涟漪 ---------- */
+.ux-ripple {
+  position: fixed;
+  z-index: 9999;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(56, 189, 248, 0.55), rgba(245, 158, 11, 0.28) 58%, transparent 72%);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ux-ripple-anim 0.6s ease-out forwards;
+}
+@keyframes ux-ripple-anim {
+  to { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* ---------- 5. 提示气泡 ---------- */
+[data-ux-tip] { position: relative; }
+[data-ux-tip]::after {
+  content: attr(data-ux-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translate(-50%, 4px);
+  background: rgba(10, 14, 26, 0.96);
+  color: var(--ocean-bright, #38bdf8);
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 60;
+}
+[data-ux-tip]:hover::after { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- 6. 图片骨架屏 ---------- */
+.article-gallery-img:not(.loaded)::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg,
+    rgba(30, 41, 59, 0.65) 30%,
+    rgba(56, 189, 248, 0.20) 50%,
+    rgba(30, 41, 59, 0.65) 70%);
+  background-size: 200% 100%;
+  animation: ux-shimmer 1.4s linear infinite;
+}
+@keyframes ux-shimmer { to { background-position: -200% 0; } }
+
+/* ---------- 7. 页面转场（pjax） ---------- */
+#main { transition: opacity 0.3s ease, transform 0.3s ease; }
+body.ux-leaving #main { opacity: 0; transform: translateY(10px); }
+body.ux-entering #main { animation: ux-enter 0.45s ease both; }
+@keyframes ux-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- 降级：减少动态效果 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ux-spectrum { animation: none; background-position: 0% 50%; }
+  #ux-aurora, .ux-ripple { display: none !important; }
+  .home-posts-grid .post-card,
+  .home-posts-grid .post-card:hover {
+    transform: none !important;
+    transition: box-shadow 0.2s ease !important;
+  }
+  .ux-readmore { opacity: 1; transform: none; }
+  body.ux-ready .home-posts-grid .post-card { opacity: 1; --ux-enter: 0px; }
+  .article-gallery-img:not(.loaded)::before { animation: none; }
+}
+/* 触屏设备：禁用 3D 倾斜与氛围光（无鼠标语义） */
+@media (hover: none), (pointer: coarse) {
+  #ux-aurora { display: none !important; }
+  .home-posts-grid .post-card,
+  .home-posts-grid .post-card:hover { transform: translateY(0) scale(1) !important; }
+  .home-posts-grid .post-card::after { display: none; }
+}

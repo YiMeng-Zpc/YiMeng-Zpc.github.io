@@ -186,6 +186,8 @@
 <!-- 自定义：cyber.css + hero.css（M1: hero.css 不要再在别处重复引用） -->
 <link rel="stylesheet" href="{{ "css/cyber.css" | relURL }}">
 <link rel="stylesheet" href="{{ "css/hero.css" | relURL }}">
+<!-- 2026-11-20: UX 增强层（光谱标题/卡片倾斜聚光/涟漪/骨架屏等），独立于 cyber.css 便于回滚 -->
+<link rel="stylesheet" href="{{ "css/ux-enhance.css" | relURL }}">
 
 <!-- instantsearch -->
 {{- if .Site.Params.algolia_search.enable -}}
