@@ -301,7 +301,7 @@ body.boot-welcome-on .boot-stage > .boot-hash {
   background: rgba(125, 226, 255, .12);
 }
 .boot-snd {
-  right: 100px;
+  right: 118px;
   /* 呼吸提示：告诉用户这里能开音效（浏览器要求用户手势才能播放） */
   animation: bootSndHint 2.4s ease-in-out infinite;
 }
@@ -334,5 +334,5 @@ body.no-fx .boot-bar::after { display: none; }
   .boot-brand { top: 18px; left: 18px; }
   .boot-corner { right: 18px; bottom: 16px; }
   .boot-skip { right: 16px; top: 17px; }
-  .boot-snd { right: 96px; top: 17px; }
+  .boot-snd { right: 112px; top: 17px; }
 }
