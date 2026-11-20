@@ -52,7 +52,7 @@
         '<div class="boot-w2">' + siteTitle() + '</div>' +
       '</div>' +
     '</div>' +
-    '<div class="boot-skip" hidden>点击跳过</div>';
+    '<div class="boot-skip" hidden>跳过 · Esc</div>';
 
   /* HUD 底部实时时钟 */
   var clockEl = layer.querySelector('#boot-clock');
@@ -77,6 +77,15 @@
 
   var started = false, finished = false, aborted = false;
   var audio = null;
+  var startedAt = 0;
+
+  /* 跳过：仅右下角按钮或 Esc 键，避免误触/双击打断序列 */
+  function skipNow() {
+    if (started && !finished) {
+      aborted = true;
+      fireFlashThenReveal();
+    }
+  }
 
   document.documentElement.classList.add('boot-lock');
 
@@ -85,12 +94,14 @@
     if (layer.parentNode) layer.parentNode.removeChild(layer);
     if (flash.parentNode) flash.parentNode.removeChild(flash);
     if (audio) { audio.pause(); audio.src = ''; }
+    document.removeEventListener('keydown', onKey);
     try { sessionStorage.setItem(SK, '1'); } catch (e) { }
   }
 
   function fireFlashThenReveal() {
     if (finished) return;
     finished = true;
+    document.removeEventListener('keydown', onKey);
     flash.classList.add('boot-firing');
     /* 白闪 42%~58% 为全白峰值（1.1s 动画 → 约 0.46s~0.64s），此刻切走 boot 层 */
     setTimeout(function () {
@@ -159,9 +170,9 @@
       await sleep(180);
     }
 
-    /* 圆环 2.0s 0→100 */
+    /* 圆环 2.6s 0→100（总时长向 8.7s 音效靠拢，避免音效被掐断） */
     ringWrap.classList.add('boot-show');
-    var T0 = performance.now(), DUR = 2000;
+    var T0 = performance.now(), DUR = 2600;
     await new Promise(function (res) {
       (function tick(now) {
         if (aborted) return res();
@@ -175,17 +186,23 @@
     if (aborted) return fireFlashThenReveal();
 
     /* WELCOME 覆盖显示 */
-    await sleep(250);
+    await sleep(300);
     welcome.classList.add('boot-show');
-    await sleep(1100);
+    await sleep(1500);
     fireFlashThenReveal();
   }
 
   /* ---------- 交互 ---------- */
+  function onKey(e) {
+    if (e.key === 'Escape') skipNow();
+  }
+  document.addEventListener('keydown', onKey);
+
   layer.addEventListener('click', function () {
     if (finished) return;
     if (!started) {
       started = true;
+      startedAt = Date.now();
       /* 音频需要用户手势，此刻播放 */
       try {
         audio = new Audio(AUDIO_URL);
@@ -195,11 +212,15 @@
       } catch (e) { }
       layer.querySelector('.boot-skip').hidden = false;
       runSequence();
-    } else {
-      /* 播放中点击 = 跳过 */
-      aborted = true;
-      fireFlashThenReveal();
     }
+    /* 播放中点击页面不再跳过 —— 防止双击/误触打断序列；
+       跳过只走右下角「跳过 · Esc」按钮或 Esc 键 */
+  });
+
+  /* 跳过按钮（阻止冒泡，避免触发待机启动逻辑） */
+  layer.querySelector('.boot-skip').addEventListener('click', function (e) {
+    e.stopPropagation();
+    skipNow();
   });
 
   document.body.appendChild(layer);

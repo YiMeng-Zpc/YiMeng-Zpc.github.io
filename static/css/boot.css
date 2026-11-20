@@ -218,14 +218,24 @@ html.boot-lock, html.boot-lock body {
   to { opacity: 0; visibility: hidden; }
 }
 
-/* 跳过提示 */
+/* 跳过提示（可点击按钮） */
 .boot-skip {
   position: fixed;
   right: 1.4em;
   bottom: 1.2em;
-  font-size: 0.66rem;
-  color: rgba(127, 216, 232, 0.4);
+  font-size: 0.7rem;
+  font-family: Consolas, monospace;
+  color: rgba(127, 216, 232, 0.55);
   letter-spacing: 0.15em;
+  padding: 0.5em 1em;
+  border: 1px solid rgba(127, 216, 232, 0.3);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.boot-skip:hover {
+  color: #eaf6ff;
+  border-color: rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.25);
 }
 
 /* 触屏无 hover 概念，仅桌面加 */
