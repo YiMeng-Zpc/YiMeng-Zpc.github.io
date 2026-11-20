@@ -1,8 +1,9 @@
 /* ============================================================
    boot.js — 进入加载启动层控制器
    行为：每个浏览器会话首次进入显示「点击进入」启动页，
-   点击后播放音效 + 开机序列（logo → 终端打字 → 圆环 → WELCOME → 白闪）。
-   任意时刻点击可跳过；prefers-reduced-motion 用户直接跳过。
+   点击后播放音效 + 开机序列（logo → 代码风终端打字 → 圆环 → WELCOME → 白闪）。
+   编程氛围：代码雨 / HUD 假读数 / hex 数据流 / logo glitch。
+   播放中点击不跳过（防误触），仅「跳过 · Esc」按钮或 Esc 键可跳过。
    DOM 全部动态创建，无 JS 时站点完全不受影响。
    ============================================================ */
 (function () {
@@ -25,11 +26,12 @@
   var layer = document.createElement('div');
   layer.id = 'boot-layer';
   layer.innerHTML =
+    '<canvas class="boot-rain" aria-hidden="true"></canvas>' +
     '<div class="boot-scanbeam"></div>' +
     '<div class="boot-vignette"></div>' +
     '<div class="boot-corner tl"></div><div class="boot-corner tr"></div>' +
     '<div class="boot-corner bl"></div><div class="boot-corner br"></div>' +
-    '<div class="boot-hud top"><span>SYS.BOOT // v3.2.1</span><span><span class="boot-dot"></span>UPLINK STABLE</span></div>' +
+    '<div class="boot-hud top"><span>SYS.BOOT // v3.2.1</span><span id="boot-metrics"></span><span><span class="boot-dot"></span>UPLINK STABLE</span></div>' +
     '<div class="boot-hud bottom"><span>GRID.SECTOR-07 // NEON.PIPELINE</span><span id="boot-clock"></span></div>' +
     '<div class="boot-standby">' +
       '<div class="boot-logo">' + siteTitle() + '</div>' +
@@ -39,6 +41,7 @@
     '<div class="boot-stage" hidden>' +
       '<div class="boot-main-logo">' + siteTitle() + '</div>' +
       '<div class="boot-term"></div>' +
+      '<div class="boot-hex" aria-hidden="true"></div>' +
       '<div class="boot-ring-wrap">' +
         '<svg viewBox="0 0 120 120" aria-hidden="true">' +
           '<circle class="boot-ring-track" cx="60" cy="60" r="54"/>' +
@@ -78,6 +81,7 @@
   var started = false, finished = false, aborted = false;
   var audio = null;
   var startedAt = 0;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* 跳过：仅右下角按钮或 Esc 键，避免误触/双击打断序列 */
   function skipNow() {
@@ -102,6 +106,7 @@
     if (finished) return;
     finished = true;
     document.removeEventListener('keydown', onKey);
+    stopFx();
     flash.classList.add('boot-firing');
     /* 白闪 42%~58% 为全白峰值（1.1s 动画 → 约 0.46s~0.64s），此刻切走 boot 层 */
     setTimeout(function () {
@@ -118,6 +123,112 @@
   /* ---------- 打字机 ---------- */
   function sleep(ms) {
     return new Promise(function (res) { setTimeout(res, ms); });
+  }
+
+  /* ---------- 编程氛围：代码雨 / 假读数 / hex 流 / glitch ---------- */
+  var rainRaf = 0, metricsTimer = 0, hexTimer = 0, glitchTimer = 0;
+
+  function initRain() {
+    var cv = layer.querySelector('.boot-rain');
+    if (!cv || reduceMotion) return;
+    var ctx = cv.getContext('2d');
+    var GLYPHS = '01<>/{}[]();=+*#%$&|!?~^:'.split('').concat(
+      ['fn', '=>', '0x', 'if', 'js', 'go', 'py', 'ts', 'cd', '&&', 'ls', '::', '$_', 'git']);
+    var COLORS = ['0, 229, 255', '0, 229, 255', '82, 255, 156', '245, 158, 11', '255, 61, 240'];
+    var COL_W = 18, W = 0, H = 0, cols = [];
+
+    function resetCol(c) {
+      c.y = -Math.random() * 40;
+      c.speed = 0.7 + Math.random() * 1.5;
+      c.color = COLORS[(Math.random() * COLORS.length) | 0];
+      c.tick = 0;
+    }
+    function resize() {
+      W = cv.width = layer.clientWidth;
+      H = cv.height = layer.clientHeight;
+      cols = [];
+      for (var i = 0; i < Math.ceil(W / COL_W); i++) {
+        var c = {};
+        resetCol(c);
+        c.y = Math.random() * (H / 16);
+        cols.push(c);
+      }
+      ctx.clearRect(0, 0, W, H);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    var last = 0;
+    (function frame(now) {
+      rainRaf = requestAnimationFrame(frame);
+      if (now - last < 38 || document.hidden) return;  /* ~26fps */
+      last = now;
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.fillStyle = 'rgba(0,0,0,0.10)';
+      ctx.fillRect(0, 0, W, H);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.font = '12px Consolas, monospace';
+      for (var i = 0; i < cols.length; i++) {
+        var c = cols[i];
+        c.y += c.speed;
+        c.tick++;
+        var gy = c.y * 14;
+        if (gy > H + 20) { resetCol(c); continue; }
+        if (c.tick % 2) continue;
+        ctx.fillStyle = Math.random() < 0.12
+          ? 'rgba(255,255,255,0.9)'
+          : 'rgba(' + c.color + ',' + (0.25 + Math.random() * 0.35).toFixed(2) + ')';
+        ctx.fillText(GLYPHS[(Math.random() * GLYPHS.length) | 0], i * COL_W + 3, gy);
+      }
+    })(0);
+  }
+
+  function startMetrics() {
+    var el = layer.querySelector('#boot-metrics');
+    if (!el) return;
+    function tick() {
+      el.textContent = 'MEM ' + (52 + ((Math.random() * 18) | 0)) + '%' +
+        ' · CPU ' + (28 + ((Math.random() * 30) | 0)) + '%' +
+        ' · PID ' + (1000 + ((Math.random() * 8000) | 0));
+      metricsTimer = setTimeout(tick, 800);
+    }
+    tick();
+  }
+
+  function startHexStream() {
+    var el = layer.querySelector('.boot-hex');
+    if (!el) return;
+    function tick() {
+      var out = [];
+      for (var i = 0; i < 24; i++) {
+        out.push(((Math.random() * 256) | 0).toString(16).padStart(2, '0').toUpperCase());
+      }
+      el.textContent = '0x' + ((Math.random() * 0xffff) | 0).toString(16).padStart(4, '0').toUpperCase() +
+        '  ' + out.join(' ');
+      hexTimer = setTimeout(tick, 110);
+    }
+    tick();
+  }
+
+  function startGlitch() {
+    var logos = [
+      layer.querySelector('.boot-standby .boot-logo'),
+      layer.querySelector('.boot-main-logo')
+    ].filter(Boolean);
+    function tick() {
+      var el = logos[(Math.random() * logos.length) | 0];
+      if (el && el.isConnected) {
+        el.classList.add('boot-glitch');
+        setTimeout(function () { el.classList.remove('boot-glitch'); }, 320);
+      }
+      glitchTimer = setTimeout(tick, 1800 + Math.random() * 2200);
+    }
+    tick();
+  }
+
+  function stopFx() {
+    if (rainRaf) cancelAnimationFrame(rainRaf);
+    clearTimeout(metricsTimer); clearTimeout(hexTimer); clearTimeout(glitchTimer);
   }
 
   async function typeLine(term, text, cls, speed) {
@@ -153,21 +264,21 @@
     ringBar.style.strokeDasharray = C;
     ringBar.style.strokeDashoffset = C;
 
-    /* t≈0.9s 起打字（logo 入场动画 1s） */
+    /* t≈0.9s 起打字（logo 入场动画 1s），代码命令风 */
     await sleep(900);
     if (aborted) return fireFlashThenReveal();
 
     var lines = [
-      ['唤醒视觉内核 ...', '', 34],
-      ['校准霓虹光谱 · 载入底片档案', '', 30],
-      ['建立加密通道 · 同步相册', '', 30],
-      ['[ OK ] 系统就绪', 'boot-ok', 40]
+      ['$ boot --site=zhangpengchao.com --mode=neon', 'boot-cmd', 22],
+      ['> waking visual core ......... [ OK ]', 'boot-ok', 22],
+      ['> mount /photos (146 files) .. [ OK ]', 'boot-ok', 22],
+      ['> render neon spectrum ....... 100%', '', 22]
     ];
     for (var i = 0; i < lines.length; i++) {
       term.insertBefore(cursor, null);
       await typeLine(term, lines[i][0], lines[i][1], lines[i][2]);
       if (aborted) return fireFlashThenReveal();
-      await sleep(180);
+      await sleep(120);
     }
 
     /* 圆环 2.6s 0→100（总时长向 8.7s 音效靠拢，避免音效被掐断） */
@@ -226,4 +337,5 @@
   document.body.appendChild(layer);
   document.body.appendChild(flash);
   tickClock(); /* layer 挂载后再启动时钟 */
+  initRain(); startMetrics(); startHexStream(); startGlitch();
 })();
