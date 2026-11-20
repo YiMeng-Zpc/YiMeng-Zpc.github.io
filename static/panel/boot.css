@@ -1,0 +1,338 @@
+/* ============================================================================
+ * 启动序列样式 —— 对齐用户分享视频的排版结构
+ *   巨大发光圆弧 + 中文大字 + 英文小字 + 细横线 + 进度条 + WELCOME 反白标签
+ * ========================================================================== */
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  /* 不透明底：canvas 每帧 clearRect 后完全透明，不铺底色会透出底下内容 */
+  background: #05070b;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity .8s cubic-bezier(.4, 0, .2, 1);
+}
+.boot.done { opacity: 0; pointer-events: none; }
+
+/* ---------- 背景弧线 ---------- */
+.boot-net {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(120% 95% at 50% 8%, #0b1220 0%, #070b13 48%, #05070b 100%);
+}
+.boot-net::after {
+  /* 中央压暗，把文字托出来（视频里文字区是"干净"的） */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(42% 38% at 50% 46%, rgba(5, 7, 11, .88) 0%, rgba(5, 7, 11, .55) 55%, transparent 100%);
+}
+
+/* ---------- 左上角品牌 ---------- */
+.boot-brand {
+  position: absolute;
+  top: 26px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  pointer-events: none;
+  z-index: 3;
+}
+.boot-brand b {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .26em;
+  color: #d6e6ff;
+  text-shadow: 0 0 16px rgba(120, 180, 255, .45);
+}
+.boot-brand span {
+  font-size: 9.5px;
+  letter-spacing: .28em;
+  color: rgba(96, 150, 220, .85);
+}
+
+/* ---------- 中央舞台 ---------- */
+.boot-stage {
+  position: relative;
+  z-index: 2;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px;
+  text-align: center;
+}
+
+/* ---------- 巨大发光圆弧 ---------- */
+.boot-ring {
+  position: relative;
+  width: min(46vmin, 380px);
+  height: min(46vmin, 380px);
+  margin-bottom: 6px;
+  display: grid;
+  place-items: center;
+}
+/* 外圈：长弧段，缓慢自转（视频里这圈转了 5-6 秒） */
+.boot-ring::before,
+.boot-ring::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+}
+/* 外层：粗而淡的辉光弧 */
+.boot-ring::before {
+  inset: 0;
+  border-top-color: rgba(215, 235, 255, .95);
+  border-right-color: rgba(200, 225, 255, .3);
+  border-bottom-color: rgba(190, 210, 255, .12);
+  border-left-color: rgba(200, 225, 255, .34);
+  border-width: 2px;
+  transform: rotate(0deg);
+  animation: bootSpin 7s linear infinite;
+  filter: drop-shadow(0 0 22px rgba(160, 205, 255, .85));
+}
+/* 内层：反向慢转的细弧 */
+.boot-ring::after {
+  inset: 13%;
+  border-top-color: rgba(190, 215, 255, .7);
+  border-left-color: rgba(190, 215, 255, .12);
+  border-width: 1px;
+  animation: bootSpin 11s linear infinite reverse;
+  filter: drop-shadow(0 0 12px rgba(160, 190, 255, .55));
+}
+/* 圆心小点 */
+.boot-ring-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #cfe6ff;
+  box-shadow: 0 0 14px 3px rgba(160, 210, 255, .7);
+  animation: bootPulse 2.2s ease-in-out infinite;
+}
+@keyframes bootSpin { to { transform: rotate(360deg); } }
+@keyframes bootPulse {
+  0%, 100% { transform: scale(.65); opacity: .5; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* ---------- 中文大字（打字机） ---------- */
+.boot-line {
+  font-size: clamp(20px, 3.2vw, 32px);
+  font-weight: 600;
+  letter-spacing: .22em;
+  color: #eaf3ff;
+  min-height: 1.5em;
+  text-shadow: 0 0 26px rgba(120, 180, 255, .4);
+}
+.boot-line::after {
+  content: '_';
+  color: #6fd3ff;
+  animation: bootBlink 1.05s steps(2, end) infinite;
+}
+.boot-line.done::after { content: ''; animation: none; }
+@keyframes bootBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+/* ---------- 英文副标题 ---------- */
+.boot-sub {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: rgba(150, 196, 245, .8);
+  min-height: 1.5em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.boot-sub.on { opacity: 1; transform: none; }
+
+/* ---------- 中间细横线 ---------- */
+.boot-rule {
+  width: min(420px, 78vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(140, 190, 255, .38), transparent);
+}
+
+/* ---------- 细进度条 ---------- */
+.boot-bar {
+  position: relative;
+  width: min(300px, 66vw);
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(120, 160, 210, .14);
+  overflow: hidden;
+  margin-top: 4px;
+}
+.boot-bar i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(79, 157, 255, .9), #7de2ff 60%, rgba(196, 181, 253, .9));
+  box-shadow: 0 0 14px rgba(90, 180, 255, .8);
+  transition: width .5s cubic-bezier(.4, 0, .2, 1);
+}
+/* 扫光 */
+.boot-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 52px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .5), transparent);
+  animation: bootSweep 2.6s linear infinite;
+}
+@keyframes bootSweep { from { left: -60px; } to { left: 100%; } }
+
+/* ---------- 校验码 ---------- */
+.boot-hash {
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: .16em;
+  color: rgba(130, 170, 215, .55);
+  word-break: break-all;
+  max-width: min(440px, 84vw);
+  min-height: 1.4em;
+}
+
+/* ---------- WELCOME ---------- */
+.boot-welcome {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .8s ease;
+  z-index: 4;
+}
+.boot-welcome.on { opacity: 1; }
+
+/* WELCOME 亮起时，下方的主文案/进度条让位（视频里也是这么处理的：
+   两组信息不同时占据画面中央） */
+.boot-stage > .boot-line,
+.boot-stage > .boot-sub,
+.boot-stage > .boot-rule,
+.boot-stage > .boot-bar,
+.boot-stage > .boot-hash {
+  transition: opacity .6s ease, transform .6s ease;
+}
+body.boot-welcome-on .boot-stage > .boot-line,
+body.boot-welcome-on .boot-stage > .boot-sub,
+body.boot-welcome-on .boot-stage > .boot-rule,
+body.boot-welcome-on .boot-stage > .boot-bar,
+body.boot-welcome-on .boot-stage > .boot-hash {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.boot-welcome b {
+  font-size: clamp(20px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: .38em;
+  color: #f2f7ff;
+  text-shadow: 0 0 30px rgba(120, 180, 255, .55);
+}
+/* 反白底框标签（视频里 DEEPSEEK HARNESS 就是这种带框的小标签） */
+.boot-welcome em {
+  font-style: normal;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .3em;
+  color: #0a0f18;
+  background: #e8f2ff;
+  padding: 3px 12px 3px 15px;
+  box-shadow: 0 0 22px rgba(190, 225, 255, .5);
+}
+
+/* ---------- 角落 ---------- */
+.boot-corner {
+  position: absolute;
+  right: 28px;
+  bottom: 22px;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: .24em;
+  color: rgba(130, 165, 205, .45);
+  text-align: right;
+  pointer-events: none;
+  z-index: 3;
+}
+.boot-corner b { color: rgba(150, 210, 255, .8); font-weight: 600; }
+
+/* ---------- 按钮 ---------- */
+.boot-skip,
+.boot-snd {
+  position: absolute;
+  top: 24px;
+  z-index: 5;
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: .16em;
+  color: rgba(160, 190, 225, .6);
+  background: rgba(120, 160, 210, .07);
+  border: 1px solid rgba(120, 160, 210, .2);
+  border-radius: 999px;
+  padding: 5px 13px;
+  cursor: pointer;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.boot-skip { right: 26px; }
+.boot-skip:hover,
+.boot-snd:hover {
+  color: #cfe8ff;
+  border-color: rgba(125, 226, 255, .55);
+  background: rgba(125, 226, 255, .12);
+}
+.boot-snd {
+  right: 100px;
+  /* 呼吸提示：告诉用户这里能开音效（浏览器要求用户手势才能播放） */
+  animation: bootSndHint 2.4s ease-in-out infinite;
+}
+@keyframes bootSndHint {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(125, 226, 255, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(125, 226, 255, .13); }
+}
+.boot-snd.on {
+  color: #0a0f18;
+  background: linear-gradient(100deg, #7de2ff, #a78bfa);
+  border-color: transparent;
+  animation: none;
+}
+
+/* ---------- reduced-motion / 关动效 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .boot *, .boot *::before, .boot *::after {
+    animation: none !important;
+    transition: opacity .2s linear !important;
+  }
+  .boot-bar::after { display: none; }
+}
+body.no-fx .boot *, body.no-fx .boot *::before, body.no-fx .boot *::after {
+  animation: none !important;
+}
+body.no-fx .boot-bar::after { display: none; }
+
+/* ---------- 窄屏 ---------- */
+@media (max-width: 560px) {
+  .boot-brand { top: 18px; left: 18px; }
+  .boot-corner { right: 18px; bottom: 16px; }
+  .boot-skip { right: 16px; top: 17px; }
+  .boot-snd { right: 96px; top: 17px; }
+}
