@@ -373,8 +373,9 @@
     });
     if (aborted) return fireFlashThenReveal();
 
-    /* WELCOME 覆盖显示 */
+    /* WELCOME 显示：淡出终端/圆环/hex（代码雨保持流动，无背景遮罩框） */
     await sleep(300);
+    stage.classList.add('boot-clear');
     welcome.classList.add('boot-show');
     await sleep(1500);
     fireFlashThenReveal();

@@ -183,12 +183,19 @@ html.boot-lock, html.boot-lock body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--boot-bg); /* 遮住下层的终端文案与圆环 */
   opacity: 0;
   transition: opacity 0.5s ease;
   pointer-events: none;
 }
 .boot-welcome.boot-show { opacity: 1; }
+/* WELCOME 出现时淡出 stage 内的其他元素（终端/圆环/hex/logo），不再用背景遮罩 */
+.boot-stage > :not(.boot-welcome) {
+  transition: opacity 0.45s ease;
+}
+.boot-stage.boot-clear > :not(.boot-welcome) {
+  opacity: 0 !important;
+  animation: none !important; /* 打断 logo 入场等 fill:both 动画对 opacity 的锁定 */
+}
 .boot-welcome .boot-w1 {
   font-size: 0.85rem;
   letter-spacing: 0.65em;
