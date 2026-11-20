@@ -112,8 +112,8 @@
       bp.Q.value = 2.5;
       var g = actx.createGain();
       var t = actx.currentTime;
-      g.gain.setValueAtTime(0.09 + Math.random() * 0.05, t);
-      g.gain.exponentialRampToValueAtTime(0.001, t + 0.045);
+      g.gain.setValueAtTime(0.16 + Math.random() * 0.07, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
       src.connect(bp); bp.connect(g); g.connect(actx.destination);
       src.start(t);
     } catch (e) { }
@@ -127,7 +127,7 @@
       o.type = 'sine';
       o.frequency.setValueAtTime(920, t);
       o.frequency.exponentialRampToValueAtTime(620, t + 0.07);
-      g.gain.setValueAtTime(0.06, t);
+      g.gain.setValueAtTime(0.09, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
       o.connect(g); g.connect(actx.destination);
       o.start(t); o.stop(t + 0.1);
@@ -247,7 +247,7 @@
     /* 配音（下沉 whoosh） */
     try {
       var sfx = new Audio(SHATTER_URL);
-      sfx.volume = 0.65;
+      sfx.volume = 0.75;
       var pp = sfx.play();
       if (pp && pp.catch) pp.catch(function () { });
     } catch (e) { }
@@ -449,7 +449,7 @@
       /* 音频需要用户手势，此刻播放 */
       try {
         audio = new Audio(AUDIO_URL);
-        audio.volume = 0.55;
+        audio.volume = 0.72;
         var pp = audio.play();
         if (pp && pp.catch) pp.catch(function () { /* 自动播放被拒则静默 */ });
       } catch (e) { }
