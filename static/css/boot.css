@@ -130,6 +130,7 @@ html.boot-lock, html.boot-lock body {
 }
 .boot-term .boot-line { min-height: 2.1em; white-space: pre-wrap; }
 .boot-term .boot-cmd { color: #ffd166; text-shadow: 0 0 8px rgba(255, 209, 102, 0.4); }
+.boot-term .boot-cmd .boot-res { color: #52ff9c; text-shadow: 0 0 8px rgba(82, 255, 156, 0.4); }
 .boot-term .boot-ok { color: #52ff9c; text-shadow: 0 0 8px rgba(82, 255, 156, 0.4); }
 .boot-cursor {
   display: inline-block;
@@ -196,14 +197,31 @@ html.boot-lock, html.boot-lock body {
 }
 .boot-welcome .boot-w2 {
   margin-top: 0.7em;
-  padding: 0.55em 1.5em;
-  border: 2px solid #eaf6ff;
   font-size: clamp(1.1rem, 3.4vw, 1.7rem);
   font-weight: 700;
   letter-spacing: 0.28em;
   text-indent: 0.28em;
   color: #fff;
-  box-shadow: 0 0 22px rgba(0, 229, 255, 0.25), inset 0 0 18px rgba(0, 229, 255, 0.12);
+  text-shadow: 0 0 22px rgba(0, 229, 255, 0.55), 0 0 44px rgba(0, 229, 255, 0.25);
+}
+
+/* ---------- 待机内容拉远消失（点击进入后） ---------- */
+.boot-standby.boot-away {
+  animation: boot-away 0.62s cubic-bezier(0.5, 0, 0.75, 0.4) both;
+  pointer-events: none;
+}
+@keyframes boot-away {
+  40% { opacity: 0.9; filter: blur(1px); }
+  100% { opacity: 0; transform: scale(0.5); filter: blur(10px); }
+}
+
+/* 碎裂飞散的发光碎片（挂 body，独立于层） */
+.boot-shard {
+  position: fixed;
+  z-index: 100001;
+  pointer-events: none;
+  border-radius: 1px;
+  will-change: transform, opacity;
 }
 
 /* ---------- 白闪过曝转场 ---------- */

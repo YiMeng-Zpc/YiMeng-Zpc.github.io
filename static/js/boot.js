@@ -11,6 +11,7 @@
 
   var SK = 'uxBootDone';
   var AUDIO_URL = '/media/boot-intro.mp3';
+  var SHATTER_URL = '/media/boot-shatter.mp3';
 
   function skipReason() {
     try {
@@ -125,6 +126,117 @@
     return new Promise(function (res) { setTimeout(res, ms); });
   }
 
+  /* 命令打完短暂停顿后，瞬时追加绿色执行结果 */
+  async function typeLine(term, text, cls, speed, res) {
+    var line = document.createElement('div');
+    line.className = 'boot-line' + (cls ? ' ' + cls : '');
+    term.appendChild(line);
+    for (var i = 0; i < text.length; i++) {
+      if (aborted) return;
+      line.textContent += text.charAt(i);
+      await sleep(speed);
+    }
+    if (res) {
+      await sleep(170);
+      if (aborted) return;
+      var r = document.createElement('span');
+      r.className = 'boot-res';
+      r.textContent = '  ' + res;
+      line.appendChild(r);
+    }
+  }
+
+  /* ---------- 访客诊断数据：服务端连通 / IP 地理 / 设备 / UTC ---------- */
+  function gatherDiag() {
+    var diag = { rtt: null, ipRes: null };
+
+    /* 服务端连通：请求本站 favicon 计时 */
+    var t0 = performance.now();
+    try {
+      fetch('/favicon.ico?diag=' + Date.now(), { cache: 'no-store' })
+        .then(function () { diag.rtt = Math.max(1, Math.round(performance.now() - t0)); })
+        .catch(function () { diag.rtt = -1; });
+    } catch (e) { diag.rtt = -1; }
+
+    /* IP + 地理坐标：ipwho.is（https+CORS 免费无 Key），超时兜底 */
+    var ipTimer = null;
+    diag.ipPromise = new Promise(function (resolve) {
+      ipTimer = setTimeout(function () { resolve(null); }, 2200);
+      fetch('https://ipwho.is/', { cache: 'no-store' })
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (!d || !d.ip) return;
+          clearTimeout(ipTimer);
+          diag.ip = d.ip; diag.city = d.city || ''; diag.cc = d.country_code || '';
+          diag.coord = (d.latitude != null ? d.latitude.toFixed(2) : '--') + ',' + (d.longitude != null ? d.longitude.toFixed(2) : '--');
+          resolve(d);
+        })
+        .catch(function () { /* 保留超时兜底 */ });
+    });
+
+    return diag;
+  }
+
+  function deviceInfo() {
+    var ua = navigator.userAgent;
+    var os = /Windows/.test(ua) ? 'Windows' : /Mac OS X/.test(ua) ? 'macOS'
+      : /Android/.test(ua) ? 'Android' : /iPhone|iPad/.test(ua) ? 'iOS'
+      : /Linux/.test(ua) ? 'Linux' : 'UnknownOS';
+    var br = /Edg\//.test(ua) ? 'Edge' : /OPR\//.test(ua) ? 'Opera'
+      : /Chrome\//.test(ua) ? 'Chrome' : /Firefox\//.test(ua) ? 'Firefox'
+      : /Safari\//.test(ua) ? 'Safari' : 'Browser';
+    return '→ ' + os + ' · ' + br + ' · ' + screen.width + '×' + screen.height;
+  }
+
+  /* ---------- 「进入」按钮：碎裂 + 拉远消失 ---------- */
+  function shatterEnter() {
+    /* 配音 */
+    try {
+      var sfx = new Audio(SHATTER_URL);
+      sfx.volume = 0.65;
+      var pp = sfx.play();
+      if (pp && pp.catch) pp.catch(function () { });
+    } catch (e) { }
+
+    var standby = layer.querySelector('.boot-standby');
+    var btn = layer.querySelector('.boot-enter');
+    if (!standby) return;
+
+    /* 按钮碎裂：取按钮矩形，撒出 26 片发光碎片 */
+    if (btn) {
+      var r = btn.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var COLORS = ['#00e5ff', '#52ff9c', '#ffd166', '#eaf6ff', '#ff3df0'];
+      for (var i = 0; i < 26; i++) {
+        var sh = document.createElement('span');
+        sh.className = 'boot-shard';
+        var size = 3 + Math.random() * 5;
+        sh.style.cssText = 'left:' + (cx - size / 2 + (Math.random() - 0.5) * r.width * 0.8) + 'px;' +
+          'top:' + (cy - size / 2 + (Math.random() - 0.5) * r.height * 0.8) + 'px;' +
+          'width:' + size + 'px;height:' + size + 'px;background:' +
+          COLORS[(Math.random() * COLORS.length) | 0] + ';' +
+          'box-shadow:0 0 6px ' + COLORS[(Math.random() * COLORS.length) | 0] + ';';
+        document.body.appendChild(sh);
+        var ang = Math.random() * Math.PI * 2;
+        var dist = 90 + Math.random() * 300;
+        sh.animate([
+          { transform: 'translate(0,0) rotate(0deg) scale(1)', opacity: 1 },
+          {
+            transform: 'translate(' + Math.cos(ang) * dist + 'px,' +
+              (Math.sin(ang) * dist + 120) + 'px) rotate(' +
+              ((Math.random() - 0.5) * 720) + 'deg) scale(0.25)',
+            opacity: 0
+          }
+        ], { duration: 480 + Math.random() * 380, easing: 'cubic-bezier(0.16, 0.84, 0.44, 1)', fill: 'forwards' });
+        window.setTimeout(function (el) { return function () { if (el.parentNode) el.parentNode.removeChild(el); }; }(sh), 950);
+      }
+    }
+
+    /* 整组待机内容拉远消失 */
+    standby.classList.add('boot-away');
+    window.setTimeout(function () { if (standby.parentNode) standby.parentNode.removeChild(standby); }, 700);
+  }
+
   /* ---------- 编程氛围：代码雨 / 假读数 / hex 流 / glitch ---------- */
   var rainRaf = 0, metricsTimer = 0, hexTimer = 0, glitchTimer = 0;
 
@@ -231,28 +343,15 @@
     clearTimeout(metricsTimer); clearTimeout(hexTimer); clearTimeout(glitchTimer);
   }
 
-  async function typeLine(term, text, cls, speed) {
-    var line = document.createElement('div');
-    line.className = 'boot-line' + (cls ? ' ' + cls : '');
-    term.appendChild(line);
-    for (var i = 0; i < text.length; i++) {
-      if (aborted) return;
-      line.textContent += text.charAt(i);
-      await sleep(speed);
-    }
-  }
-
   /* ---------- 主序列 ---------- */
-  async function runSequence() {
+  async function runSequence(diag) {
     var stage = layer.querySelector('.boot-stage');
-    var standby = layer.querySelector('.boot-standby');
     var term = layer.querySelector('.boot-term');
     var ringWrap = layer.querySelector('.boot-ring-wrap');
     var ringBar = layer.querySelector('.boot-ring-bar');
     var pct = layer.querySelector('.boot-ring-pct');
     var welcome = layer.querySelector('.boot-welcome');
 
-    standby.remove();
     stage.hidden = false;
 
     /* 光标常驻最后一行 */
@@ -264,21 +363,32 @@
     ringBar.style.strokeDasharray = C;
     ringBar.style.strokeDashoffset = C;
 
-    /* t≈0.9s 起打字（logo 入场动画 1s），代码命令风 */
+    /* t≈0.9s 起打字；等待 IP 查询最多 1.2s（通常几百毫秒就返回） */
     await sleep(900);
+    var ipData = await Promise.race([diag.ipPromise, sleep(1200).then(function () { return null; })]);
     if (aborted) return fireFlashThenReveal();
 
+    var ipRes = ipData && ipData.ip
+      ? '→ IP ' + ipData.ip + ' · ' + (ipData.city || '') + ' ' + (ipData.country_code || '') +
+        ' (' + (ipData.latitude != null ? ipData.latitude.toFixed(1) : '--') + ',' +
+        (ipData.longitude != null ? ipData.longitude.toFixed(1) : '--') + ')'
+      : '→ IP 已加密 · GEO N/A';
+    var utcRes = '→ ' + new Date().toISOString().slice(0, 19) + 'Z';
+    var rttRes = diag.rtt != null
+      ? (diag.rtt >= 0 ? '→ 200 OK · ' + diag.rtt + 'ms' : '→ LINK DOWN · 重试中')
+      : '→ 200 OK · SYNC…';
+
     var lines = [
-      ['$ boot --site=zhangpengchao.com --mode=neon', 'boot-cmd', 22],
-      ['> waking visual core ......... [ OK ]', 'boot-ok', 22],
-      ['> mount /photos (146 files) .. [ OK ]', 'boot-ok', 22],
-      ['> render neon spectrum ....... 100%', '', 22]
+      ['$ ping zhangpengchao.com', 'boot-cmd', 20, rttRes],
+      ['$ curl -s ipwho.is', 'boot-cmd', 20, ipRes],
+      ['$ whoami --device', 'boot-cmd', 20, deviceInfo()],
+      ['$ date -u', 'boot-cmd', 20, utcRes]
     ];
     for (var i = 0; i < lines.length; i++) {
       term.insertBefore(cursor, null);
-      await typeLine(term, lines[i][0], lines[i][1], lines[i][2]);
+      await typeLine(term, lines[i][0], lines[i][1], lines[i][2], lines[i][3]);
       if (aborted) return fireFlashThenReveal();
-      await sleep(120);
+      await sleep(110);
     }
 
     /* 圆环 2.6s 0→100（总时长向 8.7s 音效靠拢，避免音效被掐断） */
@@ -322,7 +432,9 @@
         if (pp && pp.catch) pp.catch(function () { /* 自动播放被拒则静默 */ });
       } catch (e) { }
       layer.querySelector('.boot-skip').hidden = false;
-      runSequence();
+      shatterEnter();
+      var diag = gatherDiag();
+      runSequence(diag);
     }
     /* 播放中点击页面不再跳过 —— 防止双击/误触打断序列；
        跳过只走右下角「跳过 · Esc」按钮或 Esc 键 */
