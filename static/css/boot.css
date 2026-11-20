@@ -237,3 +237,128 @@ html.boot-lock, html.boot-lock body {
 @media (prefers-reduced-motion: reduce) {
   #boot-layer, #boot-flash { display: none !important; }
 }
+
+/* ============================================================
+   科技感增强：网格 / 扫描线 / HUD 角标与状态栏 / 刻度环 / 辉光
+   ============================================================ */
+
+/* 透视网格背景（缓慢流动） */
+#boot-layer::before {
+  content: '';
+  position: absolute;
+  inset: -60px;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+  animation: boot-grid-flow 3.6s linear infinite;
+  pointer-events: none;
+}
+@keyframes boot-grid-flow {
+  to { background-position: 44px 44px; }
+}
+
+/* 扫描光束：一条青色亮带周期性自上而下扫过 */
+.boot-scanbeam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 180px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(0, 229, 255, 0.04) 55%,
+    rgba(0, 229, 255, 0.10) 88%,
+    rgba(0, 229, 255, 0.22) 97%,
+    rgba(160, 245, 255, 0.5) 100%);
+  animation: boot-scan-move 4.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+@keyframes boot-scan-move {
+  0%   { transform: translateY(-190px); opacity: 0; }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { transform: translateY(calc(100vh + 10px)); opacity: 0; }
+}
+
+/* 暗角 */
+.boot-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 52%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* 四角 HUD 角标 */
+.boot-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 229, 255, 0.55);
+  pointer-events: none;
+  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.4));
+}
+.boot-corner.tl { top: 26px; left: 26px;  border-right: 0; border-bottom: 0; }
+.boot-corner.tr { top: 26px; right: 26px; border-left: 0;  border-bottom: 0; }
+.boot-corner.bl { bottom: 26px; left: 26px;  border-right: 0; border-top: 0; }
+.boot-corner.br { bottom: 26px; right: 26px; border-left: 0;  border-top: 0; }
+
+/* 顶部 / 底部 HUD 状态栏 */
+.boot-hud {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  display: flex;
+  justify-content: space-between;
+  font-family: "Cascadia Code", Consolas, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: rgba(127, 216, 232, 0.6);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.boot-hud.top    { top: 32px; }
+.boot-hud.bottom { bottom: 32px; }
+.boot-hud .boot-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #52ff9c;
+  box-shadow: 0 0 6px rgba(82, 255, 156, 0.9);
+  margin-right: 0.5em;
+  vertical-align: 1px;
+  animation: boot-blink 1.3s steps(1) infinite;
+}
+
+/* 主 logo 辉光脉冲（在原入场动画之外追加） */
+.boot-main-logo {
+  filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.35));
+}
+.boot-standby .boot-logo {
+  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.3));
+}
+
+/* 圆环：外圈刻度环旋转 + 内环辉光 */
+.boot-ring-ticks {
+  fill: none;
+  stroke: rgba(0, 229, 255, 0.4);
+  stroke-width: 1.5;
+  stroke-dasharray: 1.5 5.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: boot-ticks-spin 14s linear infinite;
+}
+@keyframes boot-ticks-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 终端行前的绿色指令前缀 */
+.boot-term .boot-line::before {
+  content: '▸ ';
+  color: #52ff9c;
+  text-shadow: 0 0 8px rgba(82, 255, 156, 0.5);
+}
+.boot-term .boot-line.boot-ok::before { content: '✓ '; }

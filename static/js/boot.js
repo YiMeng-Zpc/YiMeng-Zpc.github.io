@@ -25,6 +25,12 @@
   var layer = document.createElement('div');
   layer.id = 'boot-layer';
   layer.innerHTML =
+    '<div class="boot-scanbeam"></div>' +
+    '<div class="boot-vignette"></div>' +
+    '<div class="boot-corner tl"></div><div class="boot-corner tr"></div>' +
+    '<div class="boot-corner bl"></div><div class="boot-corner br"></div>' +
+    '<div class="boot-hud top"><span>SYS.BOOT // v3.2.1</span><span><span class="boot-dot"></span>UPLINK STABLE</span></div>' +
+    '<div class="boot-hud bottom"><span>GRID.SECTOR-07 // NEON.PIPELINE</span><span id="boot-clock"></span></div>' +
     '<div class="boot-standby">' +
       '<div class="boot-logo">' + siteTitle() + '</div>' +
       '<div class="boot-enter">进入</div>' +
@@ -36,6 +42,7 @@
       '<div class="boot-ring-wrap">' +
         '<svg viewBox="0 0 120 120" aria-hidden="true">' +
           '<circle class="boot-ring-track" cx="60" cy="60" r="54"/>' +
+          '<circle class="boot-ring-ticks" cx="60" cy="60" r="58"/>' +
           '<circle class="boot-ring-bar" cx="60" cy="60" r="54"/>' +
         '</svg>' +
         '<div class="boot-ring-pct">0%</div>' +
@@ -46,6 +53,18 @@
       '</div>' +
     '</div>' +
     '<div class="boot-skip" hidden>点击跳过</div>';
+
+  /* HUD 底部实时时钟 */
+  var clockEl = layer.querySelector('#boot-clock');
+  var clockTimer = null;
+  function tickClock() {
+    if (!clockEl || !clockEl.isConnected) return;
+    var d = new Date();
+    var p = function (n) { return (n < 10 ? '0' : '') + n; };
+    clockEl.textContent = d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) +
+      ' ' + p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+    clockTimer = setTimeout(tickClock, 1000);
+  }
 
   var flash = document.createElement('div');
   flash.id = 'boot-flash';
@@ -128,9 +147,9 @@
     if (aborted) return fireFlashThenReveal();
 
     var lines = [
-      ['> 唤醒视觉内核 ...', '', 34],
-      ['> 校准霓虹光谱 · 载入底片档案', '', 30],
-      ['> 建立加密通道 · 同步相册', '', 30],
+      ['唤醒视觉内核 ...', '', 34],
+      ['校准霓虹光谱 · 载入底片档案', '', 30],
+      ['建立加密通道 · 同步相册', '', 30],
       ['[ OK ] 系统就绪', 'boot-ok', 40]
     ];
     for (var i = 0; i < lines.length; i++) {
@@ -185,4 +204,5 @@
 
   document.body.appendChild(layer);
   document.body.appendChild(flash);
+  tickClock(); /* layer 挂载后再启动时钟 */
 })();
