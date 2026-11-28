@@ -30,7 +30,8 @@ except ImportError:
     raise SystemExit(1)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-NAS_ROOT = "//192.168.8.1/YiMeng云盘/图片"
+# 原图根目录从环境变量读取，内网地址不硬编码进公开仓库
+NAS_ROOT = os.environ.get("NAS_ROOT", "")
 PICKED = os.path.join(ROOT, ".workbuddy", "tmp", "picked")
 STAGING = os.path.join(ROOT, ".workbuddy", "tmp", "staging")
 BLACKLIST = os.environ.get(

@@ -21,8 +21,8 @@
   3. 上传前先过黑名单，再逐张写尺寸元数据。
 
 用法：
-  # 从 NAS 按人工甄别清单上传新图
-  python scripts/upload-to-r2.py --nas --slug beijing-shi-cha-hai --files-list tmp/picked.txt
+  # 从本地原图目录按人工甄别清单上传新图（先设置 NAS_ROOT 环境变量）
+  NAS_ROOT=/path/to/originals python scripts/upload-to-r2.py --nas --slug beijing-shi-cha-hai --files-list tmp/picked.txt
 
   # 把仓库里已有的 99 张迁到 R2（并改写文章 front matter 里的 URL）
   python scripts/upload-to-r2.py --migrate
@@ -54,7 +54,9 @@ except ImportError:
     raise SystemExit(1)
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-NAS_ROOT = "//192.168.8.1/YiMeng云盘/图片"
+# 原图根目录从环境变量读取，不把内网地址硬编码进公开仓库。
+# 用法：NAS_ROOT="/path/to/originals" python scripts/upload-to-r2.py --nas ...
+NAS_ROOT = os.environ.get("NAS_ROOT", "")
 REPO_IMG_ROOT = os.path.join(ROOT, "static", "images", "uploads", "posts")
 META_R2 = os.path.join(ROOT, "data", "photo_meta_r2.json")
 STAGING = os.path.join(ROOT, ".workbuddy", "tmp", "staging")
@@ -213,6 +215,20 @@ def read_list(path: str) -> list:
 
 
 def do_nas(args, cfg, client, meta, blacklist) -> int:
+    # 清单若用相对路径（不含 // 前缀且非绝对路径），必须设置 NAS_ROOT
+    with open(args.files_list, encoding="utf-8-sig") as fh:
+        needs_root = any(
+            (ln.strip().replace("\\", "/") and
+             not ln.strip().startswith("//") and
+             not os.path.isabs(ln.strip()))
+            for ln in fh if ln.strip() and not ln.strip().startswith("#")
+        )
+    if needs_root and not NAS_ROOT:
+        raise SystemExit(
+            "[ERR] 清单含相对路径，但未设置 NAS_ROOT。\n"
+            "      用法：NAS_ROOT=\"/path/to/originals\" python scripts/upload-to-r2.py --nas ...\n"
+            "      （内网地址不再硬编码在仓库里，请在本机环境变量中提供）"
+        )
     picked = read_list(args.files_list)
     print(f"[INFO] 清单 {args.files_list}：{len(picked)} 个文件")
     missing = [p for p in picked if not os.path.isfile(p)]
